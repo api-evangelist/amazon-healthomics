@@ -8,11 +8,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Healthcare
-  - Genomics
-  - Life Sciences
-  - Bioinformatics
   - AWS
+  - Bioinformatics
+  - Genomics
+  - Healthcare
+  - Life Sciences
 url: >-
   https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/apis.yml
 created: '2026-03-16'
