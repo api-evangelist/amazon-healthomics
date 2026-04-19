@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-export-schema.json",
+  "name": "WorkflowExport",
+  "type": "string",
+  "enum": [
+    "DEFINITION"
+  ],
+  "minLength": 1,
+  "maxLength": 64
+}

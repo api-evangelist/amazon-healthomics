@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-multipart-read-set-uploads-request-schema.json",
+  "title": "ListMultipartReadSetUploadsRequest",
+  "type": "object",
+  "properties": {}
+}

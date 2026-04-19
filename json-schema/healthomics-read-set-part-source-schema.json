@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-part-source-schema.json",
+  "title": "ReadSetPartSource",
+  "type": "string",
+  "enum": [
+    "SOURCE1",
+    "SOURCE2"
+  ]
+}

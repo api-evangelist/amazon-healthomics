@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-multipart-read-set-upload-response-schema.json",
+  "name": "CreateMultipartReadSetUploadResponse",
+  "type": "object",
+  "required": [
+    "sequenceStoreId",
+    "uploadId",
+    "sourceFileType",
+    "subjectId",
+    "sampleId",
+    "referenceArn",
+    "creationTime"
+  ],
+  "properties": {
+    "sequenceStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreId"
+        },
+        {
+          "description": " The sequence store ID for the store that the read set will be created in. "
+        }
+      ]
+    },
+    "uploadId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UploadId"
+        },
+        {
+          "description": " he ID for the initiated multipart upload. "
+        }
+      ]
+    },
+    "sourceFileType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileType"
+        },
+        {
+          "description": " The file type of the read set source. "
+        }
+      ]
+    },
+    "subjectId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SubjectId"
+        },
+        {
+          "description": " The source's subject ID. "
+        }
+      ]
+    },
+    "sampleId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SampleId"
+        },
+        {
+          "description": " The source's sample ID. "
+        }
+      ]
+    },
+    "generatedFrom": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GeneratedFrom"
+        },
+        {
+          "description": " The source of the read set. "
+        }
+      ]
+    },
+    "referenceArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceArn"
+        },
+        {
+          "description": " The read set source's reference ARN. "
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetName"
+        },
+        {
+          "description": " The name of the read set. "
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetDescription"
+        },
+        {
+          "description": " The description of the read set. "
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": " The tags to add to the read set. "
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": " The creation time of the multipart upload. "
+        }
+      ]
+    }
+  }
+}

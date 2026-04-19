@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-export-read-set-detail-list-schema.json",
+  "name": "ExportReadSetDetailList",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/ExportReadSetDetail"
+  }
+}

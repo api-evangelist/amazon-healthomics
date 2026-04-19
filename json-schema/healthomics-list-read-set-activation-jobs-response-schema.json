@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-read-set-activation-jobs-response-schema.json",
+  "title": "ListReadSetActivationJobsResponse",
+  "type": "object",
+  "properties": {
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    },
+    "activationJobs": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ActivateReadSetJobList"
+        },
+        {
+          "description": "A list of jobs."
+        }
+      ]
+    }
+  }
+}

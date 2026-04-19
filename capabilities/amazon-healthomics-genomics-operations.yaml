@@ -1,0 +1,70 @@
+name: Amazon HealthOmics Genomics Operations
+version: 1.0.0-alpha1
+description: Workflow capability for managing omics data including annotation stores, variant stores, workflows, and analysis runs.
+persona:
+  - Bioinformatics Scientist
+  - Genomics Data Engineer
+  - Life Sciences Developer
+apis:
+  - Amazon HealthOmics
+tools:
+  - name: create_annotation_store
+    description: Create a new annotation store for genomic annotations
+    operationId: CreateAnnotationStore
+    method: POST
+    path: /annotationStore
+  - name: list_annotation_stores
+    description: List all annotation stores in the account
+    operationId: ListAnnotationStores
+    method: POST
+    path: /annotationStores
+  - name: create_variant_store
+    description: Create a new variant store for genomic variants
+    operationId: CreateVariantStore
+    method: POST
+    path: /variantStore
+  - name: list_variant_stores
+    description: List all variant stores in the account
+    operationId: ListVariantStores
+    method: POST
+    path: /variantStores
+  - name: create_workflow
+    description: Create a new bioinformatics workflow
+    operationId: CreateWorkflow
+    method: POST
+    path: /workflow
+  - name: get_workflow
+    description: Get details of a specific workflow
+    operationId: GetWorkflow
+    method: GET
+    path: /workflow/{id}
+  - name: list_workflows
+    description: List all workflows in the account
+    operationId: ListWorkflows
+    method: GET
+    path: /workflow
+  - name: start_run
+    description: Start a workflow run for omics data analysis
+    operationId: StartRun
+    method: POST
+    path: /run
+  - name: get_run
+    description: Get status and details of a workflow run
+    operationId: GetRun
+    method: GET
+    path: /run/{id}
+  - name: list_runs
+    description: List all workflow runs in the account
+    operationId: ListRuns
+    method: GET
+    path: /run
+  - name: cancel_run
+    description: Cancel a running workflow run
+    operationId: CancelRun
+    method: POST
+    path: /run/{id}/cancel
+  - name: list_run_groups
+    description: List all run groups for organizing workflow runs
+    operationId: ListRunGroups
+    method: GET
+    path: /runGroup

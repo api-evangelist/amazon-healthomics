@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-run-response-schema.json",
+  "name": "StartRunResponse",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunArn"
+        },
+        {
+          "description": "The run's ARN."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunId"
+        },
+        {
+          "description": "The run's ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunStatus"
+        },
+        {
+          "description": "The run's status."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The run's tags."
+        }
+      ]
+    }
+  }
+}

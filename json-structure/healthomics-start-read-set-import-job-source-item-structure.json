@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-read-set-import-job-source-item-schema.json",
+  "name": "StartReadSetImportJobSourceItem",
+  "type": "object",
+  "required": [
+    "sourceFiles",
+    "sourceFileType",
+    "subjectId",
+    "sampleId",
+    "referenceArn"
+  ],
+  "properties": {
+    "sourceFiles": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SourceFiles"
+        },
+        {
+          "description": "The source files' location in Amazon S3."
+        }
+      ]
+    },
+    "sourceFileType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileType"
+        },
+        {
+          "description": "The source's file type."
+        }
+      ]
+    },
+    "subjectId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SubjectId"
+        },
+        {
+          "description": "The source's subject ID."
+        }
+      ]
+    },
+    "sampleId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SampleId"
+        },
+        {
+          "description": "The source's sample ID."
+        }
+      ]
+    },
+    "generatedFrom": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GeneratedFrom"
+        },
+        {
+          "description": "Where the source originated."
+        }
+      ]
+    },
+    "referenceArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceArn"
+        },
+        {
+          "description": "The source's reference ARN."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetName"
+        },
+        {
+          "description": "The source's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetDescription"
+        },
+        {
+          "description": "The source's description."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The source's tags."
+        }
+      ]
+    }
+  },
+  "description": "A source for a read set import job."
+}

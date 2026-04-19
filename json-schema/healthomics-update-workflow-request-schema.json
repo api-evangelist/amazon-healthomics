@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-update-workflow-request-schema.json",
+  "title": "UpdateWorkflowRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowName"
+        },
+        {
+          "description": "A name for the workflow."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDescription"
+        },
+        {
+          "description": "A description for the workflow."
+        }
+      ]
+    }
+  }
+}

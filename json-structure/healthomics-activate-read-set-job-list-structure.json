@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-activate-read-set-job-list-schema.json",
+  "name": "ActivateReadSetJobList",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/ActivateReadSetJobItem"
+  }
+}

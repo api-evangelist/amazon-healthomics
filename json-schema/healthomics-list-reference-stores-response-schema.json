@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-reference-stores-response-schema.json",
+  "title": "ListReferenceStoresResponse",
+  "type": "object",
+  "required": [
+    "referenceStores"
+  ],
+  "properties": {
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    },
+    "referenceStores": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStoreDetailList"
+        },
+        {
+          "description": "A list of reference stores."
+        }
+      ]
+    }
+  }
+}

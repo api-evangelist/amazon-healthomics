@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-batch-error-schema.json",
+  "title": "ReadSetBatchError",
+  "type": "object",
+  "required": [
+    "id",
+    "code",
+    "message"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetId"
+        },
+        {
+          "description": "The error's ID."
+        }
+      ]
+    },
+    "code": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": "The error's code."
+        }
+      ]
+    },
+    "message": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": "The error's message."
+        }
+      ]
+    }
+  },
+  "description": "An error from a batch read set operation."
+}

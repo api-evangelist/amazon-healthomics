@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-read-set-import-job-request-schema.json",
+  "name": "StartReadSetImportJobRequest",
+  "type": "object",
+  "required": [
+    "roleArn",
+    "sources"
+  ],
+  "properties": {
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RoleArn"
+        },
+        {
+          "description": "A service role for the job."
+        }
+      ]
+    },
+    "clientToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ClientToken"
+        },
+        {
+          "description": "To ensure that jobs don't run multiple times, specify a unique token for each job."
+        }
+      ]
+    },
+    "sources": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StartReadSetImportJobRequestSourcesList"
+        },
+        {
+          "description": "The job's source files."
+        }
+      ]
+    }
+  }
+}

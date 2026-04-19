@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-reference-import-jobs-response-schema.json",
+  "name": "ListReferenceImportJobsResponse",
+  "type": "object",
+  "properties": {
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    },
+    "importJobs": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ImportReferenceJobList"
+        },
+        {
+          "description": "A lis of jobs."
+        }
+      ]
+    }
+  }
+}

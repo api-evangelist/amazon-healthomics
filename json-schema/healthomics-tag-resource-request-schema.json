@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-tag-resource-request-schema.json",
+  "title": "TagResourceRequest",
+  "type": "object",
+  "required": [
+    "tags"
+  ],
+  "properties": {
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagResourceRequestTagsMap"
+        },
+        {
+          "description": "Tags for the resource."
+        }
+      ]
+    }
+  }
+}

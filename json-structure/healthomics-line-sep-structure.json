@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-line-sep-schema.json",
+  "name": "LineSep",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 20
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-files-schema.json",
+  "title": "ReadSetFiles",
+  "type": "object",
+  "properties": {
+    "source1": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformation"
+        },
+        {
+          "description": "The location of the first file in Amazon S3."
+        }
+      ]
+    },
+    "source2": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformation"
+        },
+        {
+          "description": "The location of the second file in Amazon S3."
+        }
+      ]
+    },
+    "index": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformation"
+        },
+        {
+          "description": "The files' index."
+        }
+      ]
+    }
+  },
+  "description": "Files in a read set."
+}

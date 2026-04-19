@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-complete-multipart-read-set-upload-request-schema.json",
+  "name": "CompleteMultipartReadSetUploadRequest",
+  "type": "object",
+  "required": [
+    "parts"
+  ],
+  "properties": {
+    "parts": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CompleteReadSetUploadPartList"
+        },
+        {
+          "description": " The individual uploads or parts of a multipart upload. "
+        }
+      ]
+    }
+  }
+}

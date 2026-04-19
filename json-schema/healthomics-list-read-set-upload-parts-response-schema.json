@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-read-set-upload-parts-response-schema.json",
+  "title": "ListReadSetUploadPartsResponse",
+  "type": "object",
+  "properties": {
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": " Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results. "
+        }
+      ]
+    },
+    "parts": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetUploadPartList"
+        },
+        {
+          "description": " An array of upload parts. "
+        }
+      ]
+    }
+  }
+}

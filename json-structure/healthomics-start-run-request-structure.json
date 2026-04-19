@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-run-request-schema.json",
+  "name": "StartRunRequest",
+  "type": "object",
+  "required": [
+    "roleArn",
+    "requestId"
+  ],
+  "properties": {
+    "workflowId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowId"
+        },
+        {
+          "description": "The run's workflow ID."
+        }
+      ]
+    },
+    "workflowType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowType"
+        },
+        {
+          "description": "The run's workflows type."
+        }
+      ]
+    },
+    "runId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunId"
+        },
+        {
+          "description": "The run's ID."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunRoleArn"
+        },
+        {
+          "description": "A service role for the run."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunName"
+        },
+        {
+          "description": "A name for the run."
+        }
+      ]
+    },
+    "runGroupId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupId"
+        },
+        {
+          "description": "The run's group ID."
+        }
+      ]
+    },
+    "priority": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StartRunRequestPriorityInteger"
+        },
+        {
+          "description": "A priority for the run."
+        }
+      ]
+    },
+    "parameters": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunParameters"
+        },
+        {
+          "description": "Parameters for the run."
+        }
+      ]
+    },
+    "storageCapacity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StartRunRequestStorageCapacityInteger"
+        },
+        {
+          "description": "A storage capacity for the run in gigabytes."
+        }
+      ]
+    },
+    "outputUri": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunOutputUri"
+        },
+        {
+          "description": "An output URI for the run."
+        }
+      ]
+    },
+    "logLevel": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunLogLevel"
+        },
+        {
+          "description": "A log level for the run."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "Tags for the run."
+        }
+      ]
+    },
+    "requestId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunRequestId"
+        },
+        {
+          "description": "To ensure that requests don't run multiple times, specify a unique ID for each request."
+        }
+      ]
+    }
+  }
+}

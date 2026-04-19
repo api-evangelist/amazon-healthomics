@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-list-item-schema.json",
+  "title": "ReadSetListItem",
+  "type": "object",
+  "required": [
+    "id",
+    "arn",
+    "sequenceStoreId",
+    "status",
+    "fileType",
+    "creationTime"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetId"
+        },
+        {
+          "description": "The read set's ID."
+        }
+      ]
+    },
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetArn"
+        },
+        {
+          "description": "The read set's ARN."
+        }
+      ]
+    },
+    "sequenceStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreId"
+        },
+        {
+          "description": "The read set's sequence store ID."
+        }
+      ]
+    },
+    "subjectId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SubjectId"
+        },
+        {
+          "description": "The read set's subject ID."
+        }
+      ]
+    },
+    "sampleId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SampleId"
+        },
+        {
+          "description": "The read set's sample ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetStatus"
+        },
+        {
+          "description": "The read set's status."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetName"
+        },
+        {
+          "description": "The read set's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetDescription"
+        },
+        {
+          "description": "The read set's description."
+        }
+      ]
+    },
+    "referenceArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceArn"
+        },
+        {
+          "description": "The read set's genome reference ARN."
+        }
+      ]
+    },
+    "fileType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileType"
+        },
+        {
+          "description": "The read set's file type."
+        }
+      ]
+    },
+    "sequenceInformation": {
+      "$ref": "#/components/schemas/SequenceInformation"
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the read set was created."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetStatusMessage"
+        },
+        {
+          "description": " The status for a read set. It provides more detail as to why the read set has a status. "
+        }
+      ]
+    },
+    "creationType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreationType"
+        },
+        {
+          "description": " The creation type of the read set. "
+        }
+      ]
+    }
+  },
+  "description": "A read set."
+}

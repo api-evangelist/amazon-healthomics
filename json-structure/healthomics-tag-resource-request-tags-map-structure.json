@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-tag-resource-request-tags-map-schema.json",
+  "name": "TagResourceRequestTagsMap",
+  "type": "object",
+  "minProperties": 0,
+  "maxProperties": 50,
+  "additionalProperties": {
+    "$ref": "#/components/schemas/TagValue"
+  }
+}

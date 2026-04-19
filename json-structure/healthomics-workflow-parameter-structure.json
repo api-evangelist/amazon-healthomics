@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-parameter-schema.json",
+  "name": "WorkflowParameter",
+  "type": "object",
+  "properties": {
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowParameterDescription"
+        },
+        {
+          "description": "The parameter's description."
+        }
+      ]
+    },
+    "optional": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Boolean"
+        },
+        {
+          "description": "Whether the parameter is optional."
+        }
+      ]
+    }
+  },
+  "description": "A workflow parameter."
+}

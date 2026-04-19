@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-import-read-set-source-item-schema.json",
+  "name": "ImportReadSetSourceItem",
+  "type": "object",
+  "required": [
+    "sourceFiles",
+    "sourceFileType",
+    "status",
+    "subjectId",
+    "sampleId"
+  ],
+  "properties": {
+    "sourceFiles": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SourceFiles"
+        },
+        {
+          "description": "The source files' location in Amazon S3."
+        }
+      ]
+    },
+    "sourceFileType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileType"
+        },
+        {
+          "description": "The source's file type."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetImportJobItemStatus"
+        },
+        {
+          "description": "The source's status."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobStatusMessage"
+        },
+        {
+          "description": "The source's status message."
+        }
+      ]
+    },
+    "subjectId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SubjectId"
+        },
+        {
+          "description": "The source's subject ID."
+        }
+      ]
+    },
+    "sampleId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SampleId"
+        },
+        {
+          "description": "The source's sample ID."
+        }
+      ]
+    },
+    "generatedFrom": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GeneratedFrom"
+        },
+        {
+          "description": "Where the source originated."
+        }
+      ]
+    },
+    "referenceArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceArn"
+        },
+        {
+          "description": "The source's genome reference ARN."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetName"
+        },
+        {
+          "description": "The source's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetDescription"
+        },
+        {
+          "description": "The source's description."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The source's tags."
+        }
+      ]
+    }
+  },
+  "description": "A source for an import read set job."
+}

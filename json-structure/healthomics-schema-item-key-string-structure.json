@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-schema-item-key-string-schema.json",
+  "name": "SchemaItemKeyString",
+  "type": "string",
+  "pattern": "[a-z0-9_]{1,255}"
+}

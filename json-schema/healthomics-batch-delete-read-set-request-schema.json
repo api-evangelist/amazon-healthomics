@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-batch-delete-read-set-request-schema.json",
+  "title": "BatchDeleteReadSetRequest",
+  "type": "object",
+  "required": [
+    "ids"
+  ],
+  "properties": {
+    "ids": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetIdList"
+        },
+        {
+          "description": "The read sets' IDs."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-get-run-response-priority-integer-schema.json",
+  "name": "GetRunResponsePriorityInteger",
+  "type": "int32",
+  "minimum": 0,
+  "maximum": 100000
+}

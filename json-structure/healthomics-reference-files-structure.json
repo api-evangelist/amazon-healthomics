@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-reference-files-schema.json",
+  "name": "ReferenceFiles",
+  "type": "object",
+  "properties": {
+    "source": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformation"
+        },
+        {
+          "description": "The source file's location in Amazon S3."
+        }
+      ]
+    },
+    "index": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformation"
+        },
+        {
+          "description": "The files' index."
+        }
+      ]
+    }
+  },
+  "description": "A set of genome reference files."
+}

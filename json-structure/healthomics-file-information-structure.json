@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-file-information-schema.json",
+  "name": "FileInformation",
+  "type": "object",
+  "properties": {
+    "totalParts": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformationTotalPartsInteger"
+        },
+        {
+          "description": "The file's total parts."
+        }
+      ]
+    },
+    "partSize": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformationPartSizeLong"
+        },
+        {
+          "description": "The file's part size."
+        }
+      ]
+    },
+    "contentLength": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FileInformationContentLengthLong"
+        },
+        {
+          "description": "The file's content length."
+        }
+      ]
+    }
+  },
+  "description": "Details about a file."
+}

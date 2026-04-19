@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-annotation-import-response-schema.json",
+  "name": "StartAnnotationImportResponse",
+  "type": "object",
+  "required": [
+    "jobId"
+  ],
+  "properties": {
+    "jobId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ResourceId"
+        },
+        {
+          "description": "The job's ID."
+        }
+      ]
+    }
+  }
+}

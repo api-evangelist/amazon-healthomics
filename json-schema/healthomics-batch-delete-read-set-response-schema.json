@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-batch-delete-read-set-response-schema.json",
+  "title": "BatchDeleteReadSetResponse",
+  "type": "object",
+  "properties": {
+    "errors": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetBatchErrorList"
+        },
+        {
+          "description": "Errors returned by individual delete operations."
+        }
+      ]
+    }
+  }
+}

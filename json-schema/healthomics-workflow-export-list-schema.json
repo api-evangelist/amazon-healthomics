@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-export-list-schema.json",
+  "title": "WorkflowExportList",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/WorkflowExport"
+  },
+  "minItems": 0,
+  "maxItems": 32
+}

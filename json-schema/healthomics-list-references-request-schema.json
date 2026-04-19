@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-references-request-schema.json",
+  "title": "ListReferencesRequest",
+  "type": "object",
+  "properties": {
+    "filter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceFilter"
+        },
+        {
+          "description": "A filter to apply to the list."
+        }
+      ]
+    }
+  }
+}

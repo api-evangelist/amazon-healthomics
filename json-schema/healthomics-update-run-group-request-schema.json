@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-update-run-group-request-schema.json",
+  "title": "UpdateRunGroupRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupName"
+        },
+        {
+          "description": "A name for the group."
+        }
+      ]
+    },
+    "maxCpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UpdateRunGroupRequestMaxCpusInteger"
+        },
+        {
+          "description": "The maximum number of CPUs to use."
+        }
+      ]
+    },
+    "maxRuns": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UpdateRunGroupRequestMaxRunsInteger"
+        },
+        {
+          "description": "The maximum number of concurrent runs for the group."
+        }
+      ]
+    },
+    "maxDuration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UpdateRunGroupRequestMaxDurationInteger"
+        },
+        {
+          "description": "A maximum run time for the group in minutes."
+        }
+      ]
+    },
+    "maxGpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UpdateRunGroupRequestMaxGpusInteger"
+        },
+        {
+          "description": " The maximum GPUs that can be used by a run group. "
+        }
+      ]
+    }
+  }
+}

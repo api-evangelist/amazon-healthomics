@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-run-group-list-item-schema.json",
+  "name": "RunGroupListItem",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupArn"
+        },
+        {
+          "description": "The group's ARN."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupId"
+        },
+        {
+          "description": "The group's ID."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupName"
+        },
+        {
+          "description": "The group's name."
+        }
+      ]
+    },
+    "maxCpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupListItemMaxCpusInteger"
+        },
+        {
+          "description": "The group's maximum CPU count setting."
+        }
+      ]
+    },
+    "maxRuns": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupListItemMaxRunsInteger"
+        },
+        {
+          "description": "The group's maximum concurrent run setting."
+        }
+      ]
+    },
+    "maxDuration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupListItemMaxDurationInteger"
+        },
+        {
+          "description": "The group's maximum duration setting in minutes."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupTimestamp"
+        },
+        {
+          "description": "When the group was created."
+        }
+      ]
+    },
+    "maxGpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupListItemMaxGpusInteger"
+        },
+        {
+          "description": " The maximum GPUs that can be used by a run group. "
+        }
+      ]
+    }
+  },
+  "description": "A run group."
+}

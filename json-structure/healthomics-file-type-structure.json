@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-file-type-schema.json",
+  "name": "FileType",
+  "type": "string",
+  "enum": [
+    "FASTQ",
+    "BAM",
+    "CRAM"
+  ]
+}

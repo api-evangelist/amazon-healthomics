@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-format-options-schema.json",
+  "title": "FormatOptions",
+  "type": "object",
+  "properties": {
+    "tsvOptions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TsvOptions"
+        },
+        {
+          "description": "Options for a TSV file."
+        }
+      ]
+    },
+    "vcfOptions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VcfOptions"
+        },
+        {
+          "description": "Options for a VCF file."
+        }
+      ]
+    }
+  },
+  "description": "Formatting options for a file."
+}

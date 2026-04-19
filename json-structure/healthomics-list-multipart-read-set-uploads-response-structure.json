@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-multipart-read-set-uploads-response-schema.json",
+  "name": "ListMultipartReadSetUploadsResponse",
+  "type": "object",
+  "properties": {
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": " Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. "
+        }
+      ]
+    },
+    "uploads": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MultipartReadSetUploadList"
+        },
+        {
+          "description": " An array of multipart uploads. "
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-run-group-id-schema.json",
+  "name": "RunGroupId",
+  "type": "string",
+  "pattern": "[0-9]+",
+  "minLength": 1,
+  "maxLength": 18
+}

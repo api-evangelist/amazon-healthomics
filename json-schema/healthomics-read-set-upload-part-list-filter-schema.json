@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-upload-part-list-filter-schema.json",
+  "title": "ReadSetUploadPartListFilter",
+  "type": "object",
+  "properties": {
+    "createdAfter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": " Filters for read set uploads after a specified time. "
+        }
+      ]
+    },
+    "createdBefore": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": " Filters for read set part uploads before a specified time. "
+        }
+      ]
+    }
+  },
+  "description": " Filter settings that select for read set upload parts of interest. "
+}

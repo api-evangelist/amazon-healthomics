@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-annotation-import-jobs-request-next-token-string-schema.json",
+  "title": "ListAnnotationImportJobsRequestNextTokenString",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 10000
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-read-set-import-jobs-request-schema.json",
+  "name": "ListReadSetImportJobsRequest",
+  "type": "object",
+  "properties": {
+    "filter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ImportReadSetFilter"
+        },
+        {
+          "description": "A filter to apply to the list."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-annotation-import-item-details-schema.json",
+  "name": "AnnotationImportItemDetails",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/AnnotationImportItemDetail"
+  },
+  "minItems": 1,
+  "maxItems": 1
+}

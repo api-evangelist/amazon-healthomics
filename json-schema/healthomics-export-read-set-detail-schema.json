@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-export-read-set-detail-schema.json",
+  "title": "ExportReadSetDetail",
+  "type": "object",
+  "required": [
+    "id",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetId"
+        },
+        {
+          "description": "The set's ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetExportJobItemStatus"
+        },
+        {
+          "description": "The set's status."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobStatusMessage"
+        },
+        {
+          "description": "The set's status message."
+        }
+      ]
+    }
+  },
+  "description": "Details about a read set."
+}

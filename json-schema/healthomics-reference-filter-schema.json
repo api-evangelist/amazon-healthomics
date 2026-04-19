@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-reference-filter-schema.json",
+  "title": "ReferenceFilter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceName"
+        },
+        {
+          "description": "A name to filter on."
+        }
+      ]
+    },
+    "md5": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Md5"
+        },
+        {
+          "description": "An MD5 checksum to filter on."
+        }
+      ]
+    },
+    "createdAfter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "The filter's start date."
+        }
+      ]
+    },
+    "createdBefore": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "The filter's end date."
+        }
+      ]
+    }
+  },
+  "description": "A filter for references."
+}

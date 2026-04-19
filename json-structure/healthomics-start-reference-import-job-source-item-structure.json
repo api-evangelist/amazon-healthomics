@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-reference-import-job-source-item-schema.json",
+  "name": "StartReferenceImportJobSourceItem",
+  "type": "object",
+  "required": [
+    "sourceFile",
+    "name"
+  ],
+  "properties": {
+    "sourceFile": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/S3Uri"
+        },
+        {
+          "description": "The source file's location in Amazon S3."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceName"
+        },
+        {
+          "description": "The source's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceDescription"
+        },
+        {
+          "description": "The source's description."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The source's tags."
+        }
+      ]
+    }
+  },
+  "description": "A source for a reference import job."
+}

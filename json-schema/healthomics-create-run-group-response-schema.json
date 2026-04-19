@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-run-group-response-schema.json",
+  "title": "CreateRunGroupResponse",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupArn"
+        },
+        {
+          "description": "The group's ARN."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupId"
+        },
+        {
+          "description": "The group's ID."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "Tags for the run group."
+        }
+      ]
+    }
+  }
+}

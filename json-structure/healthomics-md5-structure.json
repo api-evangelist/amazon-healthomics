@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-md5-schema.json",
+  "name": "Md5",
+  "type": "string",
+  "pattern": "[\\p{L}||\\p{N}]+",
+  "minLength": 1,
+  "maxLength": 255
+}

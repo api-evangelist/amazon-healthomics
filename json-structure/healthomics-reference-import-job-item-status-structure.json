@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-reference-import-job-item-status-schema.json",
+  "name": "ReferenceImportJobItemStatus",
+  "type": "string",
+  "enum": [
+    "NOT_STARTED",
+    "IN_PROGRESS",
+    "FINISHED",
+    "FAILED"
+  ]
+}

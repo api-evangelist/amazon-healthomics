@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-run-tasks-response-schema.json",
+  "title": "ListRunTasksResponse",
+  "type": "object",
+  "properties": {
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskList"
+        },
+        {
+          "description": "A list of tasks."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskListToken"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-annotation-store-items-schema.json",
+  "name": "AnnotationStoreItems",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/AnnotationStoreItem"
+  }
+}

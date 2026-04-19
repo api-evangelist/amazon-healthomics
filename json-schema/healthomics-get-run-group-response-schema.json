@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-get-run-group-response-schema.json",
+  "title": "GetRunGroupResponse",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupArn"
+        },
+        {
+          "description": "The group's ARN."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupId"
+        },
+        {
+          "description": "The group's ID."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupName"
+        },
+        {
+          "description": "The group's name."
+        }
+      ]
+    },
+    "maxCpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GetRunGroupResponseMaxCpusInteger"
+        },
+        {
+          "description": "The group's maximum number of CPUs to use."
+        }
+      ]
+    },
+    "maxRuns": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GetRunGroupResponseMaxRunsInteger"
+        },
+        {
+          "description": "The maximum number of concurrent runs for the group."
+        }
+      ]
+    },
+    "maxDuration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GetRunGroupResponseMaxDurationInteger"
+        },
+        {
+          "description": "The group's maximum run time in minutes."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupTimestamp"
+        },
+        {
+          "description": "When the group was created."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The group's tags."
+        }
+      ]
+    },
+    "maxGpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GetRunGroupResponseMaxGpusInteger"
+        },
+        {
+          "description": " The maximum GPUs that can be used by a run group. "
+        }
+      ]
+    }
+  }
+}

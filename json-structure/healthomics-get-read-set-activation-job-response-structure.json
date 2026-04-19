@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-get-read-set-activation-job-response-schema.json",
+  "name": "GetReadSetActivationJobResponse",
+  "type": "object",
+  "required": [
+    "id",
+    "sequenceStoreId",
+    "status",
+    "creationTime"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ActivationJobId"
+        },
+        {
+          "description": "The job's ID."
+        }
+      ]
+    },
+    "sequenceStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreId"
+        },
+        {
+          "description": "The job's sequence store ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetActivationJobStatus"
+        },
+        {
+          "description": "The job's status."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobStatusMessage"
+        },
+        {
+          "description": "The job's status message."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the job was created."
+        }
+      ]
+    },
+    "completionTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the job completed."
+        }
+      ]
+    },
+    "sources": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ActivateReadSetSourceList"
+        },
+        {
+          "description": "The job's source files."
+        }
+      ]
+    }
+  }
+}

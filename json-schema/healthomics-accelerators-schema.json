@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-accelerators-schema.json",
+  "title": "Accelerators",
+  "type": "string",
+  "enum": [
+    "GPU"
+  ],
+  "minLength": 1,
+  "maxLength": 64
+}

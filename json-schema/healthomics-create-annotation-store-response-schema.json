@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-annotation-store-response-schema.json",
+  "title": "CreateAnnotationStoreResponse",
+  "type": "object",
+  "required": [
+    "id",
+    "status",
+    "name",
+    "creationTime"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ResourceId"
+        },
+        {
+          "description": "The store's ID."
+        }
+      ]
+    },
+    "reference": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceItem"
+        },
+        {
+          "description": "The store's genome reference. Required for all stores except TSV format with generic annotations."
+        }
+      ]
+    },
+    "storeFormat": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StoreFormat"
+        },
+        {
+          "description": "The annotation file format of the store."
+        }
+      ]
+    },
+    "storeOptions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StoreOptions"
+        },
+        {
+          "description": "The store's file parsing options."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StoreStatus"
+        },
+        {
+          "description": "The store's status."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": "The store's name."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreationTime"
+        },
+        {
+          "description": "When the store was created."
+        }
+      ]
+    }
+  }
+}

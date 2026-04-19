@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-variant-import-jobs-filter-schema.json",
+  "title": "ListVariantImportJobsFilter",
+  "type": "object",
+  "properties": {
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobStatus"
+        },
+        {
+          "description": "A status to filter on."
+        }
+      ]
+    },
+    "storeName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": "A store name to filter on."
+        }
+      ]
+    }
+  },
+  "description": "A filter for variant import jobs."
+}

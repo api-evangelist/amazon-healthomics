@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-store-name-schema.json",
+  "name": "StoreName",
+  "type": "string",
+  "pattern": "([a-z]){1}([a-z0-9_]){2,254}",
+  "minLength": 3,
+  "maxLength": 255
+}

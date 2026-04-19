@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-variant-import-jobs-request-schema.json",
+  "title": "ListVariantImportJobsRequest",
+  "type": "object",
+  "properties": {
+    "ids": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ListVariantImportJobsRequestIdsList"
+        },
+        {
+          "description": "A list of job IDs."
+        }
+      ]
+    },
+    "filter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ListVariantImportJobsFilter"
+        },
+        {
+          "description": "A filter to apply to the list."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-sequence-store-request-schema.json",
+  "name": "CreateSequenceStoreRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreName"
+        },
+        {
+          "description": "A name for the store."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreDescription"
+        },
+        {
+          "description": "A description for the store."
+        }
+      ]
+    },
+    "sseConfig": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SseConfig"
+        },
+        {
+          "description": "Server-side encryption (SSE) settings for the store."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "Tags for the store."
+        }
+      ]
+    },
+    "clientToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ClientToken"
+        },
+        {
+          "description": "To ensure that requests don't run multiple times, specify a unique token for each request."
+        }
+      ]
+    },
+    "fallbackLocation": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/S3Destination"
+        },
+        {
+          "description": " An S3 location that is used to store files that have failed a direct upload. "
+        }
+      ]
+    }
+  }
+}

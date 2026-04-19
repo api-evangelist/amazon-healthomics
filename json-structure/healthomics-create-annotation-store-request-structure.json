@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-annotation-store-request-schema.json",
+  "name": "CreateAnnotationStoreRequest",
+  "type": "object",
+  "required": [
+    "storeFormat"
+  ],
+  "properties": {
+    "reference": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceItem"
+        },
+        {
+          "description": "The genome reference for the store's annotations."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreateAnnotationStoreRequestNameString"
+        },
+        {
+          "description": "A name for the store."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StoreDescription"
+        },
+        {
+          "description": "A description for the store."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "Tags for the store."
+        }
+      ]
+    },
+    "sseConfig": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SseConfig"
+        },
+        {
+          "description": "Server-side encryption (SSE) settings for the store."
+        }
+      ]
+    },
+    "storeFormat": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StoreFormat"
+        },
+        {
+          "description": "The annotation file format of the store."
+        }
+      ]
+    },
+    "storeOptions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StoreOptions"
+        },
+        {
+          "description": "File parsing options for the annotation store."
+        }
+      ]
+    }
+  }
+}

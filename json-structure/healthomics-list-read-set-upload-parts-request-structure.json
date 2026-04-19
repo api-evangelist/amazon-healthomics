@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-read-set-upload-parts-request-schema.json",
+  "name": "ListReadSetUploadPartsRequest",
+  "type": "object",
+  "required": [
+    "partSource"
+  ],
+  "properties": {
+    "partSource": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetPartSource"
+        },
+        {
+          "description": " The source file for the upload part. "
+        }
+      ]
+    },
+    "filter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetUploadPartListFilter"
+        },
+        {
+          "description": " Attributes used to filter for a specific subset of read set part uploads. "
+        }
+      ]
+    }
+  }
+}

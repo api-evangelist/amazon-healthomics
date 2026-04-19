@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-get-reference-import-job-response-schema.json",
+  "name": "GetReferenceImportJobResponse",
+  "type": "object",
+  "required": [
+    "id",
+    "referenceStoreId",
+    "roleArn",
+    "status",
+    "creationTime",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ImportJobId"
+        },
+        {
+          "description": "The job's ID."
+        }
+      ]
+    },
+    "referenceStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStoreId"
+        },
+        {
+          "description": "The job's reference store ID."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RoleArn"
+        },
+        {
+          "description": "The job's service role ARN."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceImportJobStatus"
+        },
+        {
+          "description": "The job's status."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobStatusMessage"
+        },
+        {
+          "description": "The job's status message."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the job was created."
+        }
+      ]
+    },
+    "completionTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the job completed."
+        }
+      ]
+    },
+    "sources": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ImportReferenceSourceList"
+        },
+        {
+          "description": "The job's source files."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-metadata-schema.json",
+  "title": "WorkflowMetadata",
+  "type": "object",
+  "additionalProperties": {
+    "$ref": "#/components/schemas/WorkflowMetadataValue"
+  }
+}

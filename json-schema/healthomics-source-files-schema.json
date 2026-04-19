@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-source-files-schema.json",
+  "title": "SourceFiles",
+  "type": "object",
+  "required": [
+    "source1"
+  ],
+  "properties": {
+    "source1": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/S3Uri"
+        },
+        {
+          "description": "The location of the first file in Amazon S3."
+        }
+      ]
+    },
+    "source2": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/S3Uri"
+        },
+        {
+          "description": "The location of the second file in Amazon S3."
+        }
+      ]
+    }
+  },
+  "description": "Source files for a sequence."
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-reference-item-schema.json",
+  "title": "ReferenceItem",
+  "type": "object",
+  "properties": {
+    "referenceArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceArn"
+        },
+        {
+          "description": "The reference's ARN."
+        }
+      ]
+    }
+  },
+  "description": "A genome reference."
+}

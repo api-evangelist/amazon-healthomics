@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-reference-store-response-schema.json",
+  "title": "CreateReferenceStoreResponse",
+  "type": "object",
+  "required": [
+    "id",
+    "arn",
+    "creationTime"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStoreId"
+        },
+        {
+          "description": "The store's ID."
+        }
+      ]
+    },
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStoreArn"
+        },
+        {
+          "description": "The store's ARN."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStoreName"
+        },
+        {
+          "description": "The store's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStoreDescription"
+        },
+        {
+          "description": "The store's description."
+        }
+      ]
+    },
+    "sseConfig": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SseConfig"
+        },
+        {
+          "description": "The store's SSE settings."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the store was created."
+        }
+      ]
+    }
+  }
+}

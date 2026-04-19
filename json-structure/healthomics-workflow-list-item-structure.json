@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-list-item-schema.json",
+  "name": "WorkflowListItem",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowArn"
+        },
+        {
+          "description": "The workflow's ARN."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowId"
+        },
+        {
+          "description": "The workflow's ID."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowName"
+        },
+        {
+          "description": "The workflow's name."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowStatus"
+        },
+        {
+          "description": "The workflow's status."
+        }
+      ]
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowType"
+        },
+        {
+          "description": "The workflow's type."
+        }
+      ]
+    },
+    "digest": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDigest"
+        },
+        {
+          "description": "The workflow's digest."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowTimestamp"
+        },
+        {
+          "description": "When the workflow was created."
+        }
+      ]
+    },
+    "metadata": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowMetadata"
+        },
+        {
+          "description": " Any metadata available for workflow. The information listed may vary depending on the workflow, and there may also be no metadata to return. "
+        }
+      ]
+    }
+  },
+  "description": "A workflow."
+}

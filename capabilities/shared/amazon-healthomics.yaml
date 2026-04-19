@@ -1,0 +1,88 @@
+name: Amazon HealthOmics
+version: 1.0.0-alpha1
+description: Shared per-API capability definitions for Amazon HealthOmics — purpose-built service for genomics, transcriptomics, and other omics data analysis.
+operations:
+  annotationStores:
+    - operationId: CreateAnnotationStore
+      summary: Amazon HealthOmics Create Annotation Store
+      method: POST
+      path: /annotationStore
+    - operationId: GetAnnotationStore
+      summary: Amazon HealthOmics Get Annotation Store
+      method: GET
+      path: /annotationStore/{name}
+    - operationId: UpdateAnnotationStore
+      summary: Amazon HealthOmics Update Annotation Store
+      method: POST
+      path: /annotationStore/{name}
+    - operationId: DeleteAnnotationStore
+      summary: Amazon HealthOmics Delete Annotation Store
+      method: DELETE
+      path: /annotationStore/{name}
+    - operationId: ListAnnotationStores
+      summary: Amazon HealthOmics List Annotation Stores
+      method: POST
+      path: /annotationStores
+  variantStores:
+    - operationId: CreateVariantStore
+      summary: Amazon HealthOmics Create Variant Store
+      method: POST
+      path: /variantStore
+    - operationId: GetVariantStore
+      summary: Amazon HealthOmics Get Variant Store
+      method: GET
+      path: /variantStore/{name}
+    - operationId: UpdateVariantStore
+      summary: Amazon HealthOmics Update Variant Store
+      method: POST
+      path: /variantStore/{name}
+    - operationId: DeleteVariantStore
+      summary: Amazon HealthOmics Delete Variant Store
+      method: DELETE
+      path: /variantStore/{name}
+    - operationId: ListVariantStores
+      summary: Amazon HealthOmics List Variant Stores
+      method: POST
+      path: /variantStores
+  workflows:
+    - operationId: CreateWorkflow
+      summary: Amazon HealthOmics Create Workflow
+      method: POST
+      path: /workflow
+    - operationId: GetWorkflow
+      summary: Amazon HealthOmics Get Workflow
+      method: GET
+      path: /workflow/{id}
+    - operationId: UpdateWorkflow
+      summary: Amazon HealthOmics Update Workflow
+      method: POST
+      path: /workflow/{id}
+    - operationId: DeleteWorkflow
+      summary: Amazon HealthOmics Delete Workflow
+      method: DELETE
+      path: /workflow/{id}
+    - operationId: ListWorkflows
+      summary: Amazon HealthOmics List Workflows
+      method: GET
+      path: /workflow
+  runs:
+    - operationId: StartRun
+      summary: Amazon HealthOmics Start Run
+      method: POST
+      path: /run
+    - operationId: GetRun
+      summary: Amazon HealthOmics Get Run
+      method: GET
+      path: /run/{id}
+    - operationId: CancelRun
+      summary: Amazon HealthOmics Cancel Run
+      method: POST
+      path: /run/{id}/cancel
+    - operationId: DeleteRun
+      summary: Amazon HealthOmics Delete Run
+      method: DELETE
+      path: /run/{id}
+    - operationId: ListRuns
+      summary: Amazon HealthOmics List Runs
+      method: GET
+      path: /run

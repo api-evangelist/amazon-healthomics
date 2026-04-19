@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-variant-store-request-name-string-schema.json",
+  "name": "CreateVariantStoreRequestNameString",
+  "type": "string",
+  "pattern": "([a-z]){1}([a-z0-9_]){2,254}"
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-run-group-request-schema.json",
+  "title": "CreateRunGroupRequest",
+  "type": "object",
+  "required": [
+    "requestId"
+  ],
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupName"
+        },
+        {
+          "description": "A name for the group."
+        }
+      ]
+    },
+    "maxCpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreateRunGroupRequestMaxCpusInteger"
+        },
+        {
+          "description": "The maximum number of CPUs to use in the group."
+        }
+      ]
+    },
+    "maxRuns": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreateRunGroupRequestMaxRunsInteger"
+        },
+        {
+          "description": "The maximum number of concurrent runs for the group."
+        }
+      ]
+    },
+    "maxDuration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreateRunGroupRequestMaxDurationInteger"
+        },
+        {
+          "description": "A maximum run time for the group in minutes."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "Tags for the group."
+        }
+      ]
+    },
+    "requestId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupRequestId"
+        },
+        {
+          "description": "To ensure that requests don't run multiple times, specify a unique ID for each request."
+        }
+      ]
+    },
+    "maxGpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreateRunGroupRequestMaxGpusInteger"
+        },
+        {
+          "description": " The maximum GPUs that can be used by a run group. "
+        }
+      ]
+    }
+  }
+}

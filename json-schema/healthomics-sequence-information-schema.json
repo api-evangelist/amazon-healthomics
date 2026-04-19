@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-sequence-information-schema.json",
+  "title": "SequenceInformation",
+  "type": "object",
+  "properties": {
+    "totalReadCount": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Long"
+        },
+        {
+          "description": "The sequence's total read count."
+        }
+      ]
+    },
+    "totalBaseCount": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Long"
+        },
+        {
+          "description": "The sequence's total base count."
+        }
+      ]
+    },
+    "generatedFrom": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GeneratedFrom"
+        },
+        {
+          "description": "Where the sequence originated."
+        }
+      ]
+    },
+    "alignment": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": "The sequence's alignment setting."
+        }
+      ]
+    }
+  },
+  "description": "Details about a sequence."
+}

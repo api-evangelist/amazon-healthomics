@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-update-run-group-request-max-cpus-integer-schema.json",
+  "name": "UpdateRunGroupRequestMaxCpusInteger",
+  "type": "int32",
+  "minimum": 1,
+  "maximum": 100000
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-annotation-stores-response-schema.json",
+  "name": "ListAnnotationStoresResponse",
+  "type": "object",
+  "properties": {
+    "annotationStores": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AnnotationStoreItems"
+        },
+        {
+          "description": "A list of stores."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    }
+  }
+}

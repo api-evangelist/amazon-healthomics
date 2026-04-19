@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-variant-store-items-schema.json",
+  "title": "VariantStoreItems",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/VariantStoreItem"
+  }
+}

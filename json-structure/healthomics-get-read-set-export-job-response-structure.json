@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-get-read-set-export-job-response-schema.json",
+  "name": "GetReadSetExportJobResponse",
+  "type": "object",
+  "required": [
+    "id",
+    "sequenceStoreId",
+    "destination",
+    "status",
+    "creationTime"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ExportJobId"
+        },
+        {
+          "description": "The job's ID."
+        }
+      ]
+    },
+    "sequenceStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreId"
+        },
+        {
+          "description": "The job's sequence store ID."
+        }
+      ]
+    },
+    "destination": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/S3Destination"
+        },
+        {
+          "description": "The job's destination in Amazon S3."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetExportJobStatus"
+        },
+        {
+          "description": "The job's status."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobStatusMessage"
+        },
+        {
+          "description": "The job's status message."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the job was created."
+        }
+      ]
+    },
+    "completionTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the job completed."
+        }
+      ]
+    },
+    "readSets": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ExportReadSetDetailList"
+        },
+        {
+          "description": "The job's read sets."
+        }
+      ]
+    }
+  }
+}

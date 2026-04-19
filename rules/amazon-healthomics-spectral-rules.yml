@@ -1,0 +1,55 @@
+rules:
+  healthomics-operation-summary:
+    description: All operations must have a summary
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+  healthomics-operation-id:
+    description: All operations must have an operationId
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+  healthomics-operation-tags:
+    description: All operations should have tags
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+  healthomics-response-200:
+    description: All operations should have a 200 response
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete].responses"
+    then:
+      field: "200"
+      function: truthy
+  healthomics-schema-description:
+    description: Schema components should have descriptions
+    severity: info
+    given: "$.components.schemas.*"
+    then:
+      field: description
+      function: truthy
+  healthomics-workflow-operations:
+    description: Workflow operations should follow consistent naming
+    severity: info
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+  healthomics-store-naming:
+    description: Store operations should reference appropriate schemas
+    severity: info
+    given: "$.paths.*[get,post,put,patch,delete][?(@property == 'operationId' && @.match('Store'))]"
+    then:
+      function: truthy
+  healthomics-security:
+    description: HealthOmics must document security requirements
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: truthy

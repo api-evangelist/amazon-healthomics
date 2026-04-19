@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-run-export-schema.json",
+  "title": "RunExport",
+  "type": "string",
+  "enum": [
+    "DEFINITION"
+  ],
+  "minLength": 1,
+  "maxLength": 64
+}

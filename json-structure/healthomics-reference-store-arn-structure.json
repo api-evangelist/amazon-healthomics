@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-reference-store-arn-schema.json",
+  "name": "ReferenceStoreArn",
+  "type": "string",
+  "pattern": "arn:.+",
+  "minLength": 1,
+  "maxLength": 127
+}

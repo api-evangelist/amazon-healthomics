@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-export-job-status-schema.json",
+  "title": "ReadSetExportJobStatus",
+  "type": "string",
+  "enum": [
+    "SUBMITTED",
+    "IN_PROGRESS",
+    "CANCELLING",
+    "CANCELLED",
+    "FAILED",
+    "COMPLETED",
+    "COMPLETED_WITH_FAILURES"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-store-options-schema.json",
+  "title": "StoreOptions",
+  "type": "object",
+  "properties": {
+    "tsvStoreOptions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TsvStoreOptions"
+        },
+        {
+          "description": "File settings for a TSV store."
+        }
+      ]
+    }
+  },
+  "description": "Settings for a store."
+}

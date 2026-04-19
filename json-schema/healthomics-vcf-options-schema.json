@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-vcf-options-schema.json",
+  "title": "VcfOptions",
+  "type": "object",
+  "properties": {
+    "ignoreQualField": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Boolean"
+        },
+        {
+          "description": "The file's ignore qual field setting."
+        }
+      ]
+    },
+    "ignoreFilterField": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Boolean"
+        },
+        {
+          "description": "The file's ignore filter field setting."
+        }
+      ]
+    }
+  },
+  "description": "Formatting options for a VCF file."
+}

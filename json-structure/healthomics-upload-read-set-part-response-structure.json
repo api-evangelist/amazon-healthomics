@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-upload-read-set-part-response-schema.json",
+  "name": "UploadReadSetPartResponse",
+  "type": "object",
+  "required": [
+    "checksum"
+  ],
+  "properties": {
+    "checksum": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": " An identifier used to confirm that parts are being added to the intended upload. "
+        }
+      ]
+    }
+  }
+}

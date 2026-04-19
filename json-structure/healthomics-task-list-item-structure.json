@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-task-list-item-schema.json",
+  "name": "TaskListItem",
+  "type": "object",
+  "properties": {
+    "taskId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskId"
+        },
+        {
+          "description": "The task's ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskStatus"
+        },
+        {
+          "description": "The task's status."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskName"
+        },
+        {
+          "description": "The task's name."
+        }
+      ]
+    },
+    "cpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskListItemCpusInteger"
+        },
+        {
+          "description": "The task's CPU count."
+        }
+      ]
+    },
+    "memory": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskListItemMemoryInteger"
+        },
+        {
+          "description": "The task's memory use in gigabyes."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskTimestamp"
+        },
+        {
+          "description": "When the task was created."
+        }
+      ]
+    },
+    "startTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskTimestamp"
+        },
+        {
+          "description": "When the task started."
+        }
+      ]
+    },
+    "stopTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskTimestamp"
+        },
+        {
+          "description": "When the task stopped."
+        }
+      ]
+    },
+    "gpus": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskListItemGpusInteger"
+        },
+        {
+          "description": " The number of Graphics Processing Units (GPU) specified for the task. "
+        }
+      ]
+    }
+  },
+  "description": "A workflow run task."
+}

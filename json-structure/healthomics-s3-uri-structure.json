@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-s3-uri-schema.json",
+  "name": "S3Uri",
+  "type": "string",
+  "pattern": "s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})"
+}

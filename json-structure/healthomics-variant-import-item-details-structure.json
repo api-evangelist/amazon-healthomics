@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-variant-import-item-details-schema.json",
+  "name": "VariantImportItemDetails",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/VariantImportItemDetail"
+  },
+  "minItems": 1
+}

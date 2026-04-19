@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-get-run-response-schema.json",
+  "title": "GetRunResponse",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunArn"
+        },
+        {
+          "description": "The run's ARN."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunId"
+        },
+        {
+          "description": "The run's ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunStatus"
+        },
+        {
+          "description": "The run's status."
+        }
+      ]
+    },
+    "workflowId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowId"
+        },
+        {
+          "description": "The run's workflow ID."
+        }
+      ]
+    },
+    "workflowType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowType"
+        },
+        {
+          "description": "The run's workflow type."
+        }
+      ]
+    },
+    "runId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunId"
+        },
+        {
+          "description": "The run's ID."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunRoleArn"
+        },
+        {
+          "description": "The run's service role ARN."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunName"
+        },
+        {
+          "description": "The run's name."
+        }
+      ]
+    },
+    "runGroupId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupId"
+        },
+        {
+          "description": "The run's group ID."
+        }
+      ]
+    },
+    "priority": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GetRunResponsePriorityInteger"
+        },
+        {
+          "description": "The run's priority."
+        }
+      ]
+    },
+    "definition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDefinition"
+        },
+        {
+          "description": "The run's definition."
+        }
+      ]
+    },
+    "digest": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDigest"
+        },
+        {
+          "description": "The run's digest."
+        }
+      ]
+    },
+    "parameters": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunParameters"
+        },
+        {
+          "description": "The run's parameters."
+        }
+      ]
+    },
+    "storageCapacity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GetRunResponseStorageCapacityInteger"
+        },
+        {
+          "description": "The run's storage capacity in gigabytes."
+        }
+      ]
+    },
+    "outputUri": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunOutputUri"
+        },
+        {
+          "description": "The run's output URI."
+        }
+      ]
+    },
+    "logLevel": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunLogLevel"
+        },
+        {
+          "description": "The run's log level."
+        }
+      ]
+    },
+    "resourceDigests": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunResourceDigests"
+        },
+        {
+          "description": "The run's resource digests."
+        }
+      ]
+    },
+    "startedBy": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunStartedBy"
+        },
+        {
+          "description": "Who started the run."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunTimestamp"
+        },
+        {
+          "description": "When the run was created."
+        }
+      ]
+    },
+    "startTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunTimestamp"
+        },
+        {
+          "description": "When the run started."
+        }
+      ]
+    },
+    "stopTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunTimestamp"
+        },
+        {
+          "description": "The run's stop time."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunStatusMessage"
+        },
+        {
+          "description": "The run's status message."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The run's tags."
+        }
+      ]
+    },
+    "accelerators": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Accelerators"
+        },
+        {
+          "description": " The computational accelerator used to run the workflow. "
+        }
+      ]
+    }
+  }
+}

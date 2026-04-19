@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-complete-multipart-read-set-upload-response-schema.json",
+  "title": "CompleteMultipartReadSetUploadResponse",
+  "type": "object",
+  "required": [
+    "readSetId"
+  ],
+  "properties": {
+    "readSetId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetId"
+        },
+        {
+          "description": " The read set ID created for an uploaded read set. "
+        }
+      ]
+    }
+  }
+}

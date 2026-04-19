@@ -1,0 +1,45 @@
+name: Amazon HealthOmics Vocabulary
+version: 1.0.0
+description: Unified taxonomy mapping resources, actions, workflows, and personas for Amazon HealthOmics.
+resources:
+  - name: AnnotationStore
+    description: Store for genomic annotation data
+  - name: VariantStore
+    description: Store for genomic variant data
+  - name: Workflow
+    description: Bioinformatics workflow definition for omics data analysis
+  - name: Run
+    description: Execution instance of a bioinformatics workflow
+  - name: RunGroup
+    description: Group for organizing and managing workflow runs
+  - name: SequenceStore
+    description: Store for genomic sequence read sets
+  - name: ReferenceStore
+    description: Store for genomic reference genomes
+actions:
+  - name: Create
+    description: Create a new resource
+  - name: Get
+    description: Retrieve a resource by identifier
+  - name: List
+    description: List multiple resources
+  - name: Delete
+    description: Delete a resource
+  - name: Update
+    description: Update resource configuration or metadata
+  - name: Start
+    description: Start a workflow run
+  - name: Cancel
+    description: Cancel an in-progress operation
+  - name: Import
+    description: Import omics data from external sources
+workflows:
+  - name: Genomics Analysis Pipeline
+    description: End-to-end pipeline for analyzing genomic data using HealthOmics workflows and stores
+personas:
+  - name: Bioinformatics Scientist
+    description: Scientist specializing in computational analysis of biological data
+  - name: Genomics Data Engineer
+    description: Engineer building and maintaining genomic data pipelines
+  - name: Life Sciences Developer
+    description: Developer creating applications for life sciences and healthcare research

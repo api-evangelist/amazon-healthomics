@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-tsv-store-options-schema-list-schema.json",
+  "title": "TsvStoreOptionsSchemaList",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/SchemaItem"
+  },
+  "minItems": 1,
+  "maxItems": 5000
+}

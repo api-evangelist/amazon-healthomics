@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-run-group-timestamp-schema.json",
+  "title": "RunGroupTimestamp",
+  "type": "string",
+  "format": "date-time"
+}

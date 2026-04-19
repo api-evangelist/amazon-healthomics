@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-schema-item-key-string-schema.json",
+  "title": "SchemaItemKeyString",
+  "type": "string",
+  "pattern": "[a-z0-9_]{1,255}"
+}

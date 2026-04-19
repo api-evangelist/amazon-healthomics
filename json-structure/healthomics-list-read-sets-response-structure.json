@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-read-sets-response-schema.json",
+  "name": "ListReadSetsResponse",
+  "type": "object",
+  "required": [
+    "readSets"
+  ],
+  "properties": {
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/NextToken"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    },
+    "readSets": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetList"
+        },
+        {
+          "description": "A list of read sets."
+        }
+      ]
+    }
+  }
+}

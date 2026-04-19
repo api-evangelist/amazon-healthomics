@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-job-status-schema.json",
+  "name": "JobStatus",
+  "type": "string",
+  "enum": [
+    "SUBMITTED",
+    "IN_PROGRESS",
+    "CANCELLED",
+    "COMPLETED",
+    "FAILED",
+    "COMPLETED_WITH_FAILURES"
+  ]
+}

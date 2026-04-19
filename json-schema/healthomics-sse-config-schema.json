@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-sse-config-schema.json",
+  "title": "SseConfig",
+  "type": "object",
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EncryptionType"
+        },
+        {
+          "description": "The encryption type."
+        }
+      ]
+    },
+    "keyArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SseConfigKeyArnString"
+        },
+        {
+          "description": "An encryption key ARN."
+        }
+      ]
+    }
+  },
+  "description": "Server-side encryption (SSE) settings for a store."
+}

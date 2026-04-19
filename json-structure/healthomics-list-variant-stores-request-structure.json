@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-variant-stores-request-schema.json",
+  "name": "ListVariantStoresRequest",
+  "type": "object",
+  "properties": {
+    "ids": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ListVariantStoresRequestIdsList"
+        },
+        {
+          "description": "A list of store IDs."
+        }
+      ]
+    },
+    "filter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ListVariantStoresFilter"
+        },
+        {
+          "description": "A filter to apply to the list."
+        }
+      ]
+    }
+  }
+}

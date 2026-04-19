@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-md5-schema.json",
+  "title": "Md5",
+  "type": "string",
+  "pattern": "[\\p{L}||\\p{N}]+",
+  "minLength": 1,
+  "maxLength": 255
+}

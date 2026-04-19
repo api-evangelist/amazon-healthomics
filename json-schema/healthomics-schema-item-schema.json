@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-schema-item-schema.json",
+  "title": "SchemaItem",
+  "type": "object",
+  "minProperties": 1,
+  "maxProperties": 1,
+  "additionalProperties": {
+    "$ref": "#/components/schemas/SchemaValueType"
+  }
+}

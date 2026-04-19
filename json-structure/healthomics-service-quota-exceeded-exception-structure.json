@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-service-quota-exceeded-exception-schema.json",
+  "name": "ServiceQuotaExceededException"
+}

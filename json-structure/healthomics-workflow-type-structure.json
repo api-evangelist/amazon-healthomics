@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-type-schema.json",
+  "name": "WorkflowType",
+  "type": "string",
+  "enum": [
+    "PRIVATE",
+    "READY2RUN"
+  ],
+  "minLength": 1,
+  "maxLength": 64
+}

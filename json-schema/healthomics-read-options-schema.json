@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-options-schema.json",
+  "title": "ReadOptions",
+  "type": "object",
+  "properties": {
+    "sep": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Separator"
+        },
+        {
+          "description": "The file's field separator."
+        }
+      ]
+    },
+    "encoding": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Encoding"
+        },
+        {
+          "description": "The file's encoding."
+        }
+      ]
+    },
+    "quote": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Quote"
+        },
+        {
+          "description": "The file's quote character."
+        }
+      ]
+    },
+    "quoteAll": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/QuoteAll"
+        },
+        {
+          "description": "Whether all values need to be quoted, or just those that contain quotes."
+        }
+      ]
+    },
+    "escape": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EscapeChar"
+        },
+        {
+          "description": "A character for escaping quotes in the file."
+        }
+      ]
+    },
+    "escapeQuotes": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EscapeQuotes"
+        },
+        {
+          "description": "Whether quotes need to be escaped in the file."
+        }
+      ]
+    },
+    "comment": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CommentChar"
+        },
+        {
+          "description": "The file's comment character."
+        }
+      ]
+    },
+    "header": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Header"
+        },
+        {
+          "description": "Whether the file has a header row."
+        }
+      ]
+    },
+    "lineSep": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LineSep"
+        },
+        {
+          "description": "A line separator for the file."
+        }
+      ]
+    }
+  },
+  "description": "Read options for an annotation import job."
+}

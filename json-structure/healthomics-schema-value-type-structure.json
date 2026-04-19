@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-schema-value-type-schema.json",
+  "name": "SchemaValueType",
+  "type": "string",
+  "enum": [
+    "LONG",
+    "INT",
+    "STRING",
+    "FLOAT",
+    "DOUBLE",
+    "BOOLEAN"
+  ]
+}

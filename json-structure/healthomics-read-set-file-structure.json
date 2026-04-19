@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-file-schema.json",
+  "name": "ReadSetFile",
+  "type": "string",
+  "enum": [
+    "SOURCE1",
+    "SOURCE2",
+    "INDEX"
+  ]
+}

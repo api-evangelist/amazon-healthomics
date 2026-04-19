@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-complete-read-set-upload-part-list-item-schema.json",
+  "name": "CompleteReadSetUploadPartListItem",
+  "type": "object",
+  "required": [
+    "partNumber",
+    "partSource",
+    "checksum"
+  ],
+  "properties": {
+    "partNumber": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CompleteReadSetUploadPartListItemPartNumberInteger"
+        },
+        {
+          "description": " A number identifying the part in a read set upload. "
+        }
+      ]
+    },
+    "partSource": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetPartSource"
+        },
+        {
+          "description": " The source file of the part being uploaded. "
+        }
+      ]
+    },
+    "checksum": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/String"
+        },
+        {
+          "description": " A unique identifier used to confirm that parts are being added to the correct upload. "
+        }
+      ]
+    }
+  },
+  "description": " Part of the response to the CompleteReadSetUpload API, including metadata. "
+}

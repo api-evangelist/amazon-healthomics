@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-creation-type-schema.json",
+  "name": "CreationType",
+  "type": "string",
+  "enum": [
+    "IMPORT",
+    "UPLOAD"
+  ]
+}

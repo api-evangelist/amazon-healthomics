@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-read-set-activation-job-source-item-schema.json",
+  "title": "StartReadSetActivationJobSourceItem",
+  "type": "object",
+  "required": [
+    "readSetId"
+  ],
+  "properties": {
+    "readSetId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetId"
+        },
+        {
+          "description": "The source's read set ID."
+        }
+      ]
+    }
+  },
+  "description": "A source for a read set activation job."
+}

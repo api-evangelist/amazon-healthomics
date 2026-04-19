@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-import-reference-source-item-schema.json",
+  "title": "ImportReferenceSourceItem",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "sourceFile": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/S3Uri"
+        },
+        {
+          "description": "The source file's location in Amazon S3."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceImportJobItemStatus"
+        },
+        {
+          "description": "The source's status."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobStatusMessage"
+        },
+        {
+          "description": "The source's status message."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceName"
+        },
+        {
+          "description": "The source's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceDescription"
+        },
+        {
+          "description": "The source's description."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The source's tags."
+        }
+      ]
+    }
+  },
+  "description": "An genome reference source."
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-read-set-import-job-request-sources-list-schema.json",
+  "title": "StartReadSetImportJobRequestSourcesList",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/StartReadSetImportJobSourceItem"
+  },
+  "minItems": 1,
+  "maxItems": 100
+}

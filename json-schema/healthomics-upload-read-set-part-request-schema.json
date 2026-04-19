@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-upload-read-set-part-request-schema.json",
+  "title": "UploadReadSetPartRequest",
+  "type": "object",
+  "required": [
+    "payload"
+  ],
+  "properties": {
+    "payload": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetPartStreamingBlob"
+        },
+        {
+          "description": " The read set data to upload for a part. "
+        }
+      ]
+    }
+  }
+}

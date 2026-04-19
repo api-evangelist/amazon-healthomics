@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-format-to-header-key-schema.json",
+  "title": "FormatToHeaderKey",
+  "type": "string",
+  "enum": [
+    "CHR",
+    "START",
+    "END",
+    "REF",
+    "ALT",
+    "POS"
+  ]
+}

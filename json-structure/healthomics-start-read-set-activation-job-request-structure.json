@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-read-set-activation-job-request-schema.json",
+  "name": "StartReadSetActivationJobRequest",
+  "type": "object",
+  "required": [
+    "sources"
+  ],
+  "properties": {
+    "clientToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ClientToken"
+        },
+        {
+          "description": "To ensure that jobs don't run multiple times, specify a unique token for each job."
+        }
+      ]
+    },
+    "sources": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StartReadSetActivationJobRequestSourcesList"
+        },
+        {
+          "description": "The job's source files."
+        }
+      ]
+    }
+  }
+}

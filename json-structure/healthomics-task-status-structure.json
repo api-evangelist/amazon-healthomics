@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-task-status-schema.json",
+  "name": "TaskStatus",
+  "type": "string",
+  "enum": [
+    "PENDING",
+    "STARTING",
+    "RUNNING",
+    "STOPPING",
+    "COMPLETED",
+    "CANCELLED",
+    "FAILED"
+  ],
+  "minLength": 1,
+  "maxLength": 64
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-start-read-set-activation-job-response-schema.json",
+  "title": "StartReadSetActivationJobResponse",
+  "type": "object",
+  "required": [
+    "id",
+    "sequenceStoreId",
+    "status",
+    "creationTime"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ActivationJobId"
+        },
+        {
+          "description": "The job's ID."
+        }
+      ]
+    },
+    "sequenceStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreId"
+        },
+        {
+          "description": "The read set's sequence store ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetActivationJobStatus"
+        },
+        {
+          "description": "The job's status."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the job was created."
+        }
+      ]
+    }
+  }
+}

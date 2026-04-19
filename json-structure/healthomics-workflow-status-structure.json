@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-status-schema.json",
+  "name": "WorkflowStatus",
+  "type": "string",
+  "enum": [
+    "CREATING",
+    "ACTIVE",
+    "UPDATING",
+    "DELETED",
+    "FAILED",
+    "INACTIVE"
+  ],
+  "minLength": 1,
+  "maxLength": 64
+}

@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-get-workflow-response-schema.json",
+  "name": "GetWorkflowResponse",
+  "type": "object",
+  "properties": {
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowArn"
+        },
+        {
+          "description": "The workflow's ARN."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowId"
+        },
+        {
+          "description": "The workflow's ID."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowStatus"
+        },
+        {
+          "description": "The workflow's status."
+        }
+      ]
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowType"
+        },
+        {
+          "description": "The workflow's type."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowName"
+        },
+        {
+          "description": "The workflow's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDescription"
+        },
+        {
+          "description": "The workflow's description."
+        }
+      ]
+    },
+    "engine": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowEngine"
+        },
+        {
+          "description": "The workflow's engine."
+        }
+      ]
+    },
+    "definition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDefinition"
+        },
+        {
+          "description": "The workflow's definition."
+        }
+      ]
+    },
+    "main": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowMain"
+        },
+        {
+          "description": "The path of the main definition file for the workflow."
+        }
+      ]
+    },
+    "digest": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDigest"
+        },
+        {
+          "description": "The workflow's digest."
+        }
+      ]
+    },
+    "parameterTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowParameterTemplate"
+        },
+        {
+          "description": "The workflow's parameter template."
+        }
+      ]
+    },
+    "storageCapacity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GetWorkflowResponseStorageCapacityInteger"
+        },
+        {
+          "description": "The workflow's storage capacity in gigabytes."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowTimestamp"
+        },
+        {
+          "description": "When the workflow was created."
+        }
+      ]
+    },
+    "statusMessage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowStatusMessage"
+        },
+        {
+          "description": "The workflow's status message."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "The workflow's tags."
+        }
+      ]
+    },
+    "metadata": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowMetadata"
+        },
+        {
+          "description": " Gets metadata for workflow. "
+        }
+      ]
+    },
+    "accelerators": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Accelerators"
+        },
+        {
+          "description": " The computational accelerator specified to run the workflow. "
+        }
+      ]
+    }
+  }
+}

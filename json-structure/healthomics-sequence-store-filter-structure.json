@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-sequence-store-filter-schema.json",
+  "name": "SequenceStoreFilter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SequenceStoreName"
+        },
+        {
+          "description": "A name to filter on."
+        }
+      ]
+    },
+    "createdAfter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "The filter's start date."
+        }
+      ]
+    },
+    "createdBefore": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "The filter's end date."
+        }
+      ]
+    }
+  },
+  "description": "A filter for a sequence store."
+}

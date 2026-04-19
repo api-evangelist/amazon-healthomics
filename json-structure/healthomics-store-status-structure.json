@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-store-status-schema.json",
+  "name": "StoreStatus",
+  "type": "string",
+  "enum": [
+    "CREATING",
+    "UPDATING",
+    "DELETING",
+    "ACTIVE",
+    "FAILED"
+  ]
+}

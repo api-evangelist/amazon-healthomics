@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-workflow-status-schema.json",
+  "title": "WorkflowStatus",
+  "type": "string",
+  "enum": [
+    "CREATING",
+    "ACTIVE",
+    "UPDATING",
+    "DELETED",
+    "FAILED",
+    "INACTIVE"
+  ],
+  "minLength": 1,
+  "maxLength": 64
+}

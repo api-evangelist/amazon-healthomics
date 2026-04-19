@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-tsv-options-schema.json",
+  "name": "TsvOptions",
+  "type": "object",
+  "properties": {
+    "readOptions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadOptions"
+        },
+        {
+          "description": "The file's read options."
+        }
+      ]
+    }
+  },
+  "description": "Formatting options for a TSV file."
+}

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-create-workflow-request-schema.json",
+  "title": "CreateWorkflowRequest",
+  "type": "object",
+  "required": [
+    "requestId"
+  ],
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowName"
+        },
+        {
+          "description": "A name for the workflow."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDescription"
+        },
+        {
+          "description": "A description for the workflow."
+        }
+      ]
+    },
+    "engine": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowEngine"
+        },
+        {
+          "description": "An engine for the workflow."
+        }
+      ]
+    },
+    "definitionZip": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Blob"
+        },
+        {
+          "description": "A ZIP archive for the workflow."
+        }
+      ]
+    },
+    "definitionUri": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowDefinition"
+        },
+        {
+          "description": "The URI of a definition for the workflow."
+        }
+      ]
+    },
+    "main": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowMain"
+        },
+        {
+          "description": "The path of the main definition file for the workflow."
+        }
+      ]
+    },
+    "parameterTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowParameterTemplate"
+        },
+        {
+          "description": "A parameter template for the workflow."
+        }
+      ]
+    },
+    "storageCapacity": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreateWorkflowRequestStorageCapacityInteger"
+        },
+        {
+          "description": "A storage capacity for the workflow in gigabytes."
+        }
+      ]
+    },
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagMap"
+        },
+        {
+          "description": "Tags for the workflow."
+        }
+      ]
+    },
+    "requestId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/WorkflowRequestId"
+        },
+        {
+          "description": "To ensure that requests don't run multiple times, specify a unique ID for each request."
+        }
+      ]
+    },
+    "accelerators": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Accelerators"
+        },
+        {
+          "description": " The computational accelerator specified to run the workflow. "
+        }
+      ]
+    }
+  }
+}

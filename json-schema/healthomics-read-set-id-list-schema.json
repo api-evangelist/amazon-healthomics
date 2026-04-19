@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-id-list-schema.json",
+  "title": "ReadSetIdList",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/ReadSetId"
+  },
+  "minItems": 1,
+  "maxItems": 100
+}

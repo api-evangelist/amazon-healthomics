@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-reference-list-item-schema.json",
+  "name": "ReferenceListItem",
+  "type": "object",
+  "required": [
+    "id",
+    "arn",
+    "referenceStoreId",
+    "md5",
+    "creationTime",
+    "updateTime"
+  ],
+  "properties": {
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceId"
+        },
+        {
+          "description": "The reference's ID."
+        }
+      ]
+    },
+    "arn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceArn"
+        },
+        {
+          "description": "The reference's ARN."
+        }
+      ]
+    },
+    "referenceStoreId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStoreId"
+        },
+        {
+          "description": "The reference's store ID."
+        }
+      ]
+    },
+    "md5": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Md5"
+        },
+        {
+          "description": "The reference's MD5 checksum."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceStatus"
+        },
+        {
+          "description": "The reference's status."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceName"
+        },
+        {
+          "description": "The reference's name."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceDescription"
+        },
+        {
+          "description": "The reference's description."
+        }
+      ]
+    },
+    "creationTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the reference was created."
+        }
+      ]
+    },
+    "updateTime": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "When the reference was updated."
+        }
+      ]
+    }
+  },
+  "description": "A genome reference."
+}

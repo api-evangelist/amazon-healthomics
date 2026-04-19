@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-run-groups-response-schema.json",
+  "title": "ListRunGroupsResponse",
+  "type": "object",
+  "properties": {
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupList"
+        },
+        {
+          "description": "A list of groups."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunGroupListToken"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    }
+  }
+}

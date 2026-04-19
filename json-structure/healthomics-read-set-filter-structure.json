@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-read-set-filter-schema.json",
+  "name": "ReadSetFilter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetName"
+        },
+        {
+          "description": "A name to filter on."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReadSetStatus"
+        },
+        {
+          "description": "A status to filter on."
+        }
+      ]
+    },
+    "referenceArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ReferenceArn"
+        },
+        {
+          "description": "A genome reference ARN to filter on."
+        }
+      ]
+    },
+    "createdAfter": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "The filter's start date."
+        }
+      ]
+    },
+    "createdBefore": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SyntheticTimestamp_date_time"
+        },
+        {
+          "description": "The filter's end date."
+        }
+      ]
+    },
+    "sampleId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SampleId"
+        },
+        {
+          "description": " The read set source's sample ID. "
+        }
+      ]
+    },
+    "subjectId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SubjectId"
+        },
+        {
+          "description": " The read set source's subject ID. "
+        }
+      ]
+    },
+    "generatedFrom": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/GeneratedFrom"
+        },
+        {
+          "description": " Where the source originated. "
+        }
+      ]
+    },
+    "creationType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CreationType"
+        },
+        {
+          "description": " The creation type of the read set. "
+        }
+      ]
+    }
+  },
+  "description": "A filter for read sets."
+}

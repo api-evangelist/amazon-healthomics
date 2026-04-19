@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-tsv-store-options-schema.json",
+  "title": "TsvStoreOptions",
+  "type": "object",
+  "properties": {
+    "annotationType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AnnotationType"
+        },
+        {
+          "description": "The store's annotation type."
+        }
+      ]
+    },
+    "formatToHeader": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/FormatToHeader"
+        },
+        {
+          "description": "The store's header key to column name mapping."
+        }
+      ]
+    },
+    "schema": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TsvStoreOptionsSchemaList"
+        },
+        {
+          "description": "The store's schema."
+        }
+      ]
+    }
+  },
+  "description": "File settings for a TSV store."
+}

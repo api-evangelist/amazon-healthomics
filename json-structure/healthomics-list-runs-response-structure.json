@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-healthomics/refs/heads/main/json-schema/healthomics-list-runs-response-schema.json",
+  "name": "ListRunsResponse",
+  "type": "object",
+  "properties": {
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunList"
+        },
+        {
+          "description": "A list of runs."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RunListToken"
+        },
+        {
+          "description": "A pagination token that's included if more results are available."
+        }
+      ]
+    }
+  }
+}
