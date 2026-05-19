@@ -1,0 +1,3504 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Omics
+  description: 'Amazon Omics. 72 operations. Lead operation: Amazon HealthOmics Create Annotation Store. Self-contained Naftiko
+    capability covering one Amazon Healthomics business surface.'
+  tags:
+  - Amazon Healthomics
+  - Amazon Omics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_HEALTHOMICS_API_KEY: AMAZON_HEALTHOMICS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-healthomics
+    baseUri: http://omics.{region}.amazonaws.com
+    description: Amazon Omics business capability. Self-contained, no shared references.
+    resources:
+    - name: annotationStore
+      path: /annotationStore
+      operations:
+      - name: createannotationstore
+        method: POST
+        description: Amazon HealthOmics Create Annotation Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: annotationStore-name
+      path: /annotationStore/{name}
+      operations:
+      - name: deleteannotationstore
+        method: DELETE
+        description: Amazon HealthOmics Delete Annotation Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The store's name.
+          required: true
+        - name: force
+          in: query
+          type: boolean
+          description: Whether to force deletion.
+      - name: getannotationstore
+        method: GET
+        description: Amazon HealthOmics Get Annotation Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The store's name.
+          required: true
+      - name: updateannotationstore
+        method: POST
+        description: Amazon HealthOmics Update Annotation Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: A name for the store.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: annotationStores
+      path: /annotationStores
+      operations:
+      - name: listannotationstores
+        method: POST
+        description: Amazon HealthOmics List Annotation Stores
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of stores to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: import-annotation
+      path: /import/annotation
+      operations:
+      - name: startannotationimportjob
+        method: POST
+        description: Amazon HealthOmics Start Annotation Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: import-annotation-jobId
+      path: /import/annotation/{jobId}
+      operations:
+      - name: cancelannotationimportjob
+        method: DELETE
+        description: Amazon HealthOmics Cancel Annotation Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+      - name: getannotationimportjob
+        method: GET
+        description: Amazon HealthOmics Get Annotation Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+    - name: import-annotations
+      path: /import/annotations
+      operations:
+      - name: listannotationimportjobs
+        method: POST
+        description: Amazon HealthOmics List Annotation Import Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of jobs to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: import-variant
+      path: /import/variant
+      operations:
+      - name: startvariantimportjob
+        method: POST
+        description: Amazon HealthOmics Start Variant Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: import-variant-jobId
+      path: /import/variant/{jobId}
+      operations:
+      - name: cancelvariantimportjob
+        method: DELETE
+        description: Amazon HealthOmics Cancel Variant Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+      - name: getvariantimportjob
+        method: GET
+        description: Amazon HealthOmics Get Variant Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+    - name: import-variants
+      path: /import/variants
+      operations:
+      - name: listvariantimportjobs
+        method: POST
+        description: Amazon HealthOmics List Variant Import Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of import jobs to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: referencestore
+      path: /referencestore
+      operations:
+      - name: createreferencestore
+        method: POST
+        description: Amazon HealthOmics Create Reference Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: referencestore-id
+      path: /referencestore/{id}
+      operations:
+      - name: deletereferencestore
+        method: DELETE
+        description: Amazon HealthOmics Delete Reference Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The store's ID.
+          required: true
+      - name: getreferencestore
+        method: GET
+        description: Amazon HealthOmics Get Reference Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The store's ID.
+          required: true
+    - name: referencestore-referenceStoreId-importjob
+      path: /referencestore/{referenceStoreId}/importjob
+      operations:
+      - name: startreferenceimportjob
+        method: POST
+        description: Amazon HealthOmics Start Reference Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: referenceStoreId
+          in: path
+          type: string
+          description: The job's reference store ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: referencestore-referenceStoreId-importjob-id
+      path: /referencestore/{referenceStoreId}/importjob/{id}
+      operations:
+      - name: getreferenceimportjob
+        method: GET
+        description: Amazon HealthOmics Get Reference Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+        - name: referenceStoreId
+          in: path
+          type: string
+          description: The job's reference store ID.
+          required: true
+    - name: referencestore-referenceStoreId-importjobs
+      path: /referencestore/{referenceStoreId}/importjobs
+      operations:
+      - name: listreferenceimportjobs
+        method: POST
+        description: Amazon HealthOmics List Reference Import Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of jobs to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: referenceStoreId
+          in: path
+          type: string
+          description: The job's reference store ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: referencestore-referenceStoreId-reference-id
+      path: /referencestore/{referenceStoreId}/reference/{id}
+      operations:
+      - name: deletereference
+        method: DELETE
+        description: Amazon HealthOmics Delete Reference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The reference's ID.
+          required: true
+        - name: referenceStoreId
+          in: path
+          type: string
+          description: The reference's store ID.
+          required: true
+    - name: referencestore-referenceStoreId-reference-id}#partNumber
+      path: /referencestore/{referenceStoreId}/reference/{id}#partNumber
+      operations:
+      - name: getreference
+        method: GET
+        description: Amazon HealthOmics Get Reference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The reference's ID.
+          required: true
+        - name: referenceStoreId
+          in: path
+          type: string
+          description: The reference's store ID.
+          required: true
+        - name: Range
+          in: header
+          type: string
+          description: The range to retrieve.
+        - name: partNumber
+          in: query
+          type: integer
+          description: The part number to retrieve.
+          required: true
+        - name: file
+          in: query
+          type: string
+          description: The file to retrieve.
+    - name: referencestore-referenceStoreId-reference-id-metadata
+      path: /referencestore/{referenceStoreId}/reference/{id}/metadata
+      operations:
+      - name: getreferencemetadata
+        method: GET
+        description: Amazon HealthOmics Get Reference Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The reference's ID.
+          required: true
+        - name: referenceStoreId
+          in: path
+          type: string
+          description: The reference's reference store ID.
+          required: true
+    - name: referencestore-referenceStoreId-references
+      path: /referencestore/{referenceStoreId}/references
+      operations:
+      - name: listreferences
+        method: POST
+        description: Amazon HealthOmics List References
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: referenceStoreId
+          in: path
+          type: string
+          description: The references' reference store ID.
+          required: true
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of references to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: referencestores
+      path: /referencestores
+      operations:
+      - name: listreferencestores
+        method: POST
+        description: Amazon HealthOmics List Reference Stores
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of stores to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: run
+      path: /run
+      operations:
+      - name: listruns
+        method: GET
+        description: Amazon HealthOmics List Runs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Filter the list by run name.
+        - name: runGroupId
+          in: query
+          type: string
+          description: Filter the list by run group ID.
+        - name: startingToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of runs to return in one page of results.
+        - name: status
+          in: query
+          type: string
+          description: The status of a run.
+      - name: startrun
+        method: POST
+        description: Amazon HealthOmics Start Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: run-id
+      path: /run/{id}
+      operations:
+      - name: deleterun
+        method: DELETE
+        description: Amazon HealthOmics Delete Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The run's ID.
+          required: true
+      - name: getrun
+        method: GET
+        description: Amazon HealthOmics Get Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The run's ID.
+          required: true
+        - name: export
+          in: query
+          type: array
+          description: The run's export format.
+    - name: run-id-cancel
+      path: /run/{id}/cancel
+      operations:
+      - name: cancelrun
+        method: POST
+        description: Amazon HealthOmics Cancel Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The run's ID.
+          required: true
+    - name: run-id-task
+      path: /run/{id}/task
+      operations:
+      - name: listruntasks
+        method: GET
+        description: Amazon HealthOmics List Run Tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The run's ID.
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Filter the list by status.
+        - name: startingToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of run tasks to return in one page of results.
+    - name: run-id-task-taskId
+      path: /run/{id}/task/{taskId}
+      operations:
+      - name: getruntask
+        method: GET
+        description: Amazon HealthOmics Get Run Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The task's ID.
+          required: true
+        - name: taskId
+          in: path
+          type: string
+          description: The task's ID.
+          required: true
+    - name: runGroup
+      path: /runGroup
+      operations:
+      - name: createrungroup
+        method: POST
+        description: Amazon HealthOmics Create Run Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listrungroups
+        method: GET
+        description: Amazon HealthOmics List Run Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: The run groups' name.
+        - name: startingToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of run groups to return in one page of results.
+    - name: runGroup-id
+      path: /runGroup/{id}
+      operations:
+      - name: deleterungroup
+        method: DELETE
+        description: Amazon HealthOmics Delete Run Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The run group's ID.
+          required: true
+      - name: getrungroup
+        method: GET
+        description: Amazon HealthOmics Get Run Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group's ID.
+          required: true
+      - name: updaterungroup
+        method: POST
+        description: Amazon HealthOmics Update Run Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The group's ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore
+      path: /sequencestore
+      operations:
+      - name: createsequencestore
+        method: POST
+        description: Amazon HealthOmics Create Sequence Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-id
+      path: /sequencestore/{id}
+      operations:
+      - name: deletesequencestore
+        method: DELETE
+        description: Amazon HealthOmics Delete Sequence Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The sequence store's ID.
+          required: true
+      - name: getsequencestore
+        method: GET
+        description: Amazon HealthOmics Get Sequence Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The store's ID.
+          required: true
+    - name: sequencestore-sequenceStoreId-activationjob
+      path: /sequencestore/{sequenceStoreId}/activationjob
+      operations:
+      - name: startreadsetactivationjob
+        method: POST
+        description: Amazon HealthOmics Start Read Set Activation Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The read set's sequence store ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-activationjob-id
+      path: /sequencestore/{sequenceStoreId}/activationjob/{id}
+      operations:
+      - name: getreadsetactivationjob
+        method: GET
+        description: Amazon HealthOmics Get Read Set Activation Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The job's sequence store ID.
+          required: true
+    - name: sequencestore-sequenceStoreId-activationjobs
+      path: /sequencestore/{sequenceStoreId}/activationjobs
+      operations:
+      - name: listreadsetactivationjobs
+        method: POST
+        description: Amazon HealthOmics List Read Set Activation Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The read set's sequence store ID.
+          required: true
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of read set activation jobs to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-exportjob
+      path: /sequencestore/{sequenceStoreId}/exportjob
+      operations:
+      - name: startreadsetexportjob
+        method: POST
+        description: Amazon HealthOmics Start Read Set Export Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The read set's sequence store ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-exportjob-id
+      path: /sequencestore/{sequenceStoreId}/exportjob/{id}
+      operations:
+      - name: getreadsetexportjob
+        method: GET
+        description: Amazon HealthOmics Get Read Set Export Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The job's sequence store ID.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+    - name: sequencestore-sequenceStoreId-exportjobs
+      path: /sequencestore/{sequenceStoreId}/exportjobs
+      operations:
+      - name: listreadsetexportjobs
+        method: POST
+        description: Amazon HealthOmics List Read Set Export Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The jobs' sequence store ID.
+          required: true
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of jobs to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-importjob
+      path: /sequencestore/{sequenceStoreId}/importjob
+      operations:
+      - name: startreadsetimportjob
+        method: POST
+        description: Amazon HealthOmics Start Read Set Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The read set's sequence store ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-importjob-id
+      path: /sequencestore/{sequenceStoreId}/importjob/{id}
+      operations:
+      - name: getreadsetimportjob
+        method: GET
+        description: Amazon HealthOmics Get Read Set Import Job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The job's ID.
+          required: true
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The job's sequence store ID.
+          required: true
+    - name: sequencestore-sequenceStoreId-importjobs
+      path: /sequencestore/{sequenceStoreId}/importjobs
+      operations:
+      - name: listreadsetimportjobs
+        method: POST
+        description: Amazon HealthOmics List Read Set Import Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of jobs to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The jobs' sequence store ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-readset-batch-delete
+      path: /sequencestore/{sequenceStoreId}/readset/batch/delete
+      operations:
+      - name: batchdeletereadset
+        method: POST
+        description: Amazon HealthOmics Batch Delete Read Set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The read sets' sequence store ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-readset-id}#partNumber
+      path: /sequencestore/{sequenceStoreId}/readset/{id}#partNumber
+      operations:
+      - name: getreadset
+        method: GET
+        description: Amazon HealthOmics Get Read Set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The read set's ID.
+          required: true
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The read set's sequence store ID.
+          required: true
+        - name: file
+          in: query
+          type: string
+          description: The file to retrieve.
+        - name: partNumber
+          in: query
+          type: integer
+          description: The part number to retrieve.
+          required: true
+    - name: sequencestore-sequenceStoreId-readset-id-metadata
+      path: /sequencestore/{sequenceStoreId}/readset/{id}/metadata
+      operations:
+      - name: getreadsetmetadata
+        method: GET
+        description: Amazon HealthOmics Get Read Set Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The read set's ID.
+          required: true
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The read set's sequence store ID.
+          required: true
+    - name: sequencestore-sequenceStoreId-readsets
+      path: /sequencestore/{sequenceStoreId}/readsets
+      operations:
+      - name: listreadsets
+        method: POST
+        description: Amazon HealthOmics List Read Sets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The jobs' sequence store ID.
+          required: true
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of read sets to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-upload
+      path: /sequencestore/{sequenceStoreId}/upload
+      operations:
+      - name: createmultipartreadsetupload
+        method: POST
+        description: Amazon HealthOmics Create Multipart Read Set Upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The sequence store ID for the store that is the destination of the multipart uploads.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-upload-uploadId-abort
+      path: /sequencestore/{sequenceStoreId}/upload/{uploadId}/abort
+      operations:
+      - name: abortmultipartreadsetupload
+        method: DELETE
+        description: Amazon HealthOmics Abort Multipart Read Set Upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The sequence store ID for the store involved in the multipart upload.
+          required: true
+        - name: uploadId
+          in: path
+          type: string
+          description: The ID for the multipart upload.
+          required: true
+    - name: sequencestore-sequenceStoreId-upload-uploadId-complete
+      path: /sequencestore/{sequenceStoreId}/upload/{uploadId}/complete
+      operations:
+      - name: completemultipartreadsetupload
+        method: POST
+        description: Amazon HealthOmics Complete Multipart Read Set Upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The sequence store ID for the store involved in the multipart upload.
+          required: true
+        - name: uploadId
+          in: path
+          type: string
+          description: The ID for the multipart upload.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-upload-uploadId-part#partSource&partNumber
+      path: /sequencestore/{sequenceStoreId}/upload/{uploadId}/part#partSource&partNumber
+      operations:
+      - name: uploadreadsetpart
+        method: PUT
+        description: Amazon HealthOmics Upload Read Set Part
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The Sequence Store ID used for the multipart upload.
+          required: true
+        - name: uploadId
+          in: path
+          type: string
+          description: The ID for the initiated multipart upload.
+          required: true
+        - name: partSource
+          in: query
+          type: string
+          description: The source file for an upload part.
+          required: true
+        - name: partNumber
+          in: query
+          type: integer
+          description: The number of the part being uploaded.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-upload-uploadId-parts
+      path: /sequencestore/{sequenceStoreId}/upload/{uploadId}/parts
+      operations:
+      - name: listreadsetuploadparts
+        method: POST
+        description: Amazon HealthOmics List Read Set Upload Parts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The Sequence Store ID used for the multipart uploads.
+          required: true
+        - name: uploadId
+          in: path
+          type: string
+          description: The ID for the initiated multipart upload.
+          required: true
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of read set upload parts returned in a page.
+        - name: nextToken
+          in: query
+          type: string
+          description: Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the
+            next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sequencestore-sequenceStoreId-uploads
+      path: /sequencestore/{sequenceStoreId}/uploads
+      operations:
+      - name: listmultipartreadsetuploads
+        method: POST
+        description: Amazon HealthOmics List Multipart Read Set Uploads
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sequenceStoreId
+          in: path
+          type: string
+          description: The Sequence Store ID used for the multipart uploads.
+          required: true
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of multipart uploads returned in a page.
+        - name: nextToken
+          in: query
+          type: string
+          description: Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the
+            next page of results.
+    - name: sequencestores
+      path: /sequencestores
+      operations:
+      - name: listsequencestores
+        method: POST
+        description: Amazon HealthOmics List Sequence Stores
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of stores to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tags-resourceArn
+      path: /tags/{resourceArn}
+      operations:
+      - name: listtagsforresource
+        method: GET
+        description: Amazon HealthOmics List Tags for Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resourceArn
+          in: path
+          type: string
+          description: The resource's ARN.
+          required: true
+      - name: tagresource
+        method: POST
+        description: Amazon HealthOmics Tag Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resourceArn
+          in: path
+          type: string
+          description: The resource's ARN.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tags-resourceArn}#tagKeys
+      path: /tags/{resourceArn}#tagKeys
+      operations:
+      - name: untagresource
+        method: DELETE
+        description: Amazon HealthOmics Untag Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resourceArn
+          in: path
+          type: string
+          description: The resource's ARN.
+          required: true
+        - name: tagKeys
+          in: query
+          type: array
+          description: Keys of tags to remove.
+          required: true
+    - name: variantStore
+      path: /variantStore
+      operations:
+      - name: createvariantstore
+        method: POST
+        description: Amazon HealthOmics Create Variant Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: variantStore-name
+      path: /variantStore/{name}
+      operations:
+      - name: deletevariantstore
+        method: DELETE
+        description: Amazon HealthOmics Delete Variant Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The store's name.
+          required: true
+        - name: force
+          in: query
+          type: boolean
+          description: Whether to force deletion.
+      - name: getvariantstore
+        method: GET
+        description: Amazon HealthOmics Get Variant Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The store's name.
+          required: true
+      - name: updatevariantstore
+        method: POST
+        description: Amazon HealthOmics Update Variant Store
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: A name for the store.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: variantStores
+      path: /variantStores
+      operations:
+      - name: listvariantstores
+        method: POST
+        description: Amazon HealthOmics List Variant Stores
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of stores to return in one page of results.
+        - name: nextToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: workflow
+      path: /workflow
+      operations:
+      - name: createworkflow
+        method: POST
+        description: Amazon HealthOmics Create Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listworkflows
+        method: GET
+        description: Amazon HealthOmics List Workflows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: The workflows' type.
+        - name: name
+          in: query
+          type: string
+          description: The workflows' name.
+        - name: startingToken
+          in: query
+          type: string
+          description: Specify the pagination token from a previous request to retrieve the next page of results.
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of workflows to return in one page of results.
+    - name: workflow-id
+      path: /workflow/{id}
+      operations:
+      - name: deleteworkflow
+        method: DELETE
+        description: Amazon HealthOmics Delete Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The workflow's ID.
+          required: true
+      - name: getworkflow
+        method: GET
+        description: Amazon HealthOmics Get Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The workflow's ID.
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: The workflow's type.
+        - name: export
+          in: query
+          type: array
+          description: The export format for the workflow.
+      - name: updateworkflow
+        method: POST
+        description: Amazon HealthOmics Update Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The workflow's ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_HEALTHOMICS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-healthomics-rest
+    port: 8080
+    description: REST adapter for Amazon Omics. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/annotationstore
+      name: annotationstore
+      description: REST surface for annotationStore.
+      operations:
+      - method: POST
+        name: createannotationstore
+        description: Amazon HealthOmics Create Annotation Store
+        call: amazon-healthomics.createannotationstore
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/annotationstore/{name}
+      name: annotationstore-name
+      description: REST surface for annotationStore-name.
+      operations:
+      - method: DELETE
+        name: deleteannotationstore
+        description: Amazon HealthOmics Delete Annotation Store
+        call: amazon-healthomics.deleteannotationstore
+        with:
+          name: rest.name
+          force: rest.force
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getannotationstore
+        description: Amazon HealthOmics Get Annotation Store
+        call: amazon-healthomics.getannotationstore
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateannotationstore
+        description: Amazon HealthOmics Update Annotation Store
+        call: amazon-healthomics.updateannotationstore
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/annotationstores
+      name: annotationstores
+      description: REST surface for annotationStores.
+      operations:
+      - method: POST
+        name: listannotationstores
+        description: Amazon HealthOmics List Annotation Stores
+        call: amazon-healthomics.listannotationstores
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/annotation
+      name: import-annotation
+      description: REST surface for import-annotation.
+      operations:
+      - method: POST
+        name: startannotationimportjob
+        description: Amazon HealthOmics Start Annotation Import Job
+        call: amazon-healthomics.startannotationimportjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/annotation/{jobid}
+      name: import-annotation-jobid
+      description: REST surface for import-annotation-jobId.
+      operations:
+      - method: DELETE
+        name: cancelannotationimportjob
+        description: Amazon HealthOmics Cancel Annotation Import Job
+        call: amazon-healthomics.cancelannotationimportjob
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getannotationimportjob
+        description: Amazon HealthOmics Get Annotation Import Job
+        call: amazon-healthomics.getannotationimportjob
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/annotations
+      name: import-annotations
+      description: REST surface for import-annotations.
+      operations:
+      - method: POST
+        name: listannotationimportjobs
+        description: Amazon HealthOmics List Annotation Import Jobs
+        call: amazon-healthomics.listannotationimportjobs
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/variant
+      name: import-variant
+      description: REST surface for import-variant.
+      operations:
+      - method: POST
+        name: startvariantimportjob
+        description: Amazon HealthOmics Start Variant Import Job
+        call: amazon-healthomics.startvariantimportjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/variant/{jobid}
+      name: import-variant-jobid
+      description: REST surface for import-variant-jobId.
+      operations:
+      - method: DELETE
+        name: cancelvariantimportjob
+        description: Amazon HealthOmics Cancel Variant Import Job
+        call: amazon-healthomics.cancelvariantimportjob
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getvariantimportjob
+        description: Amazon HealthOmics Get Variant Import Job
+        call: amazon-healthomics.getvariantimportjob
+        with:
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/import/variants
+      name: import-variants
+      description: REST surface for import-variants.
+      operations:
+      - method: POST
+        name: listvariantimportjobs
+        description: Amazon HealthOmics List Variant Import Jobs
+        call: amazon-healthomics.listvariantimportjobs
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore
+      name: referencestore
+      description: REST surface for referencestore.
+      operations:
+      - method: POST
+        name: createreferencestore
+        description: Amazon HealthOmics Create Reference Store
+        call: amazon-healthomics.createreferencestore
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{id}
+      name: referencestore-id
+      description: REST surface for referencestore-id.
+      operations:
+      - method: DELETE
+        name: deletereferencestore
+        description: Amazon HealthOmics Delete Reference Store
+        call: amazon-healthomics.deletereferencestore
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getreferencestore
+        description: Amazon HealthOmics Get Reference Store
+        call: amazon-healthomics.getreferencestore
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{referencestoreid}/importjob
+      name: referencestore-referencestoreid-importjob
+      description: REST surface for referencestore-referenceStoreId-importjob.
+      operations:
+      - method: POST
+        name: startreferenceimportjob
+        description: Amazon HealthOmics Start Reference Import Job
+        call: amazon-healthomics.startreferenceimportjob
+        with:
+          referenceStoreId: rest.referenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{referencestoreid}/importjob/{id}
+      name: referencestore-referencestoreid-importjob-id
+      description: REST surface for referencestore-referenceStoreId-importjob-id.
+      operations:
+      - method: GET
+        name: getreferenceimportjob
+        description: Amazon HealthOmics Get Reference Import Job
+        call: amazon-healthomics.getreferenceimportjob
+        with:
+          id: rest.id
+          referenceStoreId: rest.referenceStoreId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{referencestoreid}/importjobs
+      name: referencestore-referencestoreid-importjobs
+      description: REST surface for referencestore-referenceStoreId-importjobs.
+      operations:
+      - method: POST
+        name: listreferenceimportjobs
+        description: Amazon HealthOmics List Reference Import Jobs
+        call: amazon-healthomics.listreferenceimportjobs
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          referenceStoreId: rest.referenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{referencestoreid}/reference/{id}
+      name: referencestore-referencestoreid-reference-id
+      description: REST surface for referencestore-referenceStoreId-reference-id.
+      operations:
+      - method: DELETE
+        name: deletereference
+        description: Amazon HealthOmics Delete Reference
+        call: amazon-healthomics.deletereference
+        with:
+          id: rest.id
+          referenceStoreId: rest.referenceStoreId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{referencestoreid}/reference/id-partnumber
+      name: referencestore-referencestoreid-reference-id-partnumber
+      description: REST surface for referencestore-referenceStoreId-reference-id}#partNumber.
+      operations:
+      - method: GET
+        name: getreference
+        description: Amazon HealthOmics Get Reference
+        call: amazon-healthomics.getreference
+        with:
+          id: rest.id
+          referenceStoreId: rest.referenceStoreId
+          Range: rest.Range
+          partNumber: rest.partNumber
+          file: rest.file
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{referencestoreid}/reference/{id}/metadata
+      name: referencestore-referencestoreid-reference-id-metadata
+      description: REST surface for referencestore-referenceStoreId-reference-id-metadata.
+      operations:
+      - method: GET
+        name: getreferencemetadata
+        description: Amazon HealthOmics Get Reference Metadata
+        call: amazon-healthomics.getreferencemetadata
+        with:
+          id: rest.id
+          referenceStoreId: rest.referenceStoreId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestore/{referencestoreid}/references
+      name: referencestore-referencestoreid-references
+      description: REST surface for referencestore-referenceStoreId-references.
+      operations:
+      - method: POST
+        name: listreferences
+        description: Amazon HealthOmics List References
+        call: amazon-healthomics.listreferences
+        with:
+          referenceStoreId: rest.referenceStoreId
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/referencestores
+      name: referencestores
+      description: REST surface for referencestores.
+      operations:
+      - method: POST
+        name: listreferencestores
+        description: Amazon HealthOmics List Reference Stores
+        call: amazon-healthomics.listreferencestores
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/run
+      name: run
+      description: REST surface for run.
+      operations:
+      - method: GET
+        name: listruns
+        description: Amazon HealthOmics List Runs
+        call: amazon-healthomics.listruns
+        with:
+          name: rest.name
+          runGroupId: rest.runGroupId
+          startingToken: rest.startingToken
+          maxResults: rest.maxResults
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: startrun
+        description: Amazon HealthOmics Start Run
+        call: amazon-healthomics.startrun
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/run/{id}
+      name: run-id
+      description: REST surface for run-id.
+      operations:
+      - method: DELETE
+        name: deleterun
+        description: Amazon HealthOmics Delete Run
+        call: amazon-healthomics.deleterun
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getrun
+        description: Amazon HealthOmics Get Run
+        call: amazon-healthomics.getrun
+        with:
+          id: rest.id
+          export: rest.export
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/run/{id}/cancel
+      name: run-id-cancel
+      description: REST surface for run-id-cancel.
+      operations:
+      - method: POST
+        name: cancelrun
+        description: Amazon HealthOmics Cancel Run
+        call: amazon-healthomics.cancelrun
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/run/{id}/task
+      name: run-id-task
+      description: REST surface for run-id-task.
+      operations:
+      - method: GET
+        name: listruntasks
+        description: Amazon HealthOmics List Run Tasks
+        call: amazon-healthomics.listruntasks
+        with:
+          id: rest.id
+          status: rest.status
+          startingToken: rest.startingToken
+          maxResults: rest.maxResults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/run/{id}/task/{taskid}
+      name: run-id-task-taskid
+      description: REST surface for run-id-task-taskId.
+      operations:
+      - method: GET
+        name: getruntask
+        description: Amazon HealthOmics Get Run Task
+        call: amazon-healthomics.getruntask
+        with:
+          id: rest.id
+          taskId: rest.taskId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rungroup
+      name: rungroup
+      description: REST surface for runGroup.
+      operations:
+      - method: POST
+        name: createrungroup
+        description: Amazon HealthOmics Create Run Group
+        call: amazon-healthomics.createrungroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listrungroups
+        description: Amazon HealthOmics List Run Groups
+        call: amazon-healthomics.listrungroups
+        with:
+          name: rest.name
+          startingToken: rest.startingToken
+          maxResults: rest.maxResults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rungroup/{id}
+      name: rungroup-id
+      description: REST surface for runGroup-id.
+      operations:
+      - method: DELETE
+        name: deleterungroup
+        description: Amazon HealthOmics Delete Run Group
+        call: amazon-healthomics.deleterungroup
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getrungroup
+        description: Amazon HealthOmics Get Run Group
+        call: amazon-healthomics.getrungroup
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updaterungroup
+        description: Amazon HealthOmics Update Run Group
+        call: amazon-healthomics.updaterungroup
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore
+      name: sequencestore
+      description: REST surface for sequencestore.
+      operations:
+      - method: POST
+        name: createsequencestore
+        description: Amazon HealthOmics Create Sequence Store
+        call: amazon-healthomics.createsequencestore
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{id}
+      name: sequencestore-id
+      description: REST surface for sequencestore-id.
+      operations:
+      - method: DELETE
+        name: deletesequencestore
+        description: Amazon HealthOmics Delete Sequence Store
+        call: amazon-healthomics.deletesequencestore
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getsequencestore
+        description: Amazon HealthOmics Get Sequence Store
+        call: amazon-healthomics.getsequencestore
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/activationjob
+      name: sequencestore-sequencestoreid-activationjob
+      description: REST surface for sequencestore-sequenceStoreId-activationjob.
+      operations:
+      - method: POST
+        name: startreadsetactivationjob
+        description: Amazon HealthOmics Start Read Set Activation Job
+        call: amazon-healthomics.startreadsetactivationjob
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/activationjob/{id}
+      name: sequencestore-sequencestoreid-activationjob-id
+      description: REST surface for sequencestore-sequenceStoreId-activationjob-id.
+      operations:
+      - method: GET
+        name: getreadsetactivationjob
+        description: Amazon HealthOmics Get Read Set Activation Job
+        call: amazon-healthomics.getreadsetactivationjob
+        with:
+          id: rest.id
+          sequenceStoreId: rest.sequenceStoreId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/activationjobs
+      name: sequencestore-sequencestoreid-activationjobs
+      description: REST surface for sequencestore-sequenceStoreId-activationjobs.
+      operations:
+      - method: POST
+        name: listreadsetactivationjobs
+        description: Amazon HealthOmics List Read Set Activation Jobs
+        call: amazon-healthomics.listreadsetactivationjobs
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/exportjob
+      name: sequencestore-sequencestoreid-exportjob
+      description: REST surface for sequencestore-sequenceStoreId-exportjob.
+      operations:
+      - method: POST
+        name: startreadsetexportjob
+        description: Amazon HealthOmics Start Read Set Export Job
+        call: amazon-healthomics.startreadsetexportjob
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/exportjob/{id}
+      name: sequencestore-sequencestoreid-exportjob-id
+      description: REST surface for sequencestore-sequenceStoreId-exportjob-id.
+      operations:
+      - method: GET
+        name: getreadsetexportjob
+        description: Amazon HealthOmics Get Read Set Export Job
+        call: amazon-healthomics.getreadsetexportjob
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/exportjobs
+      name: sequencestore-sequencestoreid-exportjobs
+      description: REST surface for sequencestore-sequenceStoreId-exportjobs.
+      operations:
+      - method: POST
+        name: listreadsetexportjobs
+        description: Amazon HealthOmics List Read Set Export Jobs
+        call: amazon-healthomics.listreadsetexportjobs
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/importjob
+      name: sequencestore-sequencestoreid-importjob
+      description: REST surface for sequencestore-sequenceStoreId-importjob.
+      operations:
+      - method: POST
+        name: startreadsetimportjob
+        description: Amazon HealthOmics Start Read Set Import Job
+        call: amazon-healthomics.startreadsetimportjob
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/importjob/{id}
+      name: sequencestore-sequencestoreid-importjob-id
+      description: REST surface for sequencestore-sequenceStoreId-importjob-id.
+      operations:
+      - method: GET
+        name: getreadsetimportjob
+        description: Amazon HealthOmics Get Read Set Import Job
+        call: amazon-healthomics.getreadsetimportjob
+        with:
+          id: rest.id
+          sequenceStoreId: rest.sequenceStoreId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/importjobs
+      name: sequencestore-sequencestoreid-importjobs
+      description: REST surface for sequencestore-sequenceStoreId-importjobs.
+      operations:
+      - method: POST
+        name: listreadsetimportjobs
+        description: Amazon HealthOmics List Read Set Import Jobs
+        call: amazon-healthomics.listreadsetimportjobs
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          sequenceStoreId: rest.sequenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/readset/batch/delete
+      name: sequencestore-sequencestoreid-readset-batch-delete
+      description: REST surface for sequencestore-sequenceStoreId-readset-batch-delete.
+      operations:
+      - method: POST
+        name: batchdeletereadset
+        description: Amazon HealthOmics Batch Delete Read Set
+        call: amazon-healthomics.batchdeletereadset
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/readset/id-partnumber
+      name: sequencestore-sequencestoreid-readset-id-partnumber
+      description: REST surface for sequencestore-sequenceStoreId-readset-id}#partNumber.
+      operations:
+      - method: GET
+        name: getreadset
+        description: Amazon HealthOmics Get Read Set
+        call: amazon-healthomics.getreadset
+        with:
+          id: rest.id
+          sequenceStoreId: rest.sequenceStoreId
+          file: rest.file
+          partNumber: rest.partNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/readset/{id}/metadata
+      name: sequencestore-sequencestoreid-readset-id-metadata
+      description: REST surface for sequencestore-sequenceStoreId-readset-id-metadata.
+      operations:
+      - method: GET
+        name: getreadsetmetadata
+        description: Amazon HealthOmics Get Read Set Metadata
+        call: amazon-healthomics.getreadsetmetadata
+        with:
+          id: rest.id
+          sequenceStoreId: rest.sequenceStoreId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/readsets
+      name: sequencestore-sequencestoreid-readsets
+      description: REST surface for sequencestore-sequenceStoreId-readsets.
+      operations:
+      - method: POST
+        name: listreadsets
+        description: Amazon HealthOmics List Read Sets
+        call: amazon-healthomics.listreadsets
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/upload
+      name: sequencestore-sequencestoreid-upload
+      description: REST surface for sequencestore-sequenceStoreId-upload.
+      operations:
+      - method: POST
+        name: createmultipartreadsetupload
+        description: Amazon HealthOmics Create Multipart Read Set Upload
+        call: amazon-healthomics.createmultipartreadsetupload
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/upload/{uploadid}/abort
+      name: sequencestore-sequencestoreid-upload-uploadid-abort
+      description: REST surface for sequencestore-sequenceStoreId-upload-uploadId-abort.
+      operations:
+      - method: DELETE
+        name: abortmultipartreadsetupload
+        description: Amazon HealthOmics Abort Multipart Read Set Upload
+        call: amazon-healthomics.abortmultipartreadsetupload
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          uploadId: rest.uploadId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/upload/{uploadid}/complete
+      name: sequencestore-sequencestoreid-upload-uploadid-complete
+      description: REST surface for sequencestore-sequenceStoreId-upload-uploadId-complete.
+      operations:
+      - method: POST
+        name: completemultipartreadsetupload
+        description: Amazon HealthOmics Complete Multipart Read Set Upload
+        call: amazon-healthomics.completemultipartreadsetupload
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          uploadId: rest.uploadId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/upload/{uploadid}/part-partsource-partnumber
+      name: sequencestore-sequencestoreid-upload-uploadid-part-partsource-partnumber
+      description: REST surface for sequencestore-sequenceStoreId-upload-uploadId-part#partSource&partNumber.
+      operations:
+      - method: PUT
+        name: uploadreadsetpart
+        description: Amazon HealthOmics Upload Read Set Part
+        call: amazon-healthomics.uploadreadsetpart
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          uploadId: rest.uploadId
+          partSource: rest.partSource
+          partNumber: rest.partNumber
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/upload/{uploadid}/parts
+      name: sequencestore-sequencestoreid-upload-uploadid-parts
+      description: REST surface for sequencestore-sequenceStoreId-upload-uploadId-parts.
+      operations:
+      - method: POST
+        name: listreadsetuploadparts
+        description: Amazon HealthOmics List Read Set Upload Parts
+        call: amazon-healthomics.listreadsetuploadparts
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          uploadId: rest.uploadId
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestore/{sequencestoreid}/uploads
+      name: sequencestore-sequencestoreid-uploads
+      description: REST surface for sequencestore-sequenceStoreId-uploads.
+      operations:
+      - method: POST
+        name: listmultipartreadsetuploads
+        description: Amazon HealthOmics List Multipart Read Set Uploads
+        call: amazon-healthomics.listmultipartreadsetuploads
+        with:
+          sequenceStoreId: rest.sequenceStoreId
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sequencestores
+      name: sequencestores
+      description: REST surface for sequencestores.
+      operations:
+      - method: POST
+        name: listsequencestores
+        description: Amazon HealthOmics List Sequence Stores
+        call: amazon-healthomics.listsequencestores
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/{resourcearn}
+      name: tags-resourcearn
+      description: REST surface for tags-resourceArn.
+      operations:
+      - method: GET
+        name: listtagsforresource
+        description: Amazon HealthOmics List Tags for Resource
+        call: amazon-healthomics.listtagsforresource
+        with:
+          resourceArn: rest.resourceArn
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: tagresource
+        description: Amazon HealthOmics Tag Resource
+        call: amazon-healthomics.tagresource
+        with:
+          resourceArn: rest.resourceArn
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/resourcearn-tagkeys
+      name: tags-resourcearn-tagkeys
+      description: REST surface for tags-resourceArn}#tagKeys.
+      operations:
+      - method: DELETE
+        name: untagresource
+        description: Amazon HealthOmics Untag Resource
+        call: amazon-healthomics.untagresource
+        with:
+          resourceArn: rest.resourceArn
+          tagKeys: rest.tagKeys
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/variantstore
+      name: variantstore
+      description: REST surface for variantStore.
+      operations:
+      - method: POST
+        name: createvariantstore
+        description: Amazon HealthOmics Create Variant Store
+        call: amazon-healthomics.createvariantstore
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/variantstore/{name}
+      name: variantstore-name
+      description: REST surface for variantStore-name.
+      operations:
+      - method: DELETE
+        name: deletevariantstore
+        description: Amazon HealthOmics Delete Variant Store
+        call: amazon-healthomics.deletevariantstore
+        with:
+          name: rest.name
+          force: rest.force
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getvariantstore
+        description: Amazon HealthOmics Get Variant Store
+        call: amazon-healthomics.getvariantstore
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatevariantstore
+        description: Amazon HealthOmics Update Variant Store
+        call: amazon-healthomics.updatevariantstore
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/variantstores
+      name: variantstores
+      description: REST surface for variantStores.
+      operations:
+      - method: POST
+        name: listvariantstores
+        description: Amazon HealthOmics List Variant Stores
+        call: amazon-healthomics.listvariantstores
+        with:
+          maxResults: rest.maxResults
+          nextToken: rest.nextToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workflow
+      name: workflow
+      description: REST surface for workflow.
+      operations:
+      - method: POST
+        name: createworkflow
+        description: Amazon HealthOmics Create Workflow
+        call: amazon-healthomics.createworkflow
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listworkflows
+        description: Amazon HealthOmics List Workflows
+        call: amazon-healthomics.listworkflows
+        with:
+          type: rest.type
+          name: rest.name
+          startingToken: rest.startingToken
+          maxResults: rest.maxResults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workflow/{id}
+      name: workflow-id
+      description: REST surface for workflow-id.
+      operations:
+      - method: DELETE
+        name: deleteworkflow
+        description: Amazon HealthOmics Delete Workflow
+        call: amazon-healthomics.deleteworkflow
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getworkflow
+        description: Amazon HealthOmics Get Workflow
+        call: amazon-healthomics.getworkflow
+        with:
+          id: rest.id
+          type: rest.type
+          export: rest.export
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateworkflow
+        description: Amazon HealthOmics Update Workflow
+        call: amazon-healthomics.updateworkflow
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-healthomics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Omics. One tool per consumed operation, routed inline through this capability's consumes
+      block.
+    tools:
+    - name: amazon-healthomics-create-annotation-store
+      description: Amazon HealthOmics Create Annotation Store
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.createannotationstore
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-annotation-store
+      description: Amazon HealthOmics Delete Annotation Store
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deleteannotationstore
+      with:
+        name: tools.name
+        force: tools.force
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-annotation-store
+      description: Amazon HealthOmics Get Annotation Store
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getannotationstore
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-update-annotation-store
+      description: Amazon HealthOmics Update Annotation Store
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.updateannotationstore
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-annotation-stores
+      description: Amazon HealthOmics List Annotation Stores
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listannotationstores
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-start-annotation-import
+      description: Amazon HealthOmics Start Annotation Import Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.startannotationimportjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-cancel-annotation-import
+      description: Amazon HealthOmics Cancel Annotation Import Job
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.cancelannotationimportjob
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-annotation-import
+      description: Amazon HealthOmics Get Annotation Import Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getannotationimportjob
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-annotation-import
+      description: Amazon HealthOmics List Annotation Import Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listannotationimportjobs
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-start-variant-import
+      description: Amazon HealthOmics Start Variant Import Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.startvariantimportjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-cancel-variant-import
+      description: Amazon HealthOmics Cancel Variant Import Job
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.cancelvariantimportjob
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-variant-import
+      description: Amazon HealthOmics Get Variant Import Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getvariantimportjob
+      with:
+        jobId: tools.jobId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-variant-import
+      description: Amazon HealthOmics List Variant Import Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listvariantimportjobs
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-create-reference-store
+      description: Amazon HealthOmics Create Reference Store
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.createreferencestore
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-reference-store
+      description: Amazon HealthOmics Delete Reference Store
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deletereferencestore
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-reference-store
+      description: Amazon HealthOmics Get Reference Store
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreferencestore
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-start-reference-import
+      description: Amazon HealthOmics Start Reference Import Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.startreferenceimportjob
+      with:
+        referenceStoreId: tools.referenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-reference-import
+      description: Amazon HealthOmics Get Reference Import Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreferenceimportjob
+      with:
+        id: tools.id
+        referenceStoreId: tools.referenceStoreId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-reference-import
+      description: Amazon HealthOmics List Reference Import Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreferenceimportjobs
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        referenceStoreId: tools.referenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-reference
+      description: Amazon HealthOmics Delete Reference
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deletereference
+      with:
+        id: tools.id
+        referenceStoreId: tools.referenceStoreId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-reference
+      description: Amazon HealthOmics Get Reference
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreference
+      with:
+        id: tools.id
+        referenceStoreId: tools.referenceStoreId
+        Range: tools.Range
+        partNumber: tools.partNumber
+        file: tools.file
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-reference-metadata
+      description: Amazon HealthOmics Get Reference Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreferencemetadata
+      with:
+        id: tools.id
+        referenceStoreId: tools.referenceStoreId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-references
+      description: Amazon HealthOmics List References
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreferences
+      with:
+        referenceStoreId: tools.referenceStoreId
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-reference-stores
+      description: Amazon HealthOmics List Reference Stores
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreferencestores
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-runs
+      description: Amazon HealthOmics List Runs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.listruns
+      with:
+        name: tools.name
+        runGroupId: tools.runGroupId
+        startingToken: tools.startingToken
+        maxResults: tools.maxResults
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-start-run
+      description: Amazon HealthOmics Start Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.startrun
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-run
+      description: Amazon HealthOmics Delete Run
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deleterun
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-run
+      description: Amazon HealthOmics Get Run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getrun
+      with:
+        id: tools.id
+        export: tools.export
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-cancel-run
+      description: Amazon HealthOmics Cancel Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.cancelrun
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-run-tasks
+      description: Amazon HealthOmics List Run Tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.listruntasks
+      with:
+        id: tools.id
+        status: tools.status
+        startingToken: tools.startingToken
+        maxResults: tools.maxResults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-run-task
+      description: Amazon HealthOmics Get Run Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getruntask
+      with:
+        id: tools.id
+        taskId: tools.taskId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-create-run-group
+      description: Amazon HealthOmics Create Run Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.createrungroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-run-groups
+      description: Amazon HealthOmics List Run Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.listrungroups
+      with:
+        name: tools.name
+        startingToken: tools.startingToken
+        maxResults: tools.maxResults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-run-group
+      description: Amazon HealthOmics Delete Run Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deleterungroup
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-run-group
+      description: Amazon HealthOmics Get Run Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getrungroup
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-update-run-group
+      description: Amazon HealthOmics Update Run Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.updaterungroup
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-create-sequence-store
+      description: Amazon HealthOmics Create Sequence Store
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.createsequencestore
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-sequence-store
+      description: Amazon HealthOmics Delete Sequence Store
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deletesequencestore
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-sequence-store
+      description: Amazon HealthOmics Get Sequence Store
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getsequencestore
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-start-read-set
+      description: Amazon HealthOmics Start Read Set Activation Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.startreadsetactivationjob
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-read-set
+      description: Amazon HealthOmics Get Read Set Activation Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreadsetactivationjob
+      with:
+        id: tools.id
+        sequenceStoreId: tools.sequenceStoreId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-read-set
+      description: Amazon HealthOmics List Read Set Activation Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreadsetactivationjobs
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-start-read-set-2
+      description: Amazon HealthOmics Start Read Set Export Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.startreadsetexportjob
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-read-set-2
+      description: Amazon HealthOmics Get Read Set Export Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreadsetexportjob
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-read-set-2
+      description: Amazon HealthOmics List Read Set Export Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreadsetexportjobs
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-start-read-set-3
+      description: Amazon HealthOmics Start Read Set Import Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.startreadsetimportjob
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-read-set-3
+      description: Amazon HealthOmics Get Read Set Import Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreadsetimportjob
+      with:
+        id: tools.id
+        sequenceStoreId: tools.sequenceStoreId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-read-set-3
+      description: Amazon HealthOmics List Read Set Import Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreadsetimportjobs
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        sequenceStoreId: tools.sequenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-batch-delete-read
+      description: Amazon HealthOmics Batch Delete Read Set
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.batchdeletereadset
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-read-set-4
+      description: Amazon HealthOmics Get Read Set
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreadset
+      with:
+        id: tools.id
+        sequenceStoreId: tools.sequenceStoreId
+        file: tools.file
+        partNumber: tools.partNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-read-set-5
+      description: Amazon HealthOmics Get Read Set Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getreadsetmetadata
+      with:
+        id: tools.id
+        sequenceStoreId: tools.sequenceStoreId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-read-sets
+      description: Amazon HealthOmics List Read Sets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreadsets
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-create-multipart-read
+      description: Amazon HealthOmics Create Multipart Read Set Upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.createmultipartreadsetupload
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-abort-multipart-read
+      description: Amazon HealthOmics Abort Multipart Read Set Upload
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.abortmultipartreadsetupload
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        uploadId: tools.uploadId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-complete-multipart-read
+      description: Amazon HealthOmics Complete Multipart Read Set Upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.completemultipartreadsetupload
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        uploadId: tools.uploadId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-upload-read-set
+      description: Amazon HealthOmics Upload Read Set Part
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.uploadreadsetpart
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        uploadId: tools.uploadId
+        partSource: tools.partSource
+        partNumber: tools.partNumber
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-read-set-4
+      description: Amazon HealthOmics List Read Set Upload Parts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listreadsetuploadparts
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        uploadId: tools.uploadId
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-multipart-read
+      description: Amazon HealthOmics List Multipart Read Set Uploads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listmultipartreadsetuploads
+      with:
+        sequenceStoreId: tools.sequenceStoreId
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-sequence-stores
+      description: Amazon HealthOmics List Sequence Stores
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listsequencestores
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-tags-resource
+      description: Amazon HealthOmics List Tags for Resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.listtagsforresource
+      with:
+        resourceArn: tools.resourceArn
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-tag-resource
+      description: Amazon HealthOmics Tag Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.tagresource
+      with:
+        resourceArn: tools.resourceArn
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-untag-resource
+      description: Amazon HealthOmics Untag Resource
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.untagresource
+      with:
+        resourceArn: tools.resourceArn
+        tagKeys: tools.tagKeys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-create-variant-store
+      description: Amazon HealthOmics Create Variant Store
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.createvariantstore
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-variant-store
+      description: Amazon HealthOmics Delete Variant Store
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deletevariantstore
+      with:
+        name: tools.name
+        force: tools.force
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-variant-store
+      description: Amazon HealthOmics Get Variant Store
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getvariantstore
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-update-variant-store
+      description: Amazon HealthOmics Update Variant Store
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.updatevariantstore
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-variant-stores
+      description: Amazon HealthOmics List Variant Stores
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.listvariantstores
+      with:
+        maxResults: tools.maxResults
+        nextToken: tools.nextToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-create-workflow
+      description: Amazon HealthOmics Create Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.createworkflow
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-list-workflows
+      description: Amazon HealthOmics List Workflows
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.listworkflows
+      with:
+        type: tools.type
+        name: tools.name
+        startingToken: tools.startingToken
+        maxResults: tools.maxResults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-delete-workflow
+      description: Amazon HealthOmics Delete Workflow
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-healthomics.deleteworkflow
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-get-workflow
+      description: Amazon HealthOmics Get Workflow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-healthomics.getworkflow
+      with:
+        id: tools.id
+        type: tools.type
+        export: tools.export
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-healthomics-update-workflow
+      description: Amazon HealthOmics Update Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-healthomics.updateworkflow
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
