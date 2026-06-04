@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Provision Genomics Stores
+  summary: Stand up a reference store with an imported reference, then a sequence store ready for read sets.
+  description: >-
+    A bootstrap flow that prepares the storage foundation for a HealthOmics
+    genomics project. The workflow creates a reference store, imports a reference
+    genome and polls the import to completion, then creates a sequence store that
+    will hold read sets aligned against that reference. Each step spells out its
+    AWS REST-JSON request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: provision-genomics-stores
+  summary: Create a reference store, import a reference, then create a sequence store.
+  description: >-
+    Creates a reference store, starts and polls a reference import job until it
+    is COMPLETED or FAILED, and on success creates a sequence store keyed to the
+    same project naming. The reference import poll branches on the
+    ReferenceImportJobStatus enum.
+  inputs:
+    type: object
+    required:
+    - referenceStoreName
+    - sequenceStoreName
+    - roleArn
+    - referenceSources
+    properties:
+      referenceStoreName:
+        type: string
+        description: A name for the reference store.
+      sequenceStoreName:
+        type: string
+        description: A name for the sequence store.
+      roleArn:
+        type: string
+        description: The service role ARN used to import the reference.
+      referenceSources:
+        type: array
+        description: The reference import sources (each with sourceFile S3 URI and name).
+        items:
+          type: object
+  steps:
+  - stepId: createReferenceStore
+    description: Create a reference store to hold the project's reference genome.
+    operationId: CreateReferenceStore
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.referenceStoreName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceStoreId: $response.body#/id
+  - stepId: startReferenceImport
+    description: Start a reference import job that loads the reference genome into the store.
+    operationId: StartReferenceImportJob
+    parameters:
+    - name: referenceStoreId
+      in: path
+      value: $steps.createReferenceStore.outputs.referenceStoreId
+    requestBody:
+      contentType: application/json
+      payload:
+        roleArn: $inputs.roleArn
+        sources: $inputs.referenceSources
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceImportJobId: $response.body#/id
+  - stepId: pollReferenceImport
+    description: >-
+      Poll the reference import job until it reaches a terminal status. The
+      status enum is SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED,
+      COMPLETED, or COMPLETED_WITH_FAILURES.
+    operationId: GetReferenceImportJob
+    parameters:
+    - name: referenceStoreId
+      in: path
+      value: $steps.createReferenceStore.outputs.referenceStoreId
+    - name: id
+      in: path
+      value: $steps.startReferenceImport.outputs.referenceImportJobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/status
+    onSuccess:
+    - name: referenceReady
+      type: goto
+      stepId: createSequenceStore
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: referenceFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED" || $.status == "CANCELLED"
+        type: jsonpath
+    - name: referenceStillImporting
+      type: goto
+      stepId: pollReferenceImport
+      criteria:
+      - context: $response.body
+        condition: $.status == "IN_PROGRESS" || $.status == "SUBMITTED"
+        type: jsonpath
+  - stepId: createSequenceStore
+    description: Create a sequence store that will hold read sets aligned to the imported reference.
+    operationId: CreateSequenceStore
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.sequenceStoreName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sequenceStoreId: $response.body#/id
+      sequenceStoreArn: $response.body#/arn
+  outputs:
+    referenceStoreId: $steps.createReferenceStore.outputs.referenceStoreId
+    referenceImportJobId: $steps.startReferenceImport.outputs.referenceImportJobId
+    sequenceStoreId: $steps.createSequenceStore.outputs.sequenceStoreId

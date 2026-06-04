@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Activate an Archived Read Set
+  summary: Start a read set activation job in a sequence store and poll it to completion.
+  description: >-
+    To reduce storage charges, Amazon HealthOmics archives unused read sets
+    after 30 days; they must be reactivated before they can be read or exported.
+    This workflow starts a read set activation job for the supplied read sets in
+    a sequence store and polls GetReadSetActivationJob until the job reaches a
+    terminal state. Each step spells out its AWS REST-JSON request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: activate-read-set
+  summary: Start a read set activation job and wait for it to complete.
+  description: >-
+    Starts a read set activation job for the supplied sources and polls
+    GetReadSetActivationJob until the job is COMPLETED, COMPLETED_WITH_FAILURES,
+    CANCELLED, or FAILED.
+  inputs:
+    type: object
+    required:
+    - sequenceStoreId
+    - sources
+    properties:
+      sequenceStoreId:
+        type: string
+        description: The sequence store ID that holds the archived read sets.
+      sources:
+        type: array
+        description: The activation job sources, each with a readSetId.
+        items:
+          type: object
+  steps:
+  - stepId: startActivationJob
+    description: Start a read set activation job for the supplied read sets.
+    operationId: StartReadSetActivationJob
+    parameters:
+    - name: sequenceStoreId
+      in: path
+      value: $inputs.sequenceStoreId
+    requestBody:
+      contentType: application/json
+      payload:
+        sources: $inputs.sources
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      activationJobId: $response.body#/id
+      activationStatus: $response.body#/status
+  - stepId: pollActivationJob
+    description: >-
+      Poll the activation job until it reaches a terminal status. The status
+      enum is SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED,
+      or COMPLETED_WITH_FAILURES.
+    operationId: GetReadSetActivationJob
+    parameters:
+    - name: sequenceStoreId
+      in: path
+      value: $inputs.sequenceStoreId
+    - name: id
+      in: path
+      value: $steps.startActivationJob.outputs.activationJobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/status
+      statusMessage: $response.body#/statusMessage
+      completionTime: $response.body#/completionTime
+    onSuccess:
+    - name: activationComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: activationFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED" || $.status == "CANCELLED"
+        type: jsonpath
+    - name: activationStillRunning
+      type: goto
+      stepId: pollActivationJob
+      criteria:
+      - context: $response.body
+        condition: $.status == "IN_PROGRESS" || $.status == "SUBMITTED"
+        type: jsonpath
+  outputs:
+    activationJobId: $steps.startActivationJob.outputs.activationJobId
+    finalStatus: $steps.pollActivationJob.outputs.jobStatus

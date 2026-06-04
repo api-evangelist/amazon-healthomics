@@ -1,0 +1,113 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Import Variants
+  summary: Create a variant store, start a variant import job, and poll it to completion.
+  description: >-
+    Variant stores hold the called variants from genomic analysis in a queryable
+    form. This workflow creates a variant store bound to a genome reference,
+    starts a variant import job that loads VCF source items from Amazon S3 into
+    the store, and polls GetVariantImportJob until the job reaches a terminal
+    state. Each step spells out its AWS REST-JSON request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: import-variants
+  summary: Create a variant store then import variants and wait for completion.
+  description: >-
+    Creates a variant store referencing a genome, starts a variant import job
+    against it by destination store name, and polls GetVariantImportJob until
+    the job is COMPLETED, COMPLETED_WITH_FAILURES, CANCELLED, or FAILED.
+  inputs:
+    type: object
+    required:
+    - storeName
+    - referenceArn
+    - roleArn
+    - items
+    properties:
+      storeName:
+        type: string
+        description: A name for the new variant store (lowercase, starts with a letter).
+      referenceArn:
+        type: string
+        description: The genome reference ARN the store is bound to.
+      roleArn:
+        type: string
+        description: The service role ARN that HealthOmics assumes to read source files.
+      items:
+        type: array
+        description: The variant import items, each with an S3 source URI.
+        items:
+          type: object
+  steps:
+  - stepId: createVariantStore
+    description: Create a variant store bound to the supplied genome reference.
+    operationId: CreateVariantStore
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.storeName
+        reference:
+          referenceArn: $inputs.referenceArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      variantStoreId: $response.body#/id
+      variantStoreName: $response.body#/name
+      storeStatus: $response.body#/status
+  - stepId: startImportJob
+    description: Start a variant import job that loads the VCF items into the new store.
+    operationId: StartVariantImportJob
+    requestBody:
+      contentType: application/json
+      payload:
+        destinationName: $steps.createVariantStore.outputs.variantStoreName
+        roleArn: $inputs.roleArn
+        items: $inputs.items
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      importJobId: $response.body#/jobId
+  - stepId: pollImportJob
+    description: >-
+      Poll the variant import job until it reaches a terminal status. The status
+      enum is SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED, or
+      COMPLETED_WITH_FAILURES.
+    operationId: GetVariantImportJob
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.startImportJob.outputs.importJobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/status
+      statusMessage: $response.body#/statusMessage
+    onSuccess:
+    - name: importComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: importFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED" || $.status == "CANCELLED"
+        type: jsonpath
+    - name: importStillRunning
+      type: goto
+      stepId: pollImportJob
+      criteria:
+      - context: $response.body
+        condition: $.status == "IN_PROGRESS" || $.status == "SUBMITTED"
+        type: jsonpath
+  outputs:
+    variantStoreId: $steps.createVariantStore.outputs.variantStoreId
+    importJobId: $steps.startImportJob.outputs.importJobId
+    finalStatus: $steps.pollImportJob.outputs.jobStatus

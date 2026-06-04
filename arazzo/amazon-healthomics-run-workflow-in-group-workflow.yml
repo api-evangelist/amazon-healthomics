@@ -1,0 +1,134 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Run a Workflow in a Run Group
+  summary: Create a run group, start a run inside it, and poll the run to completion.
+  description: >-
+    Run groups let teams cap the concurrency, CPU, GPU, and duration consumed by
+    a set of HealthOmics runs. This workflow creates a run group, starts a run
+    that belongs to that group against an existing workflow, and polls GetRun
+    until the run reaches a terminal state. Each step spells out its AWS
+    REST-JSON request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: run-workflow-in-group
+  summary: Create a run group, start a run within it, and wait for the run to finish.
+  description: >-
+    Creates a run group with concurrency and resource limits, starts a run
+    bound to that group against an existing workflow, and polls GetRun until the
+    run status is COMPLETED, CANCELLED, DELETED, or FAILED.
+  inputs:
+    type: object
+    required:
+    - groupRequestId
+    - workflowId
+    - roleArn
+    - runRequestId
+    properties:
+      groupName:
+        type: string
+        description: A name for the run group.
+      maxCpus:
+        type: integer
+        description: The maximum number of CPUs the group may use.
+      maxRuns:
+        type: integer
+        description: The maximum number of concurrent runs in the group.
+      maxDuration:
+        type: integer
+        description: A maximum run time for the group in minutes.
+      groupRequestId:
+        type: string
+        description: Idempotency token for the CreateRunGroup request.
+      workflowId:
+        type: string
+        description: The existing workflow ID to run.
+      roleArn:
+        type: string
+        description: The service role ARN the run assumes.
+      runName:
+        type: string
+        description: A name for the run.
+      parameters:
+        type: object
+        description: Parameters passed to the run.
+      runRequestId:
+        type: string
+        description: Idempotency token for the StartRun request.
+  steps:
+  - stepId: createRunGroup
+    description: Create a run group that caps concurrency and resource usage for its runs.
+    operationId: CreateRunGroup
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.groupName
+        maxCpus: $inputs.maxCpus
+        maxRuns: $inputs.maxRuns
+        maxDuration: $inputs.maxDuration
+        requestId: $inputs.groupRequestId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      runGroupId: $response.body#/id
+      runGroupArn: $response.body#/arn
+  - stepId: startRun
+    description: Start a run inside the new run group against an existing workflow.
+    operationId: StartRun
+    requestBody:
+      contentType: application/json
+      payload:
+        workflowId: $inputs.workflowId
+        workflowType: PRIVATE
+        roleArn: $inputs.roleArn
+        name: $inputs.runName
+        runGroupId: $steps.createRunGroup.outputs.runGroupId
+        parameters: $inputs.parameters
+        requestId: $inputs.runRequestId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      runId: $response.body#/id
+      runStatus: $response.body#/status
+  - stepId: pollRun
+    description: >-
+      Poll the run until it reaches a terminal status. The status enum is
+      PENDING, STARTING, RUNNING, STOPPING, COMPLETED, DELETED, CANCELLED, or
+      FAILED.
+    operationId: GetRun
+    parameters:
+    - name: id
+      in: path
+      value: $steps.startRun.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runStatus: $response.body#/status
+    onSuccess:
+    - name: runComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: runFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED" || $.status == "CANCELLED"
+        type: jsonpath
+    - name: runStillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.status == "PENDING" || $.status == "STARTING" || $.status == "RUNNING"
+        type: jsonpath
+  outputs:
+    runGroupId: $steps.createRunGroup.outputs.runGroupId
+    runId: $steps.startRun.outputs.runId
+    finalRunStatus: $steps.pollRun.outputs.runStatus

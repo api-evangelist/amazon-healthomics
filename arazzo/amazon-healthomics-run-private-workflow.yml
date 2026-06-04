@@ -1,0 +1,147 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Run a Private Workflow
+  summary: Register a private workflow, start a run, poll it to completion, and list its tasks.
+  description: >-
+    The end-to-end bioinformatics execution flow for Amazon HealthOmics. The
+    workflow registers a private WDL/Nextflow/CWL workflow definition, starts a
+    run against it with a service role and run parameters, polls GetRun until
+    the run reaches a terminal state, and then lists the run's tasks for
+    inspection. Each step spells out its AWS REST-JSON request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: run-private-workflow
+  summary: Create a private workflow, start a run, wait for it to finish, then list tasks.
+  description: >-
+    Registers a private workflow definition, starts a run, polls GetRun until
+    the run status is COMPLETED, CANCELLED, DELETED, or FAILED, and on
+    completion enumerates the run's tasks via ListRunTasks.
+  inputs:
+    type: object
+    required:
+    - workflowName
+    - engine
+    - definitionUri
+    - requestId
+    - roleArn
+    - runRequestId
+    properties:
+      workflowName:
+        type: string
+        description: A name for the workflow.
+      engine:
+        type: string
+        description: The workflow engine (WDL, NEXTFLOW, or CWL).
+      definitionUri:
+        type: string
+        description: The URI of the workflow definition.
+      main:
+        type: string
+        description: The path of the main definition file.
+      requestId:
+        type: string
+        description: Idempotency token for the CreateWorkflow request.
+      roleArn:
+        type: string
+        description: The service role ARN the run assumes.
+      runName:
+        type: string
+        description: A name for the run.
+      parameters:
+        type: object
+        description: Parameters passed to the run.
+      runRequestId:
+        type: string
+        description: Idempotency token for the StartRun request.
+  steps:
+  - stepId: createWorkflow
+    description: Register the private workflow definition with HealthOmics.
+    operationId: CreateWorkflow
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.workflowName
+        engine: $inputs.engine
+        definitionUri: $inputs.definitionUri
+        main: $inputs.main
+        requestId: $inputs.requestId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      workflowId: $response.body#/id
+      workflowArn: $response.body#/arn
+      workflowStatus: $response.body#/status
+  - stepId: startRun
+    description: Start a run against the newly created private workflow.
+    operationId: StartRun
+    requestBody:
+      contentType: application/json
+      payload:
+        workflowId: $steps.createWorkflow.outputs.workflowId
+        workflowType: PRIVATE
+        roleArn: $inputs.roleArn
+        name: $inputs.runName
+        parameters: $inputs.parameters
+        requestId: $inputs.runRequestId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      runId: $response.body#/id
+      runStatus: $response.body#/status
+  - stepId: pollRun
+    description: >-
+      Poll the run until it reaches a terminal status. The status enum is
+      PENDING, STARTING, RUNNING, STOPPING, COMPLETED, DELETED, CANCELLED, or
+      FAILED.
+    operationId: GetRun
+    parameters:
+    - name: id
+      in: path
+      value: $steps.startRun.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runStatus: $response.body#/status
+    onSuccess:
+    - name: runComplete
+      type: goto
+      stepId: listRunTasks
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: runFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED" || $.status == "CANCELLED"
+        type: jsonpath
+    - name: runStillRunning
+      type: goto
+      stepId: pollRun
+      criteria:
+      - context: $response.body
+        condition: $.status == "PENDING" || $.status == "STARTING" || $.status == "RUNNING"
+        type: jsonpath
+  - stepId: listRunTasks
+    description: List the tasks for the completed run so individual task results can be inspected.
+    operationId: ListRunTasks
+    parameters:
+    - name: id
+      in: path
+      value: $steps.startRun.outputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tasks: $response.body#/items
+  outputs:
+    workflowId: $steps.createWorkflow.outputs.workflowId
+    runId: $steps.startRun.outputs.runId
+    finalRunStatus: $steps.pollRun.outputs.runStatus
+    tasks: $steps.listRunTasks.outputs.tasks

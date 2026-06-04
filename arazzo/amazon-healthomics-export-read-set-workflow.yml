@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Export a Read Set to S3
+  summary: Start a read set export job to Amazon S3 and poll it to completion.
+  description: >-
+    Read sets stored in a HealthOmics sequence store can be exported back to
+    Amazon S3 for downstream tooling. This workflow starts a read set export job
+    that writes the supplied read sets to an S3 destination and polls
+    GetReadSetExportJob until the job reaches a terminal state. Each step spells
+    out its AWS REST-JSON request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: export-read-set
+  summary: Start a read set export job to S3 and wait for it to complete.
+  description: >-
+    Starts a read set export job that writes the supplied read sets to an S3
+    destination and polls GetReadSetExportJob until the job is COMPLETED,
+    COMPLETED_WITH_FAILURES, CANCELLED, or FAILED.
+  inputs:
+    type: object
+    required:
+    - sequenceStoreId
+    - destination
+    - roleArn
+    - sources
+    properties:
+      sequenceStoreId:
+        type: string
+        description: The sequence store ID that holds the read sets to export.
+      destination:
+        type: string
+        description: The S3 location (s3://...) for the exported files.
+      roleArn:
+        type: string
+        description: The service role ARN that HealthOmics assumes to write to S3.
+      sources:
+        type: array
+        description: The export job sources, each with a readSetId.
+        items:
+          type: object
+  steps:
+  - stepId: startExportJob
+    description: Start a read set export job that writes the supplied read sets to S3.
+    operationId: StartReadSetExportJob
+    parameters:
+    - name: sequenceStoreId
+      in: path
+      value: $inputs.sequenceStoreId
+    requestBody:
+      contentType: application/json
+      payload:
+        destination: $inputs.destination
+        roleArn: $inputs.roleArn
+        sources: $inputs.sources
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      exportJobId: $response.body#/id
+      exportStatus: $response.body#/status
+  - stepId: pollExportJob
+    description: >-
+      Poll the export job until it reaches a terminal status. The status enum is
+      SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, or
+      COMPLETED_WITH_FAILURES.
+    operationId: GetReadSetExportJob
+    parameters:
+    - name: sequenceStoreId
+      in: path
+      value: $inputs.sequenceStoreId
+    - name: id
+      in: path
+      value: $steps.startExportJob.outputs.exportJobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/status
+      statusMessage: $response.body#/statusMessage
+      completionTime: $response.body#/completionTime
+    onSuccess:
+    - name: exportComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: exportFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED" || $.status == "CANCELLED"
+        type: jsonpath
+    - name: exportStillRunning
+      type: goto
+      stepId: pollExportJob
+      criteria:
+      - context: $response.body
+        condition: $.status == "IN_PROGRESS" || $.status == "SUBMITTED"
+        type: jsonpath
+  outputs:
+    exportJobId: $steps.startExportJob.outputs.exportJobId
+    finalStatus: $steps.pollExportJob.outputs.jobStatus

@@ -51,6 +51,39 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-healthomics.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-healthomics-activate-read-set-workflow.yml
+    name: Amazon HealthOmics Activate an Archived Read Set
+    summary: Start a read set activation job in a sequence store and poll it to completion.
+  - url: arazzo/amazon-healthomics-export-read-set-workflow.yml
+    name: Amazon HealthOmics Export a Read Set to S3
+    summary: Start a read set export job to Amazon S3 and poll it to completion.
+  - url: arazzo/amazon-healthomics-import-annotations-workflow.yml
+    name: Amazon HealthOmics Import Annotations
+    summary: Create an annotation store, start an annotation import job, and poll it to completion.
+  - url: arazzo/amazon-healthomics-import-read-set-workflow.yml
+    name: Amazon HealthOmics Import Read Set
+    summary: Provision a sequence store, start a read set import job, and poll it to completion.
+  - url: arazzo/amazon-healthomics-import-reference-workflow.yml
+    name: Amazon HealthOmics Import Reference Genome
+    summary: Provision a reference store, start a reference import job, and poll it to completion.
+  - url: arazzo/amazon-healthomics-import-variants-workflow.yml
+    name: Amazon HealthOmics Import Variants
+    summary: Create a variant store, start a variant import job, and poll it to completion.
+  - url: arazzo/amazon-healthomics-inspect-run-task-workflow.yml
+    name: Amazon HealthOmics Inspect a Run Task
+    summary: Confirm a run exists, list its tasks, and fetch detail for the first task.
+  - url: arazzo/amazon-healthomics-provision-genomics-stores-workflow.yml
+    name: Amazon HealthOmics Provision Genomics Stores
+    summary: Stand up a reference store with an imported reference, then a sequence store ready for read sets.
+  - url: arazzo/amazon-healthomics-run-private-workflow.yml
+    name: Amazon HealthOmics Run a Private Workflow
+    summary: Register a private workflow, start a run, poll it to completion, and list its tasks.
+  - url: arazzo/amazon-healthomics-run-workflow-in-group-workflow.yml
+    name: Amazon HealthOmics Run a Workflow in a Run Group
+    summary: Create a run group, start a run inside it, and poll the run to completion.
 - type: Portal
   url: https://aws.amazon.com/healthomics/
 - type: Documentation

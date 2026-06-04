@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Import Annotations
+  summary: Create an annotation store, start an annotation import job, and poll it to completion.
+  description: >-
+    Annotation stores hold genomic annotations (GFF, TSV, or VCF) in a queryable
+    form. This workflow creates an annotation store in a chosen format, starts an
+    annotation import job that loads source items from Amazon S3 into the store,
+    and polls GetAnnotationImportJob until the job reaches a terminal state. Each
+    step spells out its AWS REST-JSON request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: import-annotations
+  summary: Create an annotation store then import annotations and wait for completion.
+  description: >-
+    Creates an annotation store in the chosen storeFormat, starts an annotation
+    import job against it by destination store name, and polls
+    GetAnnotationImportJob until the job is COMPLETED, COMPLETED_WITH_FAILURES,
+    CANCELLED, or FAILED.
+  inputs:
+    type: object
+    required:
+    - storeName
+    - storeFormat
+    - roleArn
+    - items
+    properties:
+      storeName:
+        type: string
+        description: A name for the new annotation store (lowercase, starts with a letter).
+      storeFormat:
+        type: string
+        description: The annotation file format of the store (GFF, TSV, or VCF).
+      referenceArn:
+        type: string
+        description: An optional genome reference ARN to bind the store to.
+      roleArn:
+        type: string
+        description: The service role ARN that HealthOmics assumes to read source files.
+      items:
+        type: array
+        description: The annotation import items, each with an S3 source URI.
+        items:
+          type: object
+  steps:
+  - stepId: createAnnotationStore
+    description: Create an annotation store in the chosen format.
+    operationId: CreateAnnotationStore
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.storeName
+        storeFormat: $inputs.storeFormat
+        reference:
+          referenceArn: $inputs.referenceArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      annotationStoreId: $response.body#/id
+      annotationStoreName: $response.body#/name
+      storeStatus: $response.body#/status
+  - stepId: startImportJob
+    description: Start an annotation import job that loads the source items into the new store.
+    operationId: StartAnnotationImportJob
+    requestBody:
+      contentType: application/json
+      payload:
+        destinationName: $steps.createAnnotationStore.outputs.annotationStoreName
+        roleArn: $inputs.roleArn
+        items: $inputs.items
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      importJobId: $response.body#/jobId
+  - stepId: pollImportJob
+    description: >-
+      Poll the annotation import job until it reaches a terminal status. The
+      status enum is SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED, or
+      COMPLETED_WITH_FAILURES.
+    operationId: GetAnnotationImportJob
+    parameters:
+    - name: jobId
+      in: path
+      value: $steps.startImportJob.outputs.importJobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/status
+      statusMessage: $response.body#/statusMessage
+    onSuccess:
+    - name: importComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: importFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED" || $.status == "CANCELLED"
+        type: jsonpath
+    - name: importStillRunning
+      type: goto
+      stepId: pollImportJob
+      criteria:
+      - context: $response.body
+        condition: $.status == "IN_PROGRESS" || $.status == "SUBMITTED"
+        type: jsonpath
+  outputs:
+    annotationStoreId: $steps.createAnnotationStore.outputs.annotationStoreId
+    importJobId: $steps.startImportJob.outputs.importJobId
+    finalStatus: $steps.pollImportJob.outputs.jobStatus

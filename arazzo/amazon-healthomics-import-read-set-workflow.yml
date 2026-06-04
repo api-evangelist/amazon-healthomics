@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Import Read Set
+  summary: Provision a sequence store, start a read set import job, and poll it to completion.
+  description: >-
+    The core genomics ingestion flow for Amazon HealthOmics. The workflow
+    creates a sequence store to hold genomic read sets, starts a read set
+    import job that pulls source files from Amazon S3 into the store, and then
+    polls the import job until it reaches a terminal state. Each step spells out
+    its AWS REST-JSON request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: import-read-set
+  summary: Create a sequence store then import a read set and wait for completion.
+  description: >-
+    Creates a new sequence store, starts a read set import job against it using
+    the supplied service role and source files, and polls GetReadSetImportJob
+    until the job is COMPLETED, COMPLETED_WITH_FAILURES, or FAILED.
+  inputs:
+    type: object
+    required:
+    - storeName
+    - roleArn
+    - sources
+    properties:
+      storeName:
+        type: string
+        description: A name for the new sequence store.
+      description:
+        type: string
+        description: An optional description for the sequence store.
+      roleArn:
+        type: string
+        description: The service role ARN that HealthOmics assumes to read source files.
+      sources:
+        type: array
+        description: The read set import job source files (sourceFiles, sourceFileType, subjectId, sampleId, referenceArn).
+        items:
+          type: object
+  steps:
+  - stepId: createSequenceStore
+    description: Create a sequence store to hold the imported read sets.
+    operationId: CreateSequenceStore
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.storeName
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sequenceStoreId: $response.body#/id
+      sequenceStoreArn: $response.body#/arn
+  - stepId: startImportJob
+    description: Start a read set import job that loads the source files into the new store.
+    operationId: StartReadSetImportJob
+    parameters:
+    - name: sequenceStoreId
+      in: path
+      value: $steps.createSequenceStore.outputs.sequenceStoreId
+    requestBody:
+      contentType: application/json
+      payload:
+        roleArn: $inputs.roleArn
+        sources: $inputs.sources
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      importJobId: $response.body#/id
+      importStatus: $response.body#/status
+  - stepId: pollImportJob
+    description: >-
+      Poll the read set import job until it reaches a terminal status. The
+      status enum is SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED,
+      COMPLETED, or COMPLETED_WITH_FAILURES.
+    operationId: GetReadSetImportJob
+    parameters:
+    - name: sequenceStoreId
+      in: path
+      value: $steps.createSequenceStore.outputs.sequenceStoreId
+    - name: id
+      in: path
+      value: $steps.startImportJob.outputs.importJobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/status
+      statusMessage: $response.body#/statusMessage
+      completionTime: $response.body#/completionTime
+    onSuccess:
+    - name: importComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: importFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED"
+        type: jsonpath
+    - name: importStillRunning
+      type: goto
+      stepId: pollImportJob
+      criteria:
+      - context: $response.body
+        condition: $.status == "IN_PROGRESS" || $.status == "SUBMITTED"
+        type: jsonpath
+  outputs:
+    sequenceStoreId: $steps.createSequenceStore.outputs.sequenceStoreId
+    importJobId: $steps.startImportJob.outputs.importJobId
+    finalStatus: $steps.pollImportJob.outputs.jobStatus

@@ -1,0 +1,91 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Inspect a Run Task
+  summary: Confirm a run exists, list its tasks, and fetch detail for the first task.
+  description: >-
+    A diagnostic flow for an existing HealthOmics run. The workflow reads the run
+    to confirm its status, lists the tasks that make up the run, and then fetches
+    the detailed record for the first task — including CPU, memory, GPU usage,
+    timing, and log stream. Each step spells out its AWS REST-JSON request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: inspect-run-task
+  summary: Read a run, list its tasks, and get detail for the first task.
+  description: >-
+    Calls GetRun to confirm the run, ListRunTasks to enumerate its tasks, and
+    GetRunTask to retrieve the first task's detail. Branches to end early when
+    the run has no tasks.
+  inputs:
+    type: object
+    required:
+    - runId
+    properties:
+      runId:
+        type: string
+        description: The run's ID to inspect.
+  steps:
+  - stepId: getRun
+    description: Read the run to confirm it exists and capture its current status.
+    operationId: GetRun
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runStatus: $response.body#/status
+  - stepId: listRunTasks
+    description: List the tasks that make up the run.
+    operationId: ListRunTasks
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.runId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tasks: $response.body#/items
+      firstTaskId: $response.body#/items/0/taskId
+    onSuccess:
+    - name: hasTasks
+      type: goto
+      stepId: getRunTask
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+    - name: noTasks
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.items.length == 0
+        type: jsonpath
+  - stepId: getRunTask
+    description: Fetch the detailed record for the first task in the run.
+    operationId: GetRunTask
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.runId
+    - name: taskId
+      in: path
+      value: $steps.listRunTasks.outputs.firstTaskId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taskStatus: $response.body#/status
+      taskName: $response.body#/name
+      cpus: $response.body#/cpus
+      memory: $response.body#/memory
+      logStream: $response.body#/logStream
+  outputs:
+    runStatus: $steps.getRun.outputs.runStatus
+    firstTaskId: $steps.listRunTasks.outputs.firstTaskId
+    taskStatus: $steps.getRunTask.outputs.taskStatus

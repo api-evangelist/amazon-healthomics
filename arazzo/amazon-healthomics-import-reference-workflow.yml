@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Amazon HealthOmics Import Reference Genome
+  summary: Provision a reference store, start a reference import job, and poll it to completion.
+  description: >-
+    Reference genomes underpin every downstream genomics analysis in Amazon
+    HealthOmics. This workflow creates a reference store, starts a reference
+    import job that pulls a FASTA source file from Amazon S3 into the store, and
+    polls the import job until it reaches a terminal state. Each step spells out
+    its AWS REST-JSON request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: healthOmicsApi
+  url: ../openapi/amazon-healthomics-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: import-reference
+  summary: Create a reference store then import a reference genome and wait for completion.
+  description: >-
+    Creates a new reference store, starts a reference import job against it
+    using the supplied service role and source, and polls GetReferenceImportJob
+    until the job is COMPLETED, COMPLETED_WITH_FAILURES, or FAILED.
+  inputs:
+    type: object
+    required:
+    - storeName
+    - roleArn
+    - sources
+    properties:
+      storeName:
+        type: string
+        description: A name for the new reference store.
+      description:
+        type: string
+        description: An optional description for the reference store.
+      roleArn:
+        type: string
+        description: The service role ARN that HealthOmics assumes to read the source file.
+      sources:
+        type: array
+        description: The reference import job sources (each with sourceFile S3 URI and name).
+        items:
+          type: object
+  steps:
+  - stepId: createReferenceStore
+    description: Create a reference store to hold the imported reference genome.
+    operationId: CreateReferenceStore
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.storeName
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceStoreId: $response.body#/id
+      referenceStoreArn: $response.body#/arn
+  - stepId: startImportJob
+    description: Start a reference import job that loads the reference FASTA into the new store.
+    operationId: StartReferenceImportJob
+    parameters:
+    - name: referenceStoreId
+      in: path
+      value: $steps.createReferenceStore.outputs.referenceStoreId
+    requestBody:
+      contentType: application/json
+      payload:
+        roleArn: $inputs.roleArn
+        sources: $inputs.sources
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      importJobId: $response.body#/id
+      importStatus: $response.body#/status
+  - stepId: pollImportJob
+    description: >-
+      Poll the reference import job until it reaches a terminal status. The
+      status enum is SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED,
+      COMPLETED, or COMPLETED_WITH_FAILURES.
+    operationId: GetReferenceImportJob
+    parameters:
+    - name: referenceStoreId
+      in: path
+      value: $steps.createReferenceStore.outputs.referenceStoreId
+    - name: id
+      in: path
+      value: $steps.startImportJob.outputs.importJobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobStatus: $response.body#/status
+      statusMessage: $response.body#/statusMessage
+      completionTime: $response.body#/completionTime
+    onSuccess:
+    - name: importComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: importFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED"
+        type: jsonpath
+    - name: importStillRunning
+      type: goto
+      stepId: pollImportJob
+      criteria:
+      - context: $response.body
+        condition: $.status == "IN_PROGRESS" || $.status == "SUBMITTED"
+        type: jsonpath
+  outputs:
+    referenceStoreId: $steps.createReferenceStore.outputs.referenceStoreId
+    importJobId: $steps.startImportJob.outputs.importJobId
+    finalStatus: $steps.pollImportJob.outputs.jobStatus
