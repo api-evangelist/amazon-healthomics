@@ -51,6 +51,8 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-healthomics.yaml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/amazon-healthomics/overview
 - type: ArazzoWorkflows
   url: arazzo/
   workflows:
