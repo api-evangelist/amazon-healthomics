@@ -4,7 +4,7 @@ description: AWS HealthOmics is a purpose-built service for healthcare and life 
   and analyze genomic, transcriptomic, and other omics data to generate insights and accelerate scientific discoveries and
   improve healthcare.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - AWS
 - Bioinformatics
