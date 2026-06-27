@@ -48,118 +48,115 @@ apis:
     url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
   - type: JSONLD
     url: json-ld/amazon-healthomics-context.jsonld
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/amazon-healthomics.yaml
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-healthomics/overview
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/amazon-healthomics-activate-read-set-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-activate-read-set-workflow.yml
     name: Amazon HealthOmics Activate an Archived Read Set
-    summary: Start a read set activation job in a sequence store and poll it to completion.
-  - url: arazzo/amazon-healthomics-export-read-set-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-export-read-set-workflow.yml
     name: Amazon HealthOmics Export a Read Set to S3
-    summary: Start a read set export job to Amazon S3 and poll it to completion.
-  - url: arazzo/amazon-healthomics-import-annotations-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-import-annotations-workflow.yml
     name: Amazon HealthOmics Import Annotations
-    summary: Create an annotation store, start an annotation import job, and poll it to completion.
-  - url: arazzo/amazon-healthomics-import-read-set-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-import-read-set-workflow.yml
     name: Amazon HealthOmics Import Read Set
-    summary: Provision a sequence store, start a read set import job, and poll it to completion.
-  - url: arazzo/amazon-healthomics-import-reference-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-import-reference-workflow.yml
     name: Amazon HealthOmics Import Reference Genome
-    summary: Provision a reference store, start a reference import job, and poll it to completion.
-  - url: arazzo/amazon-healthomics-import-variants-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-import-variants-workflow.yml
     name: Amazon HealthOmics Import Variants
-    summary: Create a variant store, start a variant import job, and poll it to completion.
-  - url: arazzo/amazon-healthomics-inspect-run-task-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-inspect-run-task-workflow.yml
     name: Amazon HealthOmics Inspect a Run Task
-    summary: Confirm a run exists, list its tasks, and fetch detail for the first task.
-  - url: arazzo/amazon-healthomics-provision-genomics-stores-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-provision-genomics-stores-workflow.yml
     name: Amazon HealthOmics Provision Genomics Stores
-    summary: Stand up a reference store with an imported reference, then a sequence store ready for read sets.
-  - url: arazzo/amazon-healthomics-run-private-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-run-private-workflow.yml
     name: Amazon HealthOmics Run a Private Workflow
-    summary: Register a private workflow, start a run, poll it to completion, and list its tasks.
-  - url: arazzo/amazon-healthomics-run-workflow-in-group-workflow.yml
+  - type: Arazzo
+    url: arazzo/amazon-healthomics-run-workflow-in-group-workflow.yml
     name: Amazon HealthOmics Run a Workflow in a Run Group
-    summary: Create a run group, start a run inside it, and poll the run to completion.
-- type: Portal
-  url: https://aws.amazon.com/healthomics/
-- type: Documentation
-  url: https://docs.aws.amazon.com/omics/
-- type: TermsOfService
-  url: https://aws.amazon.com/service-terms/
-- type: PrivacyPolicy
-  url: https://aws.amazon.com/privacy/
-- type: Support
-  url: https://aws.amazon.com/premiumsupport/
-- type: Blog
-  url: https://aws.amazon.com/blogs/industries/healthcare/
-- type: GitHubOrganization
-  url: https://github.com/aws
-- type: Console
-  url: https://console.aws.amazon.com/omics/
-- type: SignUp
-  url: https://portal.aws.amazon.com/billing/signup
-- type: StatusPage
-  url: https://health.aws.amazon.com/health/status
-- type: Contact
-  url: https://aws.amazon.com/contact-us/
-- type: SDK
-  url: https://aws.amazon.com/developer/tools/
-- type: CLI
-  url: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/omics/index.html
-- type: Features
-  data:
-  - name: Omics Storage
-    description: Purpose-built storage for genomic, transcriptomic, and other omics data with automatic optimization.
-  - name: Bioinformatics Workflows
-    description: Run industry-standard bioinformatics tools and pipelines using WDL and Nextflow workflow definitions.
-  - name: Annotation Stores
-    description: Store and query genomic annotation data from sources like ClinVar, Ensembl, and custom datasets.
-  - name: Variant Stores
-    description: Store and query genomic variant data in VCF and other standard bioinformatics formats.
-  - name: Sequence Stores
-    description: Efficiently store and retrieve genomic sequence read sets in FASTQ, BAM, and CRAM formats.
-  - name: Reference Genomes
-    description: Store and access reference genome files for alignment and analysis workflows.
-  - name: Managed Compute
-    description: Fully managed compute infrastructure for running bioinformatics workflows at scale.
-- type: UseCases
-  data:
-  - name: Whole Genome Sequencing
-    description: Store, analyze, and interpret whole genome sequencing data for research and clinical applications.
-  - name: Variant Calling Pipelines
-    description: Run standard variant calling workflows on genomic data to identify genetic variants.
-  - name: Pharmacogenomics Research
-    description: Analyze genomic data to understand drug response and develop personalized medicine approaches.
-  - name: Population Genomics
-    description: Process and analyze large-scale genomic datasets across patient populations for research.
-  - name: Clinical Genomics
-    description: Support clinical genomics workflows for diagnosis and treatment of genetic disorders.
-- type: Integrations
-  data:
-  - name: Amazon S3
-    description: Import and export omics data using S3 as the primary data source and destination.
-  - name: AWS IAM
-    description: Control access to HealthOmics resources using IAM roles and policies.
-  - name: Amazon CloudWatch
-    description: Monitor HealthOmics workflows and storage operations through CloudWatch metrics.
-  - name: AWS Lake Formation
-    description: Govern and secure genomic data lake access using Lake Formation permissions.
-  - name: Amazon Athena
-    description: Query genomic annotation and variant data stored in HealthOmics using Athena.
-  - name: AWS Batch
-    description: Supplement HealthOmics workflows with custom compute jobs using AWS Batch.
-- type: SpectralRules
-  url: rules/amazon-healthomics-spectral-rules.yml
-- type: Vocabulary
-  url: vocabulary/amazon-healthomics-vocabulary.yaml
-- type: Integrations
-  url: https://aws.amazon.com/marketplace
+  - type: Portal
+    url: https://aws.amazon.com/healthomics/
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/
+  - type: TermsOfService
+    url: https://aws.amazon.com/service-terms/
+  - type: PrivacyPolicy
+    url: https://aws.amazon.com/privacy/
+  - type: Support
+    url: https://aws.amazon.com/premiumsupport/
+  - type: Blog
+    url: https://aws.amazon.com/blogs/industries/healthcare/
+  - type: GitHubOrganization
+    url: https://github.com/aws
+  - type: Console
+    url: https://console.aws.amazon.com/omics/
+  - type: Signup
+    url: https://portal.aws.amazon.com/billing/signup
+  - type: StatusPage
+    url: https://health.aws.amazon.com/health/status
+  - type: Contact
+    url: https://aws.amazon.com/contact-us/
+  - type: SDKs
+    url: https://aws.amazon.com/developer/tools/
+  - type: CLI
+    url: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/omics/index.html
+  - type: Features
+    data:
+    - name: Omics Storage
+      description: Purpose-built storage for genomic, transcriptomic, and other omics data with automatic optimization.
+    - name: Bioinformatics Workflows
+      description: Run industry-standard bioinformatics tools and pipelines using WDL and Nextflow workflow definitions.
+    - name: Annotation Stores
+      description: Store and query genomic annotation data from sources like ClinVar, Ensembl, and custom datasets.
+    - name: Variant Stores
+      description: Store and query genomic variant data in VCF and other standard bioinformatics formats.
+    - name: Sequence Stores
+      description: Efficiently store and retrieve genomic sequence read sets in FASTQ, BAM, and CRAM formats.
+    - name: Reference Genomes
+      description: Store and access reference genome files for alignment and analysis workflows.
+    - name: Managed Compute
+      description: Fully managed compute infrastructure for running bioinformatics workflows at scale.
+  - type: UseCases
+    data:
+    - name: Whole Genome Sequencing
+      description: Store, analyze, and interpret whole genome sequencing data for research and clinical applications.
+    - name: Variant Calling Pipelines
+      description: Run standard variant calling workflows on genomic data to identify genetic variants.
+    - name: Pharmacogenomics Research
+      description: Analyze genomic data to understand drug response and develop personalized medicine approaches.
+    - name: Population Genomics
+      description: Process and analyze large-scale genomic datasets across patient populations for research.
+    - name: Clinical Genomics
+      description: Support clinical genomics workflows for diagnosis and treatment of genetic disorders.
+  - type: Integrations
+    data:
+    - name: Amazon S3
+      description: Import and export omics data using S3 as the primary data source and destination.
+    - name: AWS IAM
+      description: Control access to HealthOmics resources using IAM roles and policies.
+    - name: Amazon CloudWatch
+      description: Monitor HealthOmics workflows and storage operations through CloudWatch metrics.
+    - name: AWS Lake Formation
+      description: Govern and secure genomic data lake access using Lake Formation permissions.
+    - name: Amazon Athena
+      description: Query genomic annotation and variant data stored in HealthOmics using Athena.
+    - name: AWS Batch
+      description: Supplement HealthOmics workflows with custom compute jobs using AWS Batch.
+  - type: SpectralRules
+    url: rules/amazon-healthomics-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/amazon-healthomics-vocabulary.yaml
+  - type: Integrations
+    url: https://aws.amazon.com/marketplace
 integrations:
 - name: Sign in
 - name: Agent Mode

@@ -2,8 +2,11 @@
   "repo": "amazon-healthomics",
   "feeds": [
     {
-      "source": "https://aws.amazon.com/blogs/industries/healthcare/feed/",
-      "error": "HTTPError"
+      "source": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "feed_url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "title": "",
+      "saved": 41,
+      "method": "feed"
     },
     {
       "source": "https://aws.amazon.com/premiumsupport/",
@@ -13,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 159,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 242,
+  "fetched": "2026-06-27T12:03:07Z"
 }
