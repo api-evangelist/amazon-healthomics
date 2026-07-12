@@ -51,6 +51,14 @@ apis:
   - type: X-NaftikoCapability
     url: capabilities/amazon-healthomics.yaml
 common:
+  - type: TrustCenter
+    url: security/amazon-healthomics-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-healthomics-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-healthomics-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-healthomics-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-healthomics/overview
   - type: Arazzo
