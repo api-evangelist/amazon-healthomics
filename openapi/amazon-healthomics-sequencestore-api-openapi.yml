@@ -1,0 +1,3743 @@
+openapi: 3.0.0
+info:
+  version: '2022-11-28'
+  x-release: v4
+  title: Amazon Omics AnnotationStore Sequencestore API
+  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  x-logo:
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: '#FFFFFF'
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: omics
+  x-aws-signingName: omics
+  x-origin:
+  - contentType: application/json
+    url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
+    converter:
+      url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
+    x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+  - cloud
+  x-preferred: true
+servers:
+- url: http://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: https://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: http://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+- url: https://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+security:
+- hmac: []
+tags:
+- name: Sequencestore
+paths:
+  /sequencestore/{sequenceStoreId}/upload/{uploadId}/abort:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: AbortMultipartReadSetUpload
+      description: ' Stops a multipart upload. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbortMultipartReadSetUploadResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: NotSupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotSupportedOperationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: ' The sequence store ID for the store involved in the multipart upload. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: uploadId
+        in: path
+        required: true
+        description: ' The ID for the multipart upload. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Abort Multipart Read Set Upload
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/readset/batch/delete:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: BatchDeleteReadSet
+      description: Deletes one or more read sets.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteReadSetResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The read sets' sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ids
+              properties:
+                ids:
+                  description: The read sets' IDs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ReadSetId'
+                  minItems: 1
+                  maxItems: 100
+      summary: Amazon HealthOmics Batch Delete Read Set
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/upload/{uploadId}/complete:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CompleteMultipartReadSetUpload
+      description: ' Concludes a multipart upload once you have uploaded all the components. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompleteMultipartReadSetUploadResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: NotSupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotSupportedOperationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: ' The sequence store ID for the store involved in the multipart upload. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: uploadId
+        in: path
+        required: true
+        description: ' The ID for the multipart upload. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - parts
+              properties:
+                parts:
+                  description: ' The individual uploads or parts of a multipart upload. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CompleteReadSetUploadPartListItem'
+      summary: Amazon HealthOmics Complete Multipart Read Set Upload
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/upload:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CreateMultipartReadSetUpload
+      description: ' Begins a multipart read set upload. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMultipartReadSetUploadResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: NotSupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotSupportedOperationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: ' The sequence store ID for the store that is the destination of the multipart uploads. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sourceFileType
+              - subjectId
+              - sampleId
+              - referenceArn
+              - name
+              properties:
+                clientToken:
+                  description: ' An idempotency token that can be used to avoid triggering multiple multipart uploads. '
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                sourceFileType:
+                  description: ' The type of file being uploaded. '
+                  type: string
+                  enum:
+                  - FASTQ
+                  - BAM
+                  - CRAM
+                subjectId:
+                  description: ' The source''s subject ID. '
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                sampleId:
+                  description: ' The source''s sample ID. '
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                generatedFrom:
+                  description: ' Where the source originated. '
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                referenceArn:
+                  description: ' The ARN of the reference. '
+                  type: string
+                  pattern: arn:.+
+                  minLength: 1
+                  maxLength: 127
+                name:
+                  description: ' The name of the read set. '
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                description:
+                  description: ' The description of the read set. '
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 255
+                tags:
+                  description: ' Any tags to add to the read set. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+      summary: Amazon HealthOmics Create Multipart Read Set Upload
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CreateSequenceStore
+      description: Creates a sequence store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSequenceStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  description: A name for the store.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                description:
+                  description: A description for the store.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 255
+                sseConfig:
+                  description: Server-side encryption (SSE) settings for a store.
+                  type: object
+                  properties:
+                    type:
+                      allOf:
+                      - $ref: '#/components/schemas/EncryptionType'
+                      - description: The encryption type.
+                    keyArn:
+                      allOf:
+                      - $ref: '#/components/schemas/SseConfigKeyArnString'
+                      - description: An encryption key ARN.
+                tags:
+                  description: Tags for the store.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                clientToken:
+                  description: To ensure that requests don't run multiple times, specify a unique token for each request.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                fallbackLocation:
+                  description: ' An S3 location that is used to store files that have failed a direct upload. '
+                  type: string
+                  pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
+      summary: Amazon HealthOmics Create Sequence Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteSequenceStore
+      description: Deletes a sequence store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSequenceStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The sequence store's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Delete Sequence Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+    get:
+      operationId: GetSequenceStore
+      description: Gets information about a sequence store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSequenceStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The store's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Sequence Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/readset/{id}#partNumber:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReadSet
+      description: Gets a file from a read set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadSetResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: RangeNotSatisfiableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RangeNotSatisfiableException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The read set's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The read set's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: file
+        in: query
+        required: false
+        description: The file to retrieve.
+        schema:
+          type: string
+          enum:
+          - SOURCE1
+          - SOURCE2
+          - INDEX
+      - name: partNumber
+        in: query
+        required: true
+        description: The part number to retrieve.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+      summary: Amazon HealthOmics Get Read Set
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/activationjob/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReadSetActivationJob
+      description: Gets information about a read set activation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadSetActivationJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The job's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Read Set Activation Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/exportjob/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReadSetExportJob
+      description: Gets information about a read set export job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadSetExportJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The job's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: id
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Read Set Export Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/importjob/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReadSetImportJob
+      description: Gets information about a read set import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadSetImportJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The job's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Read Set Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/readset/{id}/metadata:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReadSetMetadata
+      description: Gets details about a read set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadSetMetadataResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The read set's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The read set's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Read Set Metadata
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/uploads:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListMultipartReadSetUploads
+      description: ' Lists all multipart read set uploads and their statuses. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMultipartReadSetUploadsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: NotSupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotSupportedOperationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: ' The Sequence Store ID used for the multipart uploads. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: maxResults
+        in: query
+        required: false
+        description: ' The maximum number of multipart uploads returned in a page. '
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: ' Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. '
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      summary: Amazon HealthOmics List Multipart Read Set Uploads
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/activationjobs:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListReadSetActivationJobs
+      description: Retrieves a list of read set activation jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReadSetActivationJobsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The read set's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of read set activation jobs to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  description: A read set activation job filter.
+                  type: object
+                  properties:
+                    status:
+                      allOf:
+                      - $ref: '#/components/schemas/ReadSetActivationJobStatus'
+                      - description: The filter's status.
+                    createdAfter:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's start date.
+                    createdBefore:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's end date.
+      summary: Amazon HealthOmics List Read Set Activation Jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/exportjobs:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListReadSetExportJobs
+      description: Retrieves a list of read set export jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReadSetExportJobsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The jobs' sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of jobs to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  description: An read set export job filter.
+                  type: object
+                  properties:
+                    status:
+                      allOf:
+                      - $ref: '#/components/schemas/ReadSetExportJobStatus'
+                      - description: A status to filter on.
+                    createdAfter:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's start date.
+                    createdBefore:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's end date.
+      summary: Amazon HealthOmics List Read Set Export Jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/importjobs:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListReadSetImportJobs
+      description: Retrieves a list of read set import jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReadSetImportJobsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of jobs to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The jobs' sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  description: A filter for import read set jobs.
+                  type: object
+                  properties:
+                    status:
+                      allOf:
+                      - $ref: '#/components/schemas/ReadSetImportJobStatus'
+                      - description: A status to filter on.
+                    createdAfter:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's start date.
+                    createdBefore:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's end date.
+      summary: Amazon HealthOmics List Read Set Import Jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/upload/{uploadId}/parts:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListReadSetUploadParts
+      description: ' This operation will list all parts in a requested multipart upload for a sequence store. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReadSetUploadPartsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: NotSupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotSupportedOperationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: ' The Sequence Store ID used for the multipart uploads. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: uploadId
+        in: path
+        required: true
+        description: ' The ID for the initiated multipart upload. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: maxResults
+        in: query
+        required: false
+        description: ' The maximum number of read set upload parts returned in a page. '
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: ' Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results. '
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - partSource
+              properties:
+                partSource:
+                  description: ' The source file for the upload part. '
+                  type: string
+                  enum:
+                  - SOURCE1
+                  - SOURCE2
+                filter:
+                  description: ' Filter settings that select for read set upload parts of interest. '
+                  type: object
+                  properties:
+                    createdAfter:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: ' Filters for read set uploads after a specified time. '
+                    createdBefore:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: ' Filters for read set part uploads before a specified time. '
+      summary: Amazon HealthOmics List Read Set Upload Parts
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/readsets:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListReadSets
+      description: Retrieves a list of read sets.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReadSetsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The jobs' sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of read sets to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  description: A filter for read sets.
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                      - $ref: '#/components/schemas/ReadSetName'
+                      - description: A name to filter on.
+                    status:
+                      allOf:
+                      - $ref: '#/components/schemas/ReadSetStatus'
+                      - description: A status to filter on.
+                    referenceArn:
+                      allOf:
+                      - $ref: '#/components/schemas/ReferenceArn'
+                      - description: A genome reference ARN to filter on.
+                    createdAfter:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's start date.
+                    createdBefore:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's end date.
+                    sampleId:
+                      allOf:
+                      - $ref: '#/components/schemas/SampleId'
+                      - description: ' The read set source''s sample ID. '
+                    subjectId:
+                      allOf:
+                      - $ref: '#/components/schemas/SubjectId'
+                      - description: ' The read set source''s subject ID. '
+                    generatedFrom:
+                      allOf:
+                      - $ref: '#/components/schemas/GeneratedFrom'
+                      - description: ' Where the source originated. '
+                    creationType:
+                      allOf:
+                      - $ref: '#/components/schemas/CreationType'
+                      - description: ' The creation type of the read set. '
+      summary: Amazon HealthOmics List Read Sets
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/activationjob:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartReadSetActivationJob
+      description: Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReadSetActivationJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The read set's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sources
+              properties:
+                clientToken:
+                  description: To ensure that jobs don't run multiple times, specify a unique token for each job.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                sources:
+                  description: The job's source files.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StartReadSetActivationJobSourceItem'
+                  minItems: 1
+                  maxItems: 20
+      summary: Amazon HealthOmics Start Read Set Activation Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/exportjob:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartReadSetExportJob
+      description: Exports a read set to Amazon S3.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReadSetExportJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The read set's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - destination
+              - roleArn
+              - sources
+              properties:
+                destination:
+                  description: A location for exported files in Amazon S3.
+                  type: string
+                  pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
+                roleArn:
+                  description: A service role for the job.
+                  type: string
+                  pattern: arn:.*
+                  minLength: 20
+                  maxLength: 2048
+                clientToken:
+                  description: To ensure that jobs don't run multiple times, specify a unique token for each job.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                sources:
+                  description: The job's source files.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ExportReadSet'
+                  minItems: 1
+                  maxItems: 100
+      summary: Amazon HealthOmics Start Read Set Export Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/importjob:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartReadSetImportJob
+      description: Starts a read set import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReadSetImportJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: The read set's sequence store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roleArn
+              - sources
+              properties:
+                roleArn:
+                  description: A service role for the job.
+                  type: string
+                  pattern: arn:.*
+                  minLength: 20
+                  maxLength: 2048
+                clientToken:
+                  description: To ensure that jobs don't run multiple times, specify a unique token for each job.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                sources:
+                  description: The job's source files.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StartReadSetImportJobSourceItem'
+                  minItems: 1
+                  maxItems: 100
+      summary: Amazon HealthOmics Start Read Set Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+  /sequencestore/{sequenceStoreId}/upload/{uploadId}/part#partSource&partNumber:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UploadReadSetPart
+      description: ' This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadReadSetPartResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: NotSupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotSupportedOperationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: sequenceStoreId
+        in: path
+        required: true
+        description: ' The Sequence Store ID used for the multipart upload. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: uploadId
+        in: path
+        required: true
+        description: ' The ID for the initiated multipart upload. '
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: partSource
+        in: query
+        required: true
+        description: ' The source file for an upload part. '
+        schema:
+          type: string
+          enum:
+          - SOURCE1
+          - SOURCE2
+      - name: partNumber
+        in: query
+        required: true
+        description: ' The number of the part being uploaded. '
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - payload
+              properties:
+                payload:
+                  description: ' The read set data to upload for a part. '
+                  type: string
+      summary: Amazon HealthOmics Upload Read Set Part
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Sequencestore
+components:
+  schemas:
+    ReadSetListItem:
+      type: object
+      required:
+      - id
+      - arn
+      - sequenceStoreId
+      - status
+      - fileType
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The read set's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetArn'
+          - description: The read set's ARN.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: The read set's subject ID.
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: The read set's sample ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetStatus'
+          - description: The read set's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: The read set's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: The read set's description.
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The read set's genome reference ARN.
+        fileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: The read set's file type.
+        sequenceInformation:
+          $ref: '#/components/schemas/SequenceInformation'
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the read set was created.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetStatusMessage'
+          - description: ' The status for a read set. It provides more detail as to why the read set has a status. '
+        creationType:
+          allOf:
+          - $ref: '#/components/schemas/CreationType'
+          - description: ' The creation type of the read set. '
+      description: A read set.
+    NextToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
+    CreateMultipartReadSetUploadResponse:
+      type: object
+      required:
+      - sequenceStoreId
+      - uploadId
+      - sourceFileType
+      - subjectId
+      - sampleId
+      - referenceArn
+      - creationTime
+      properties:
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: ' The sequence store ID for the store that the read set will be created in. '
+        uploadId:
+          allOf:
+          - $ref: '#/components/schemas/UploadId'
+          - description: ' he ID for the initiated multipart upload. '
+        sourceFileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: ' The file type of the read set source. '
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: ' The source''s subject ID. '
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: ' The source''s sample ID. '
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: ' The source of the read set. '
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: ' The read set source''s reference ARN. '
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: ' The name of the read set. '
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: ' The description of the read set. '
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: ' The tags to add to the read set. '
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The creation time of the multipart upload. '
+    RoleArn:
+      type: string
+      pattern: arn:.*
+      minLength: 20
+      maxLength: 2048
+    ImportReadSetJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportReadSetJobItem'
+    ExportReadSetDetail:
+      type: object
+      required:
+      - id
+      - status
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The set's ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobItemStatus'
+          - description: The set's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The set's status message.
+      description: Details about a read set.
+    ActivateReadSetSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActivateReadSetSourceItem'
+    ReadSetExportJobItemStatus:
+      type: string
+      enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+    SequenceInformation:
+      type: object
+      properties:
+        totalReadCount:
+          allOf:
+          - $ref: '#/components/schemas/Long'
+          - description: The sequence's total read count.
+        totalBaseCount:
+          allOf:
+          - $ref: '#/components/schemas/Long'
+          - description: The sequence's total base count.
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: Where the sequence originated.
+        alignment:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The sequence's alignment setting.
+      description: Details about a sequence.
+    ReadSetStreamingBlob:
+      type: string
+    ReadSetPartSource:
+      type: string
+      enum:
+      - SOURCE1
+      - SOURCE2
+    ReadSetUploadPartListItem:
+      type: object
+      required:
+      - partNumber
+      - partSize
+      - partSource
+      - checksum
+      properties:
+        partNumber:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetUploadPartListItemPartNumberInteger'
+          - description: ' The number identifying the part in an upload. '
+        partSize:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetUploadPartListItemPartSizeLong'
+          - description: ' The size of the the part in an upload. '
+        partSource:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetPartSource'
+          - description: ' The origin of the part being direct uploaded. '
+        checksum:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: ' A unique identifier used to confirm that parts are being added to the correct upload. '
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The time stamp for when a direct upload was created. '
+        lastUpdatedTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The time stamp for the most recent update to an uploaded part. '
+      description: ' The metadata of a single part of a file that was added to a multipart upload. A list of these parts is returned in the response to the ListReadSetUploadParts API. '
+    SubjectId:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ServiceQuotaExceededException: {}
+    ReadSetName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    Long:
+      type: integer
+    MultipartReadSetUploadList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MultipartReadSetUploadListItem'
+    ReadSetId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    FileInformation:
+      type: object
+      properties:
+        totalParts:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationTotalPartsInteger'
+          - description: The file's total parts.
+        partSize:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationPartSizeLong'
+          - description: The file's part size.
+        contentLength:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationContentLengthLong'
+          - description: The file's content length.
+      description: Details about a file.
+    FileType:
+      type: string
+      enum:
+      - FASTQ
+      - BAM
+      - CRAM
+    S3Destination:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
+    StartReadSetExportJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - destination
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ExportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        destination:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: The job's output location.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+    ReadSetBatchErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadSetBatchError'
+    FileInformationPartSizeLong:
+      type: integer
+      minimum: 1
+      maximum: 5368709120
+    ReadSetBatchError:
+      type: object
+      required:
+      - id
+      - code
+      - message
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The error's ID.
+        code:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The error's code.
+        message:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The error's message.
+      description: An error from a batch read set operation.
+    ActivateReadSetJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActivateReadSetJobItem'
+    RangeNotSatisfiableException: {}
+    GetReadSetMetadataResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - sequenceStoreId
+      - status
+      - fileType
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The read set's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetArn'
+          - description: The read set's ARN.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: The read set's subject ID.
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: The read set's sample ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetStatus'
+          - description: The read set's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: The read set's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: The read set's description.
+        fileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: The read set's file type.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the read set was created.
+        sequenceInformation:
+          allOf:
+          - $ref: '#/components/schemas/SequenceInformation'
+          - description: The read set's sequence information.
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The read set's genome reference ARN.
+        files:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetFiles'
+          - description: The read set's files.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetStatusMessage'
+          - description: ' The status message for a read set. It provides more detail as to why the read set has a status. '
+        creationType:
+          allOf:
+          - $ref: '#/components/schemas/CreationType'
+          - description: ' The creation type of the read set. '
+    S3Uri:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})
+    ActivateReadSetJobItem:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ActivationJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetActivationJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: A read set activation job.
+    UploadId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    SequenceStoreId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    CompleteReadSetUploadPartListItemPartNumberInteger:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    GeneratedFrom:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ImportJobId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    SequenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    FileInformationTotalPartsInteger:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    FileInformationContentLengthLong:
+      type: integer
+      minimum: 1
+      maximum: 5497558138880
+    GetSequenceStoreResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The store's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreArn'
+          - description: The store's ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreName'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreDescription'
+          - description: The store's description.
+        sseConfig:
+          allOf:
+          - $ref: '#/components/schemas/SseConfig'
+          - description: The store's server-side encryption (SSE) settings.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the store was created.
+        fallbackLocation:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: ' An S3 location that is used to store files that have failed a direct upload. '
+    SourceFiles:
+      type: object
+      required:
+      - source1
+      properties:
+        source1:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The location of the first file in Amazon S3.
+        source2:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The location of the second file in Amazon S3.
+      description: Source files for a sequence.
+    BatchDeleteReadSetResponse:
+      type: object
+      properties:
+        errors:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetBatchErrorList'
+          - description: Errors returned by individual delete operations.
+    AbortMultipartReadSetUploadResponse:
+      type: object
+      properties: {}
+    ReadSetImportJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    SampleId:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    CompleteReadSetUploadPartListItem:
+      type: object
+      required:
+      - partNumber
+      - partSource
+      - checksum
+      properties:
+        partNumber:
+          allOf:
+          - $ref: '#/components/schemas/CompleteReadSetUploadPartListItemPartNumberInteger'
+          - description: ' A number identifying the part in a read set upload. '
+        partSource:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetPartSource'
+          - description: ' The source file of the part being uploaded. '
+        checksum:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: ' A unique identifier used to confirm that parts are being added to the correct upload. '
+      description: ' Part of the response to the CompleteReadSetUpload API, including metadata. '
+    UploadReadSetPartResponse:
+      type: object
+      required:
+      - checksum
+      properties:
+        checksum:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: ' An identifier used to confirm that parts are being added to the intended upload. '
+    MultipartReadSetUploadListItem:
+      type: object
+      required:
+      - sequenceStoreId
+      - uploadId
+      - sourceFileType
+      - subjectId
+      - sampleId
+      - generatedFrom
+      - referenceArn
+      - creationTime
+      properties:
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: ' The sequence store ID used for the multipart upload. '
+        uploadId:
+          allOf:
+          - $ref: '#/components/schemas/UploadId'
+          - description: ' The ID for the initiated multipart upload. '
+        sourceFileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: ' The type of file the read set originated from. '
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: ' The read set source''s subject ID. '
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: ' The read set source''s sample ID. '
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: ' The source of an uploaded part. '
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: ' The source''s reference ARN. '
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: ' The name of a read set. '
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: ' The description of a read set. '
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: ' Any tags you wish to add to a read set. '
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The time stamp for when a direct upload was created. '
+      description: ' Part of the response to ListMultipartReadSetUploads, excluding completed and aborted multipart uploads. '
+    ResourceNotFoundException: {}
+    ExportReadSet:
+      type: object
+      required:
+      - readSetId
+      properties:
+        readSetId:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The set's ID.
+      description: A read set.
+    ImportReadSetJobItem:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: An import read set job.
+    ConflictException: {}
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    ListReadSetUploadPartsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: ' Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results. '
+        parts:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetUploadPartList'
+          - description: ' An array of upload parts. '
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    ReadSetDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    ExportReadSetJobDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportReadSetJobDetail'
+    ReadSetFiles:
+      type: object
+      properties:
+        source1:
+          allOf:
+          - $ref: '#/components/schemas/FileInformation'
+          - description: The location of the first file in Amazon S3.
+        source2:
+          allOf:
+          - $ref: '#/components/schemas/FileInformation'
+          - description: The location of the second file in Amazon S3.
+        index:
+          allOf:
+          - $ref: '#/components/schemas/FileInformation'
+          - description: The files' index.
+      description: Files in a read set.
+    ReadSetUploadPartList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadSetUploadPartListItem'
+    ReadSetImportJobItemStatus:
+      type: string
+      enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+    ReadSetArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    ExportReadSetDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportReadSetDetail'
+    GetReadSetResponse:
+      type: object
+      properties:
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetStreamingBlob'
+          - description: The read set file payload.
+    CreationType:
+      type: string
+      enum:
+      - IMPORT
+      - UPLOAD
+    RequestTimeoutException: {}
+    ListReadSetsResponse:
+      type: object
+      required:
+      - readSets
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        readSets:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetList'
+          - description: A list of read sets.
+    GetReadSetActivationJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ActivationJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetActivationJobStatus'
+          - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The job's status message.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+        sources:
+          allOf:
+          - $ref: '#/components/schemas/ActivateReadSetSourceList'
+          - description: The job's source files.
+    ReadSetStatusMessage:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    ReadSetActivationJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    ExportJobId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    String:
+      type: string
+    StartReadSetImportJobSourceItem:
+      type: object
+      required:
+      - sourceFiles
+      - sourceFileType
+      - subjectId
+      - sampleId
+      - referenceArn
+      properties:
+        sourceFiles:
+          allOf:
+          - $ref: '#/components/schemas/SourceFiles'
+          - description: The source files' location in Amazon S3.
+        sourceFileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: The source's file type.
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: The source's subject ID.
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: The source's sample ID.
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: Where the source originated.
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The source's reference ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: The source's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: The source's description.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The source's tags.
+      description: A source for a read set import job.
+    CompleteMultipartReadSetUploadResponse:
+      type: object
+      required:
+      - readSetId
+      properties:
+        readSetId:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: ' The read set ID created for an uploaded read set. '
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    ListReadSetExportJobsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        exportJobs:
+          allOf:
+          - $ref: '#/components/schemas/ExportReadSetJobDetailList'
+          - description: A list of jobs.
+    ValidationException: {}
+    ExportReadSetJobDetail:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - destination
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ExportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        destination:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: The job's destination in Amazon S3.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: Details about a read set export job.
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    ActivationJobId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    SequenceStoreArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    ReadSetActivationJobItemStatus:
+      type: string
+      enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+    ReadSetUploadPartListItemPartSizeLong:
+      type: integer
+      minimum: 1
+      maximum: 5368709120
+    AccessDeniedException: {}
+    StartReadSetImportJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+    SequenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ListMultipartReadSetUploadsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: ' Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. '
+        uploads:
+          allOf:
+          - $ref: '#/components/schemas/MultipartReadSetUploadList'
+          - description: ' An array of multipart uploads. '
+    ReadSetExportJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    ReadSetStatus:
+      type: string
+      enum:
+      - ARCHIVED
+      - ACTIVATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - PROCESSING_UPLOAD
+      - UPLOAD_FAILED
+    ImportReadSetSourceItem:
+      type: object
+      required:
+      - sourceFiles
+      - sourceFileType
+      - status
+      - subjectId
+      - sampleId
+      properties:
+        sourceFiles:
+          allOf:
+          - $ref: '#/components/schemas/SourceFiles'
+          - description: The source files' location in Amazon S3.
+        sourceFileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: The source's file type.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetImportJobItemStatus'
+          - description: The source's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The source's status message.
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: The source's subject ID.
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: The source's sample ID.
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: Where the source originated.
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The source's genome reference ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: The source's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: The source's description.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The source's tags.
+      description: A source for an import read set job.
+    ReadSetUploadPartListItemPartNumberInteger:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    JobStatusMessage:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ImportReadSetSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportReadSetSourceItem'
+    ThrottlingException: {}
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+    ActivateReadSetSourceItem:
+      type: object
+      required:
+      - readSetId
+      - status
+      properties:
+        readSetId:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The source's read set ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetActivationJobItemStatus'
+          - description: The source's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The source's status message.
+      description: A source for a read set activation job.
+    NotSupportedOperationException: {}
+    CreateSequenceStoreResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The store's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreArn'
+          - description: The store's ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreName'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreDescription'
+          - description: The store's description.
+        sseConfig:
+          allOf:
+          - $ref: '#/components/schemas/SseConfig'
+          - description: The store's SSE settings.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the store was created.
+        fallbackLocation:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: ' An S3 location that is used to store files that have failed a direct upload. '
+    ReadSetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadSetListItem'
+    ListReadSetImportJobsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        importJobs:
+          allOf:
+          - $ref: '#/components/schemas/ImportReadSetJobList'
+          - description: A list of jobs.
+    GetReadSetImportJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      - sources
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetImportJobStatus'
+          - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The job's status message.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+        sources:
+          allOf:
+          - $ref: '#/components/schemas/ImportReadSetSourceList'
+          - description: The job's source files.
+    ListReadSetActivationJobsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        activationJobs:
+          allOf:
+          - $ref: '#/components/schemas/ActivateReadSetJobList'
+          - description: A list of jobs.
+    StartReadSetActivationJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ActivationJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetActivationJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+    DeleteSequenceStoreResponse:
+      type: object
+      properties: {}
+    GetReadSetExportJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - destination
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ExportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        destination:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: The job's destination in Amazon S3.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobStatus'
+          - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The job's status message.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+        readSets:
+          allOf:
+          - $ref: '#/components/schemas/ExportReadSetDetailList'
+          - description: The job's read sets.
+    InternalServerException: {}
+    StartReadSetActivationJobSourceItem:
+      type: object
+      required:
+      - readSetId
+      properties:
+        readSetId:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The source's read set ID.
+      description: A source for a read set activation job.
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/omics/
+x-hasEquivalentPaths: true

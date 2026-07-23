@@ -1,0 +1,816 @@
+openapi: 3.0.0
+info:
+  version: '2022-11-28'
+  x-release: v4
+  title: Amazon Omics AnnotationStore RunGroup API
+  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  x-logo:
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: '#FFFFFF'
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: omics
+  x-aws-signingName: omics
+  x-origin:
+  - contentType: application/json
+    url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
+    converter:
+      url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
+    x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+  - cloud
+  x-preferred: true
+servers:
+- url: http://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: https://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: http://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+- url: https://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+security:
+- hmac: []
+tags:
+- name: RunGroup
+paths:
+  /runGroup:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CreateRunGroup
+      description: Creates a run group.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRunGroupResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - requestId
+              properties:
+                name:
+                  description: A name for the group.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 128
+                maxCpus:
+                  description: The maximum number of CPUs to use in the group.
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+                maxRuns:
+                  description: The maximum number of concurrent runs for the group.
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+                maxDuration:
+                  description: A maximum run time for the group in minutes.
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+                tags:
+                  description: Tags for the group.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                requestId:
+                  description: To ensure that requests don't run multiple times, specify a unique ID for each request.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 128
+                maxGpus:
+                  description: ' The maximum GPUs that can be used by a run group. '
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+      summary: Amazon HealthOmics Create Run Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - RunGroup
+    get:
+      operationId: ListRunGroups
+      description: Retrieves a list of run groups.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRunGroupsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: name
+        in: query
+        required: false
+        description: The run groups' name.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 128
+      - name: startingToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 128
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of run groups to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      summary: Amazon HealthOmics List Run Groups
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - RunGroup
+  /runGroup/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteRunGroup
+      description: Deletes a workflow run group.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The run group's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 1
+          maxLength: 18
+      summary: Amazon HealthOmics Delete Run Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - RunGroup
+    get:
+      operationId: GetRunGroup
+      description: Gets information about a workflow run group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRunGroupResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The group's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 1
+          maxLength: 18
+      summary: Amazon HealthOmics Get Run Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - RunGroup
+    post:
+      operationId: UpdateRunGroup
+      description: Updates a run group.
+      responses:
+        '202':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The group's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 1
+          maxLength: 18
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: A name for the group.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 128
+                maxCpus:
+                  description: The maximum number of CPUs to use.
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+                maxRuns:
+                  description: The maximum number of concurrent runs for the group.
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+                maxDuration:
+                  description: A maximum run time for the group in minutes.
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+                maxGpus:
+                  description: ' The maximum GPUs that can be used by a run group. '
+                  type: integer
+                  minimum: 1
+                  maximum: 100000
+      summary: Amazon HealthOmics Update Run Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - RunGroup
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    ResourceNotFoundException: {}
+    ConflictException: {}
+    RunGroupListItemMaxDurationInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    RunGroupName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
+    RunGroupListItemMaxRunsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    GetRunGroupResponseMaxGpusInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    RunGroupTimestamp:
+      type: string
+      format: date-time
+    RequestTimeoutException: {}
+    ListRunGroupsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupList'
+          - description: A list of groups.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListToken'
+          - description: A pagination token that's included if more results are available.
+    RunGroupListToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
+    GetRunGroupResponseMaxCpusInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    ThrottlingException: {}
+    RunGroupListItemMaxGpusInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    RunGroupListItemMaxCpusInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    ValidationException: {}
+    RunGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RunGroupListItem'
+    GetRunGroupResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupArn'
+          - description: The group's ARN.
+        id:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupId'
+          - description: The group's ID.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupName'
+          - description: The group's name.
+        maxCpus:
+          allOf:
+          - $ref: '#/components/schemas/GetRunGroupResponseMaxCpusInteger'
+          - description: The group's maximum number of CPUs to use.
+        maxRuns:
+          allOf:
+          - $ref: '#/components/schemas/GetRunGroupResponseMaxRunsInteger'
+          - description: The maximum number of concurrent runs for the group.
+        maxDuration:
+          allOf:
+          - $ref: '#/components/schemas/GetRunGroupResponseMaxDurationInteger'
+          - description: The group's maximum run time in minutes.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupTimestamp'
+          - description: When the group was created.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The group's tags.
+        maxGpus:
+          allOf:
+          - $ref: '#/components/schemas/GetRunGroupResponseMaxGpusInteger'
+          - description: ' The maximum GPUs that can be used by a run group. '
+    RunGroupId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 1
+      maxLength: 18
+    RunGroupListItem:
+      type: object
+      properties:
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupArn'
+          - description: The group's ARN.
+        id:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupId'
+          - description: The group's ID.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupName'
+          - description: The group's name.
+        maxCpus:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxCpusInteger'
+          - description: The group's maximum CPU count setting.
+        maxRuns:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxRunsInteger'
+          - description: The group's maximum concurrent run setting.
+        maxDuration:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxDurationInteger'
+          - description: The group's maximum duration setting in minutes.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupTimestamp'
+          - description: When the group was created.
+        maxGpus:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxGpusInteger'
+          - description: ' The maximum GPUs that can be used by a run group. '
+      description: A run group.
+    RunGroupArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 128
+    GetRunGroupResponseMaxDurationInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    GetRunGroupResponseMaxRunsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    ServiceQuotaExceededException: {}
+    AccessDeniedException: {}
+    InternalServerException: {}
+    CreateRunGroupResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupArn'
+          - description: The group's ARN.
+        id:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupId'
+          - description: The group's ID.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: Tags for the run group.
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/omics/
+x-hasEquivalentPaths: true

@@ -1,0 +1,1306 @@
+openapi: 3.0.0
+info:
+  version: '2022-11-28'
+  x-release: v4
+  title: Amazon Omics AnnotationStore Import API
+  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  x-logo:
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: '#FFFFFF'
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: omics
+  x-aws-signingName: omics
+  x-origin:
+  - contentType: application/json
+    url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
+    converter:
+      url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
+    x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+  - cloud
+  x-preferred: true
+servers:
+- url: http://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: https://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: http://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+- url: https://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+security:
+- hmac: []
+tags:
+- name: Import
+paths:
+  /import/annotation/{jobId}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: CancelAnnotationImportJob
+      description: Cancels an annotation import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelAnnotationImportResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      summary: Amazon HealthOmics Cancel Annotation Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+    get:
+      operationId: GetAnnotationImportJob
+      description: Gets information about an annotation import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnnotationImportResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      summary: Amazon HealthOmics Get Annotation Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+  /import/variant/{jobId}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: CancelVariantImportJob
+      description: Cancels a variant import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelVariantImportResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      summary: Amazon HealthOmics Cancel Variant Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+    get:
+      operationId: GetVariantImportJob
+      description: Gets information about a variant import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVariantImportResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      summary: Amazon HealthOmics Get Variant Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+  /import/annotations:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListAnnotationImportJobs
+      description: Retrieves a list of annotation import jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnnotationImportJobsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of jobs to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 10000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  description: IDs of annotation import jobs to retrieve.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourceIdentifier'
+                  minItems: 1
+                  maxItems: 20
+                filter:
+                  description: A filter for annotation import jobs.
+                  type: object
+                  properties:
+                    status:
+                      allOf:
+                      - $ref: '#/components/schemas/JobStatus'
+                      - description: A status to filter on.
+                    storeName:
+                      allOf:
+                      - $ref: '#/components/schemas/String'
+                      - description: A store name to filter on.
+      summary: Amazon HealthOmics List Annotation Import Jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+  /import/variants:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListVariantImportJobs
+      description: Retrieves a list of variant import jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVariantImportJobsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of import jobs to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 10000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  description: A list of job IDs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourceIdentifier'
+                  minItems: 1
+                  maxItems: 20
+                filter:
+                  description: A filter for variant import jobs.
+                  type: object
+                  properties:
+                    status:
+                      allOf:
+                      - $ref: '#/components/schemas/JobStatus'
+                      - description: A status to filter on.
+                    storeName:
+                      allOf:
+                      - $ref: '#/components/schemas/String'
+                      - description: A store name to filter on.
+      summary: Amazon HealthOmics List Variant Import Jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+  /import/annotation:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartAnnotationImportJob
+      description: Starts an annotation import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAnnotationImportResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - destinationName
+              - roleArn
+              - items
+              properties:
+                destinationName:
+                  description: A destination annotation store for the job.
+                  type: string
+                  pattern: ([a-z]){1}([a-z0-9_]){2,254}
+                  minLength: 3
+                  maxLength: 255
+                roleArn:
+                  description: A service role for the job.
+                  type: string
+                  pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+                  minLength: 20
+                  maxLength: 2048
+                items:
+                  description: Items to import.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnnotationImportItemSource'
+                  minItems: 1
+                formatOptions:
+                  description: Formatting options for a file.
+                  type: object
+                  properties:
+                    tsvOptions:
+                      allOf:
+                      - $ref: '#/components/schemas/TsvOptions'
+                      - description: Options for a TSV file.
+                    vcfOptions:
+                      allOf:
+                      - $ref: '#/components/schemas/VcfOptions'
+                      - description: Options for a VCF file.
+                runLeftNormalization:
+                  description: The job's left normalization setting.
+                  type: boolean
+                annotationFields:
+                  description: ' The annotation schema generated by the parsed annotation data. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/AnnotationFieldMapValueString'
+      summary: Amazon HealthOmics Start Annotation Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+  /import/variant:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartVariantImportJob
+      description: Starts a variant import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartVariantImportResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - destinationName
+              - roleArn
+              - items
+              properties:
+                destinationName:
+                  description: The destination variant store for the job.
+                  type: string
+                  pattern: ([a-z]){1}([a-z0-9_]){2,254}
+                  minLength: 3
+                  maxLength: 255
+                roleArn:
+                  description: A service role for the job.
+                  type: string
+                  pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+                  minLength: 20
+                  maxLength: 2048
+                items:
+                  description: Items to import.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VariantImportItemSource'
+                  minItems: 1
+                runLeftNormalization:
+                  description: The job's left normalization setting.
+                  type: boolean
+                annotationFields:
+                  description: ' The annotation schema generated by the parsed annotation data. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/AnnotationFieldMapValueString'
+      summary: Amazon HealthOmics Start Variant Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Import
+components:
+  schemas:
+    Arn:
+      type: string
+      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      minLength: 20
+      maxLength: 2048
+    VariantImportJobItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/VariantImportJobItem'
+    AnnotationImportItemSource:
+      type: object
+      required:
+      - source
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The source file's location in Amazon S3.
+      description: A source for an annotation import job.
+    ResourceNotFoundException: {}
+    CancelVariantImportResponse:
+      type: object
+      properties: {}
+    CreationTime:
+      type: string
+      format: date-time
+    ListVariantImportJobsResponse:
+      type: object
+      properties:
+        variantImportJobs:
+          allOf:
+          - $ref: '#/components/schemas/VariantImportJobItems'
+          - description: A list of jobs.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: A pagination token that's included if more results are available.
+    StartVariantImportResponse:
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The job's ID.
+    VariantImportItemDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/VariantImportItemDetail'
+      minItems: 1
+    JobStatusMsg:
+      type: string
+    Encoding:
+      type: string
+      minLength: 1
+      maxLength: 20
+    TsvOptions:
+      type: object
+      properties:
+        readOptions:
+          allOf:
+          - $ref: '#/components/schemas/ReadOptions'
+          - description: The file's read options.
+      description: Formatting options for a TSV file.
+    GetAnnotationImportResponse:
+      type: object
+      required:
+      - id
+      - destinationName
+      - roleArn
+      - status
+      - statusMessage
+      - creationTime
+      - updateTime
+      - completionTime
+      - items
+      - runLeftNormalization
+      - formatOptions
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The job's ID.
+        destinationName:
+          allOf:
+          - $ref: '#/components/schemas/StoreName'
+          - description: The job's destination annotation store.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMsg'
+          - description: The job's status message.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the job was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/UpdateTime'
+          - description: When the job was updated.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/CompletionTime'
+          - description: When the job completed.
+        items:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationImportItemDetails'
+          - description: The job's imported items.
+        runLeftNormalization:
+          allOf:
+          - $ref: '#/components/schemas/RunLeftNormalization'
+          - description: The job's left normalization setting.
+        formatOptions:
+          $ref: '#/components/schemas/FormatOptions'
+        annotationFields:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationFieldMap'
+          - description: ' The annotation schema generated by the parsed annotation data. '
+    InternalServerException: {}
+    EscapeChar:
+      type: string
+      minLength: 1
+      maxLength: 1
+    AnnotationImportItemDetail:
+      type: object
+      required:
+      - source
+      - jobStatus
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The source file's location in Amazon S3.
+        jobStatus:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - description: The item's job status.
+      description: Details about an imported annotation item.
+    S3Uri:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})
+    FormatOptions:
+      type: object
+      properties:
+        tsvOptions:
+          allOf:
+          - $ref: '#/components/schemas/TsvOptions'
+          - description: Options for a TSV file.
+        vcfOptions:
+          allOf:
+          - $ref: '#/components/schemas/VcfOptions'
+          - description: Options for a VCF file.
+      description: Formatting options for a file.
+    StoreName:
+      type: string
+      pattern: ([a-z]){1}([a-z0-9_]){2,254}
+      minLength: 3
+      maxLength: 255
+    VariantImportItemSource:
+      type: object
+      required:
+      - source
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The source file's location in Amazon S3.
+      description: A imported variant item's source.
+    AnnotationImportJobItem:
+      type: object
+      required:
+      - id
+      - destinationName
+      - roleArn
+      - status
+      - creationTime
+      - updateTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The job's ID.
+        destinationName:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The job's destination annotation store.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the job was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/UpdateTime'
+          - description: When the job was updated.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/CompletionTime'
+          - description: When the job completed.
+        runLeftNormalization:
+          allOf:
+          - $ref: '#/components/schemas/RunLeftNormalization'
+          - description: The job's left normalization setting.
+        annotationFields:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationFieldMap'
+          - description: ' The annotation schema generated by the parsed annotation data. '
+      description: An annotation import job.
+    Separator:
+      type: string
+      minLength: 1
+      maxLength: 20
+    Boolean:
+      type: boolean
+    ResourceId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    EscapeQuotes:
+      type: boolean
+    AnnotationFieldMapValueString:
+      type: string
+      minLength: 1
+      maxLength: 21
+    Quote:
+      type: string
+      minLength: 1
+      maxLength: 1
+    RunLeftNormalization:
+      type: boolean
+    AnnotationFieldMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/AnnotationFieldMapValueString'
+    ResourceIdentifier:
+      type: string
+      minLength: 1
+      maxLength: 50
+    ReadOptions:
+      type: object
+      properties:
+        sep:
+          allOf:
+          - $ref: '#/components/schemas/Separator'
+          - description: The file's field separator.
+        encoding:
+          allOf:
+          - $ref: '#/components/schemas/Encoding'
+          - description: The file's encoding.
+        quote:
+          allOf:
+          - $ref: '#/components/schemas/Quote'
+          - description: The file's quote character.
+        quoteAll:
+          allOf:
+          - $ref: '#/components/schemas/QuoteAll'
+          - description: Whether all values need to be quoted, or just those that contain quotes.
+        escape:
+          allOf:
+          - $ref: '#/components/schemas/EscapeChar'
+          - description: A character for escaping quotes in the file.
+        escapeQuotes:
+          allOf:
+          - $ref: '#/components/schemas/EscapeQuotes'
+          - description: Whether quotes need to be escaped in the file.
+        comment:
+          allOf:
+          - $ref: '#/components/schemas/CommentChar'
+          - description: The file's comment character.
+        header:
+          allOf:
+          - $ref: '#/components/schemas/Header'
+          - description: Whether the file has a header row.
+        lineSep:
+          allOf:
+          - $ref: '#/components/schemas/LineSep'
+          - description: A line separator for the file.
+      description: Read options for an annotation import job.
+    VariantImportItemDetail:
+      type: object
+      required:
+      - source
+      - jobStatus
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The source file's location in Amazon S3.
+        jobStatus:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - description: The item's job status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMsg'
+          - description: ' A message that provides additional context about a job '
+      description: Details about an imported variant item.
+    CommentChar:
+      type: string
+      minLength: 1
+      maxLength: 1
+    ThrottlingException: {}
+    String:
+      type: string
+    ValidationException: {}
+    LineSep:
+      type: string
+      minLength: 1
+      maxLength: 20
+    UpdateTime:
+      type: string
+      format: date-time
+    CompletionTime:
+      type: string
+      format: date-time
+    AnnotationImportItemDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnnotationImportItemDetail'
+      minItems: 1
+      maxItems: 1
+    CancelAnnotationImportResponse:
+      type: object
+      properties: {}
+    GetVariantImportResponse:
+      type: object
+      required:
+      - id
+      - destinationName
+      - roleArn
+      - status
+      - statusMessage
+      - creationTime
+      - updateTime
+      - items
+      - runLeftNormalization
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The job's ID.
+        destinationName:
+          allOf:
+          - $ref: '#/components/schemas/StoreName'
+          - description: The job's destination variant store.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMsg'
+          - description: The job's status message.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the job was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/UpdateTime'
+          - description: When the job was updated.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/CompletionTime'
+          - description: When the job completed.
+        items:
+          allOf:
+          - $ref: '#/components/schemas/VariantImportItemDetails'
+          - description: The job's items.
+        runLeftNormalization:
+          allOf:
+          - $ref: '#/components/schemas/RunLeftNormalization'
+          - description: The job's left normalization setting.
+        annotationFields:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationFieldMap'
+          - description: ' The annotation schema generated by the parsed annotation data. '
+    VcfOptions:
+      type: object
+      properties:
+        ignoreQualField:
+          allOf:
+          - $ref: '#/components/schemas/Boolean'
+          - description: The file's ignore qual field setting.
+        ignoreFilterField:
+          allOf:
+          - $ref: '#/components/schemas/Boolean'
+          - description: The file's ignore filter field setting.
+      description: Formatting options for a VCF file.
+    VariantImportJobItem:
+      type: object
+      required:
+      - id
+      - destinationName
+      - roleArn
+      - status
+      - creationTime
+      - updateTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The job's ID.
+        destinationName:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The job's destination variant store.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the job was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/UpdateTime'
+          - description: When the job was updated.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/CompletionTime'
+          - description: When the job completed.
+        runLeftNormalization:
+          allOf:
+          - $ref: '#/components/schemas/RunLeftNormalization'
+          - description: The job's left normalization setting.
+        annotationFields:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationFieldMap'
+          - description: ' The annotation schema generated by the parsed annotation data. '
+      description: A variant import job.
+    AnnotationImportJobItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnnotationImportJobItem'
+    Header:
+      type: boolean
+    QuoteAll:
+      type: boolean
+    JobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLED
+      - COMPLETED
+      - FAILED
+      - COMPLETED_WITH_FAILURES
+    ServiceQuotaExceededException: {}
+    StartAnnotationImportResponse:
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The job's ID.
+    AccessDeniedException: {}
+    ListAnnotationImportJobsResponse:
+      type: object
+      properties:
+        annotationImportJobs:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationImportJobItems'
+          - description: A list of jobs.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: A pagination token that's included if more results are available.
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/omics/
+x-hasEquivalentPaths: true

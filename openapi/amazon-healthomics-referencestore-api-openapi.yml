@@ -1,0 +1,1650 @@
+openapi: 3.0.0
+info:
+  version: '2022-11-28'
+  x-release: v4
+  title: Amazon Omics AnnotationStore Referencestore API
+  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  x-logo:
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: '#FFFFFF'
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: omics
+  x-aws-signingName: omics
+  x-origin:
+  - contentType: application/json
+    url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
+    converter:
+      url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
+    x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+  - cloud
+  x-preferred: true
+servers:
+- url: http://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: https://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: http://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+- url: https://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+security:
+- hmac: []
+tags:
+- name: Referencestore
+paths:
+  /referencestore:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CreateReferenceStore
+      description: Creates a reference store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReferenceStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  description: A name for the store.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                description:
+                  description: A description for the store.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 255
+                sseConfig:
+                  description: Server-side encryption (SSE) settings for a store.
+                  type: object
+                  properties:
+                    type:
+                      allOf:
+                      - $ref: '#/components/schemas/EncryptionType'
+                      - description: The encryption type.
+                    keyArn:
+                      allOf:
+                      - $ref: '#/components/schemas/SseConfigKeyArnString'
+                      - description: An encryption key ARN.
+                tags:
+                  description: Tags for the store.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                clientToken:
+                  description: To ensure that requests don't run multiple times, specify a unique token for each request.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+      summary: Amazon HealthOmics Create Reference Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{referenceStoreId}/reference/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteReference
+      description: Deletes a genome reference.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReferenceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The reference's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: referenceStoreId
+        in: path
+        required: true
+        description: The reference's store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Delete Reference
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteReferenceStore
+      description: Deletes a genome reference store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReferenceStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The store's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Delete Reference Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+    get:
+      operationId: GetReferenceStore
+      description: Gets information about a reference store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReferenceStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The store's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Reference Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{referenceStoreId}/reference/{id}#partNumber:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReference
+      description: Gets a reference file.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReferenceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: RangeNotSatisfiableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RangeNotSatisfiableException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The reference's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: referenceStoreId
+        in: path
+        required: true
+        description: The reference's store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: Range
+        in: header
+        required: false
+        description: The range to retrieve.
+        schema:
+          type: string
+          pattern: '[\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 127
+      - name: partNumber
+        in: query
+        required: true
+        description: The part number to retrieve.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+      - name: file
+        in: query
+        required: false
+        description: The file to retrieve.
+        schema:
+          type: string
+          enum:
+          - SOURCE
+          - INDEX
+      summary: Amazon HealthOmics Get Reference
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{referenceStoreId}/importjob/{id}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReferenceImportJob
+      description: Gets information about a reference import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReferenceImportJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The job's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: referenceStoreId
+        in: path
+        required: true
+        description: The job's reference store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Reference Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{referenceStoreId}/reference/{id}/metadata:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReferenceMetadata
+      description: Gets information about a genome reference's metadata.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReferenceMetadataResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The reference's ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: referenceStoreId
+        in: path
+        required: true
+        description: The reference's reference store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      summary: Amazon HealthOmics Get Reference Metadata
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{referenceStoreId}/importjobs:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListReferenceImportJobs
+      description: Retrieves a list of reference import jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReferenceImportJobsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of jobs to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      - name: referenceStoreId
+        in: path
+        required: true
+        description: The job's reference store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  description: A filter for import references.
+                  type: object
+                  properties:
+                    status:
+                      allOf:
+                      - $ref: '#/components/schemas/ReferenceImportJobStatus'
+                      - description: A status to filter on.
+                    createdAfter:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's start date.
+                    createdBefore:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's end date.
+      summary: Amazon HealthOmics List Reference Import Jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{referenceStoreId}/references:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListReferences
+      description: Retrieves a list of references.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReferencesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: referenceStoreId
+        in: path
+        required: true
+        description: The references' reference store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      - name: maxResults
+        in: query
+        required: false
+        description: The maximum number of references to return in one page of results.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: nextToken
+        in: query
+        required: false
+        description: Specify the pagination token from a previous request to retrieve the next page of results.
+        schema:
+          type: string
+          pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+          minLength: 1
+          maxLength: 6144
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  description: A filter for references.
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                      - $ref: '#/components/schemas/ReferenceName'
+                      - description: A name to filter on.
+                    md5:
+                      allOf:
+                      - $ref: '#/components/schemas/Md5'
+                      - description: An MD5 checksum to filter on.
+                    createdAfter:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's start date.
+                    createdBefore:
+                      allOf:
+                      - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+                      - description: The filter's end date.
+      summary: Amazon HealthOmics List References
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+  /referencestore/{referenceStoreId}/importjob:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartReferenceImportJob
+      description: Starts a reference import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReferenceImportJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+      - name: referenceStoreId
+        in: path
+        required: true
+        description: The job's reference store ID.
+        schema:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roleArn
+              - sources
+              properties:
+                roleArn:
+                  description: A service role for the job.
+                  type: string
+                  pattern: arn:.*
+                  minLength: 20
+                  maxLength: 2048
+                clientToken:
+                  description: To ensure that jobs don't run multiple times, specify a unique token for each job.
+                  type: string
+                  pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+                  minLength: 1
+                  maxLength: 127
+                sources:
+                  description: The job's source files.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StartReferenceImportJobSourceItem'
+                  minItems: 1
+                  maxItems: 100
+      summary: Amazon HealthOmics Start Reference Import Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - Referencestore
+components:
+  schemas:
+    FileInformation:
+      type: object
+      properties:
+        totalParts:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationTotalPartsInteger'
+          - description: The file's total parts.
+        partSize:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationPartSizeLong'
+          - description: The file's part size.
+        contentLength:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationContentLengthLong'
+          - description: The file's content length.
+      description: Details about a file.
+    ResourceNotFoundException: {}
+    ReferenceStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DELETING
+      - DELETED
+    ImportReferenceSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportReferenceSourceItem'
+    FileInformationPartSizeLong:
+      type: integer
+      minimum: 1
+      maximum: 5368709120
+    NextToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
+    DeleteReferenceResponse:
+      type: object
+      properties: {}
+    ConflictException: {}
+    ReferenceDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    ReferenceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceListItem'
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    RangeNotSatisfiableException: {}
+    S3Uri:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})
+    GetReferenceImportJobResponse:
+      type: object
+      required:
+      - id
+      - referenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      - sources
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The job's reference store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceImportJobStatus'
+          - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The job's status message.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+        sources:
+          allOf:
+          - $ref: '#/components/schemas/ImportReferenceSourceList'
+          - description: The job's source files.
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    ReferenceImportJobItemStatus:
+      type: string
+      enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+    RoleArn:
+      type: string
+      pattern: arn:.*
+      minLength: 20
+      maxLength: 2048
+    GetReferenceStoreResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The store's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreArn'
+          - description: The store's ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreName'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreDescription'
+          - description: The store's description.
+        sseConfig:
+          allOf:
+          - $ref: '#/components/schemas/SseConfig'
+          - description: The store's server-side encryption (SSE) settings.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the store was created.
+    Md5:
+      type: string
+      pattern: '[\p{L}||\p{N}]+'
+      minLength: 1
+      maxLength: 255
+    ImportJobId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    CreateReferenceStoreResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The store's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreArn'
+          - description: The store's ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreName'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreDescription'
+          - description: The store's description.
+        sseConfig:
+          allOf:
+          - $ref: '#/components/schemas/SseConfig'
+          - description: The store's SSE settings.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the store was created.
+    ReferenceStreamingBlob:
+      type: string
+    ImportReferenceSourceItem:
+      type: object
+      required:
+      - status
+      properties:
+        sourceFile:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The source file's location in Amazon S3.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceImportJobItemStatus'
+          - description: The source's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The source's status message.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceName'
+          - description: The source's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceDescription'
+          - description: The source's description.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The source's tags.
+      description: An genome reference source.
+    FileInformationTotalPartsInteger:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    RequestTimeoutException: {}
+    FileInformationContentLengthLong:
+      type: integer
+      minimum: 1
+      maximum: 5497558138880
+    ReferenceId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    StartReferenceImportJobSourceItem:
+      type: object
+      required:
+      - sourceFile
+      - name
+      properties:
+        sourceFile:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The source file's location in Amazon S3.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceName'
+          - description: The source's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceDescription'
+          - description: The source's description.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The source's tags.
+      description: A source for a reference import job.
+    ThrottlingException: {}
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+    ReferenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ListReferenceImportJobsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        importJobs:
+          allOf:
+          - $ref: '#/components/schemas/ImportReferenceJobList'
+          - description: A lis of jobs.
+    ReferenceStoreArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    JobStatusMessage:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    GetReferenceResponse:
+      type: object
+      properties:
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStreamingBlob'
+          - description: The reference file payload.
+    ReferenceName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 3
+      maxLength: 255
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    GetReferenceMetadataResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - referenceStoreId
+      - md5
+      - creationTime
+      - updateTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceId'
+          - description: The reference's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The reference's ARN.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The reference's reference store ID.
+        md5:
+          allOf:
+          - $ref: '#/components/schemas/Md5'
+          - description: The reference's MD5 checksum.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStatus'
+          - description: The reference's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceName'
+          - description: The reference's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceDescription'
+          - description: The reference's description.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the reference was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the reference was updated.
+        files:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceFiles'
+          - description: The reference's files.
+    ValidationException: {}
+    ImportReferenceJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportReferenceJobItem'
+    ReferenceListItem:
+      type: object
+      required:
+      - id
+      - arn
+      - referenceStoreId
+      - md5
+      - creationTime
+      - updateTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceId'
+          - description: The reference's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The reference's ARN.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The reference's store ID.
+        md5:
+          allOf:
+          - $ref: '#/components/schemas/Md5'
+          - description: The reference's MD5 checksum.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStatus'
+          - description: The reference's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceName'
+          - description: The reference's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceDescription'
+          - description: The reference's description.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the reference was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the reference was updated.
+      description: A genome reference.
+    ReferenceStoreId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    ReferenceImportJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    ListReferencesResponse:
+      type: object
+      required:
+      - references
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        references:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceList'
+          - description: A list of references.
+    ImportReferenceJobItem:
+      type: object
+      required:
+      - id
+      - referenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The job's reference store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: An import reference job.
+    ReferenceFiles:
+      type: object
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/FileInformation'
+          - description: The source file's location in Amazon S3.
+        index:
+          allOf:
+          - $ref: '#/components/schemas/FileInformation'
+          - description: The files' index.
+      description: A set of genome reference files.
+    ReferenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    DeleteReferenceStoreResponse:
+      type: object
+      properties: {}
+    ServiceQuotaExceededException: {}
+    AccessDeniedException: {}
+    InternalServerException: {}
+    StartReferenceImportJobResponse:
+      type: object
+      required:
+      - id
+      - referenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The job's reference store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/omics/
+x-hasEquivalentPaths: true

@@ -1,0 +1,809 @@
+openapi: 3.0.0
+info:
+  version: '2022-11-28'
+  x-release: v4
+  title: Amazon Omics AnnotationStore API
+  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  x-logo:
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: '#FFFFFF'
+  termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: omics
+  x-aws-signingName: omics
+  x-origin:
+  - contentType: application/json
+    url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
+    converter:
+      url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
+    x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+  - cloud
+  x-preferred: true
+servers:
+- url: http://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: https://omics.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The Amazon Omics multi-region endpoint
+- url: http://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+- url: https://omics.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The Amazon Omics endpoint for China (Beijing) and China (Ningxia)
+security:
+- hmac: []
+tags:
+- name: AnnotationStore
+paths:
+  /annotationStore:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CreateAnnotationStore
+      description: Creates an annotation store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAnnotationStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - storeFormat
+              properties:
+                reference:
+                  description: A genome reference.
+                  type: object
+                  properties:
+                    referenceArn:
+                      allOf:
+                      - $ref: '#/components/schemas/ReferenceArn'
+                      - description: The reference's ARN.
+                name:
+                  description: A name for the store.
+                  type: string
+                  pattern: ([a-z]){1}([a-z0-9_]){2,254}
+                description:
+                  description: A description for the store.
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                tags:
+                  description: Tags for the store.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                sseConfig:
+                  description: Server-side encryption (SSE) settings for a store.
+                  type: object
+                  properties:
+                    type:
+                      allOf:
+                      - $ref: '#/components/schemas/EncryptionType'
+                      - description: The encryption type.
+                    keyArn:
+                      allOf:
+                      - $ref: '#/components/schemas/SseConfigKeyArnString'
+                      - description: An encryption key ARN.
+                storeFormat:
+                  description: The annotation file format of the store.
+                  type: string
+                  enum:
+                  - GFF
+                  - TSV
+                  - VCF
+                storeOptions:
+                  description: Settings for a store.
+                  type: object
+                  properties:
+                    tsvStoreOptions:
+                      allOf:
+                      - $ref: '#/components/schemas/TsvStoreOptions'
+                      - description: File settings for a TSV store.
+      summary: Amazon HealthOmics Create Annotation Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - AnnotationStore
+  /annotationStore/{name}:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteAnnotationStore
+      description: Deletes an annotation store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAnnotationStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: The store's name.
+        schema:
+          type: string
+      - name: force
+        in: query
+        required: false
+        description: Whether to force deletion.
+        schema:
+          type: boolean
+      summary: Amazon HealthOmics Delete Annotation Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - AnnotationStore
+    get:
+      operationId: GetAnnotationStore
+      description: Gets information about an annotation store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnnotationStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: The store's name.
+        schema:
+          type: string
+      summary: Amazon HealthOmics Get Annotation Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - AnnotationStore
+    post:
+      operationId: UpdateAnnotationStore
+      description: Updates an annotation store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAnnotationStoreResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: A name for the store.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: A description for the store.
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+      summary: Amazon HealthOmics Update Annotation Store
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - AnnotationStore
+components:
+  schemas:
+    Arn:
+      type: string
+      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      minLength: 20
+      maxLength: 2048
+    ResourceNotFoundException: {}
+    DeleteAnnotationStoreResponse:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
+    CreationTime:
+      type: string
+      format: date-time
+    ConflictException: {}
+    StoreDescription:
+      type: string
+      minLength: 0
+      maxLength: 500
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    SchemaItem:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        $ref: '#/components/schemas/SchemaValueType'
+    StoreFormat:
+      type: string
+      enum:
+      - GFF
+      - TSV
+      - VCF
+    SchemaValueType:
+      type: string
+      enum:
+      - LONG
+      - INT
+      - STRING
+      - FLOAT
+      - DOUBLE
+      - BOOLEAN
+    ReferenceItem:
+      type: object
+      properties:
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The reference's ARN.
+      description: A genome reference.
+    ResourceId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    AnnotationType:
+      type: string
+      enum:
+      - GENERIC
+      - CHR_POS
+      - CHR_POS_REF_ALT
+      - CHR_START_END_ONE_BASE
+      - CHR_START_END_REF_ALT_ONE_BASE
+      - CHR_START_END_ZERO_BASE
+      - CHR_START_END_REF_ALT_ZERO_BASE
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    FormatToHeader:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FormatToHeaderValueString'
+    StoreStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
+      - FAILED
+    ThrottlingException: {}
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+    CreateAnnotationStoreResponse:
+      type: object
+      required:
+      - id
+      - status
+      - name
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The store's ID.
+        reference:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceItem'
+          - description: The store's genome reference. Required for all stores except TSV format with generic annotations.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The annotation file format of the store.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: The store's file parsing options.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The store's name.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the store was created.
+    StoreOptions:
+      type: object
+      properties:
+        tsvStoreOptions:
+          allOf:
+          - $ref: '#/components/schemas/TsvStoreOptions'
+          - description: File settings for a TSV store.
+      description: Settings for a store.
+    GetAnnotationStoreResponse:
+      type: object
+      required:
+      - id
+      - reference
+      - status
+      - storeArn
+      - name
+      - description
+      - sseConfig
+      - creationTime
+      - updateTime
+      - tags
+      - statusMessage
+      - storeSizeBytes
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The store's ID.
+        reference:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceItem'
+          - description: The store's genome reference.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
+        storeArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The store's ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/StoreDescription'
+          - description: The store's description.
+        sseConfig:
+          allOf:
+          - $ref: '#/components/schemas/SseConfig'
+          - description: The store's server-side encryption (SSE) settings.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the store was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/UpdateTime'
+          - description: When the store was updated.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The store's tags.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: The store's parsing options.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The store's annotation file format.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/StatusMessage'
+          - description: A status message.
+        storeSizeBytes:
+          allOf:
+          - $ref: '#/components/schemas/Long'
+          - description: The store's size in bytes.
+    String:
+      type: string
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    UpdateAnnotationStoreResponse:
+      type: object
+      required:
+      - id
+      - reference
+      - status
+      - name
+      - description
+      - creationTime
+      - updateTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The store's ID.
+        reference:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceItem'
+          - description: The store's genome reference.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/StoreDescription'
+          - description: The store's description.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the store was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/UpdateTime'
+          - description: When the store was updated.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: Parsing options for the store.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The annotation file format of the store.
+    ValidationException: {}
+    TsvStoreOptions:
+      type: object
+      properties:
+        annotationType:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationType'
+          - description: The store's annotation type.
+        formatToHeader:
+          allOf:
+          - $ref: '#/components/schemas/FormatToHeader'
+          - description: The store's header key to column name mapping.
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/TsvStoreOptionsSchemaList'
+          - description: The store's schema.
+      description: File settings for a TSV store.
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    TsvStoreOptionsSchemaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaItem'
+      minItems: 1
+      maxItems: 5000
+    AccessDeniedException: {}
+    FormatToHeaderValueString:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    ServiceQuotaExceededException: {}
+    UpdateTime:
+      type: string
+      format: date-time
+    InternalServerException: {}
+    Long:
+      type: integer
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+externalDocs:
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/omics/
+x-hasEquivalentPaths: true
