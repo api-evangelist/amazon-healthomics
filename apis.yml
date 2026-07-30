@@ -4,7 +4,20 @@ description: AWS HealthOmics is a purpose-built service for healthcare and life 
   and analyze genomic, transcriptomic, and other omics data to generate insights and accelerate scientific discoveries and
   improve healthcare.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-healthomics.png
 tags:
 - AWS
 - Bioinformatics
@@ -17,23 +30,354 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: amazon-healthomics:aws-healthomics-api
-  name: AWS HealthOmics API
-  description: The AWS HealthOmics API provides programmatic access to manage omics storage, workflows, run groups, annotation
-    stores, and variant stores for genomics and other omics data analysis.
+- aid: amazon-healthomics:amazon-healthomics-annotationstore-api
+  name: Amazon HealthOmics AnnotationStore API
+  description: The AnnotationStore API from Amazon HealthOmics — 2 operation(s) for annotationstore.
   humanURL: https://aws.amazon.com/healthomics/
   baseURL: https://omics.amazonaws.com
   tags:
-  - Genomics
-  - Healthcare
-  - Life Sciences
-  - Bioinformatics
-  - Workflows
+  - AnnotationStore
   properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-annotationstore-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-annotationstores-api
+  name: Amazon HealthOmics AnnotationStores API
+  description: The AnnotationStores API from Amazon HealthOmics — 1 operation(s) for annotationstores.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - AnnotationStores
+  properties:
   - type: OpenAPI
-    url: openapi/amazon-healthomics-openapi.yaml
+    url: openapi/amazon-healthomics-annotationstores-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-import-api
+  name: Amazon HealthOmics Import API
+  description: The Import API from Amazon HealthOmics — 6 operation(s) for import.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Import
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-import-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-referencestore-api
+  name: Amazon HealthOmics Referencestore API
+  description: The Referencestore API from Amazon HealthOmics — 9 operation(s) for referencestore.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Referencestore
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-referencestore-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-referencestores-api
+  name: Amazon HealthOmics Referencestores API
+  description: The Referencestores API from Amazon HealthOmics — 1 operation(s) for referencestores.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Referencestores
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-referencestores-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-run-api
+  name: Amazon HealthOmics Run API
+  description: The Run API from Amazon HealthOmics — 5 operation(s) for run.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Run
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-run-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-rungroup-api
+  name: Amazon HealthOmics RunGroup API
+  description: The RunGroup API from Amazon HealthOmics — 2 operation(s) for rungroup.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - RunGroup
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-rungroup-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-sequencestore-api
+  name: Amazon HealthOmics Sequencestore API
+  description: The Sequencestore API from Amazon HealthOmics — 21 operation(s) for sequencestore.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Sequencestore
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-sequencestore-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-sequencestores-api
+  name: Amazon HealthOmics Sequencestores API
+  description: The Sequencestores API from Amazon HealthOmics — 1 operation(s) for sequencestores.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Sequencestores
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-sequencestores-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-tags-api
+  name: Amazon HealthOmics Tags API
+  description: The Tags API from Amazon HealthOmics — 2 operation(s) for tags.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-variantstore-api
+  name: Amazon HealthOmics VariantStore API
+  description: The VariantStore API from Amazon HealthOmics — 2 operation(s) for variantstore.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - VariantStore
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-variantstore-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-variantstores-api
+  name: Amazon HealthOmics VariantStores API
+  description: The VariantStores API from Amazon HealthOmics — 1 operation(s) for variantstores.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - VariantStores
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-variantstores-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/healthomics/getting-started/
+  - type: Pricing
+    url: https://aws.amazon.com/healthomics/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/healthomics/faqs/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
+  - type: Authentication
+    url: https://docs.aws.amazon.com/omics/latest/api/CommonParameters.html
+  - type: JSONSchema
+    url: json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-healthomics-context.jsonld
+  - type: X-NaftikoCapability
+    url: capabilities/amazon-healthomics.yaml
+- aid: amazon-healthomics:amazon-healthomics-workflow-api
+  name: Amazon HealthOmics Workflow API
+  description: The Workflow API from Amazon HealthOmics — 2 operation(s) for workflow.
+  humanURL: https://aws.amazon.com/healthomics/
+  baseURL: https://omics.amazonaws.com
+  tags:
+  - Workflow
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-healthomics-workflow-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/omics/latest/api/Welcome.html
   - type: GettingStarted
     url: https://aws.amazon.com/healthomics/getting-started/
   - type: Pricing
