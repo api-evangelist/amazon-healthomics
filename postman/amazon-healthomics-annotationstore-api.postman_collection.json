@@ -1,0 +1,2563 @@
+{
+  "info": {
+    "_postman_id": "099e86d6-1ef9-4ee1-becd-0da3b75cb2f7",
+    "name": "Amazon Omics AnnotationStore API",
+    "description": "This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/\">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.\n\nContact Support:\n Name: Mike Ralphson\n Email: mike.ralphson@gmail.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:24:57.000Z",
+    "updatedAt": "2026-07-28T10:24:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-099e86d6-1ef9-4ee1-becd-0da3b75cb2f7"
+  },
+  "item": [
+    {
+      "name": "annotationStore",
+      "item": [
+        {
+          "name": "{name}",
+          "item": [
+            {
+              "name": "Amazon HealthOmics Delete Annotation Store",
+              "id": "5a15b137-7d19-4b14-bdb8-3e83d322148e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore",
+                    ":name"
+                  ],
+                  "query": [
+                    {
+                      "description": "Whether to force deletion.",
+                      "key": "force",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "6e958d78-07c7-4dce-8712-b0275e04dde3",
+                      "key": "name",
+                      "value": "<string>",
+                      "description": "(Required) The store's name."
+                    }
+                  ]
+                },
+                "description": "Deletes an annotation store."
+              },
+              "response": [
+                {
+                  "id": "8ed85fdf-9264-463c-8556-2414d74fb050",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to force deletion.",
+                          "key": "force",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"DELETING\"\n}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-8ed85fdf-9264-463c-8556-2414d74fb050"
+                },
+                {
+                  "id": "bb463bea-2777-42e3-ac5f-2edf0805bd59",
+                  "name": "InternalServerException",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to force deletion.",
+                          "key": "force",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-bb463bea-2777-42e3-ac5f-2edf0805bd59"
+                },
+                {
+                  "id": "9d4e1dff-5990-40a2-a19f-0a9c60f51288",
+                  "name": "ThrottlingException",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to force deletion.",
+                          "key": "force",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-9d4e1dff-5990-40a2-a19f-0a9c60f51288"
+                },
+                {
+                  "id": "92c3132f-c9c8-41e0-8016-12e88a0739a4",
+                  "name": "ValidationException",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to force deletion.",
+                          "key": "force",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-92c3132f-c9c8-41e0-8016-12e88a0739a4"
+                },
+                {
+                  "id": "7b2f545f-68aa-4a23-a424-e0e6126cbc5a",
+                  "name": "ConflictException",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to force deletion.",
+                          "key": "force",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-7b2f545f-68aa-4a23-a424-e0e6126cbc5a"
+                },
+                {
+                  "id": "b16c6bb5-51c1-4306-b4d2-3445df7036e9",
+                  "name": "ResourceNotFoundException",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to force deletion.",
+                          "key": "force",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-b16c6bb5-51c1-4306-b4d2-3445df7036e9"
+                },
+                {
+                  "id": "f555fb34-56d4-4aed-ae26-37ff501ec9ad",
+                  "name": "AccessDeniedException",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name?force=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to force deletion.",
+                          "key": "force",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-f555fb34-56d4-4aed-ae26-37ff501ec9ad"
+                }
+              ],
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-5a15b137-7d19-4b14-bdb8-3e83d322148e"
+            },
+            {
+              "name": "Amazon HealthOmics Get Annotation Store",
+              "id": "21efdca6-e727-4f63-90c6-97cb9637d2b4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore/:name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore",
+                    ":name"
+                  ],
+                  "variable": [
+                    {
+                      "id": "408d8c53-a4b3-44cf-896d-fa010204751a",
+                      "key": "name",
+                      "value": "<string>",
+                      "description": "(Required) The store's name."
+                    }
+                  ]
+                },
+                "description": "Gets information about an annotation store."
+              },
+              "response": [
+                {
+                  "id": "818faaf0-ac62-431a-a36f-0f662787371d",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"c51dd2a3-9a22-35cd-45b4-9bb09c4f03b3\",\n  \"reference\": {\n    \"referenceArn\": \"arn:W\"\n  },\n  \"status\": \"FAILED\",\n  \"storeArn\": \"arn:e2=Km^*Lv$:Ck6&3y9U:Iu:108822900603:k<Q,kMoZN\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \"}aA\\\\@karn:9::Y1\\\\({7:606459108541:;*m<!094\"\n  },\n  \"creationTime\": \"<dateTime>\",\n  \"updateTime\": \"<dateTime>\",\n  \"tags\": {\n    \"laboris7\": \"<string>\",\n    \"exercitation_2d\": \"<string>\"\n  },\n  \"statusMessage\": \"<string>\",\n  \"storeSizeBytes\": \"<integer>\",\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_ONE_BASE\",\n      \"formatToHeader\": {\n        \"cupidatat_df\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"aliqua_e_\": \"BOOLEAN\"\n        }\n      ]\n    }\n  },\n  \"storeFormat\": \"TSV\"\n}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-818faaf0-ac62-431a-a36f-0f662787371d"
+                },
+                {
+                  "id": "3cc83aab-7a52-4522-9239-796b24823e8d",
+                  "name": "InternalServerException",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-3cc83aab-7a52-4522-9239-796b24823e8d"
+                },
+                {
+                  "id": "70dc69e8-f6fb-47f6-875d-4a32e20c69dc",
+                  "name": "ThrottlingException",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-70dc69e8-f6fb-47f6-875d-4a32e20c69dc"
+                },
+                {
+                  "id": "b9997d83-0936-44c4-ae88-1d5bd69f5125",
+                  "name": "ValidationException",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-b9997d83-0936-44c4-ae88-1d5bd69f5125"
+                },
+                {
+                  "id": "754faf6e-b318-45a8-9eba-38cccc9abb42",
+                  "name": "ResourceNotFoundException",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-754faf6e-b318-45a8-9eba-38cccc9abb42"
+                },
+                {
+                  "id": "4fc21142-cc99-43f0-bada-b1b4076d9b15",
+                  "name": "AccessDeniedException",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-4fc21142-cc99-43f0-bada-b1b4076d9b15"
+                }
+              ],
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-21efdca6-e727-4f63-90c6-97cb9637d2b4"
+            },
+            {
+              "name": "Amazon HealthOmics Update Annotation Store",
+              "id": "b163f388-a073-4879-ac27-3b5ea03e8be9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore/:name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore",
+                    ":name"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a6c856c3-6205-44c7-97fa-beab85546ab7",
+                      "key": "name",
+                      "value": "<string>",
+                      "description": "(Required) A name for the store."
+                    }
+                  ]
+                },
+                "description": "Updates an annotation store."
+              },
+              "response": [
+                {
+                  "id": "d97e829e-263d-4980-9caa-7a0827e99489",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"306252ec-aee8-0ee1-959c-991a4039452d\",\n  \"reference\": {\n    \"referenceArn\": \"arn:i`]PD:,#lz\"\n  },\n  \"status\": \"UPDATING\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"creationTime\": \"<dateTime>\",\n  \"updateTime\": \"<dateTime>\",\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"officia_70\": \"<string>\",\n        \"sunt_7\": \"<string>\",\n        \"consectetur_d\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"estb\": \"STRING\"\n        }\n      ]\n    }\n  },\n  \"storeFormat\": \"TSV\"\n}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-d97e829e-263d-4980-9caa-7a0827e99489"
+                },
+                {
+                  "id": "bc6664a5-f9a0-4485-9aa2-b39e8a3fdf01",
+                  "name": "InternalServerException",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-bc6664a5-f9a0-4485-9aa2-b39e8a3fdf01"
+                },
+                {
+                  "id": "53405414-06aa-4b8f-9a82-471b87181c65",
+                  "name": "ThrottlingException",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-53405414-06aa-4b8f-9a82-471b87181c65"
+                },
+                {
+                  "id": "7df12f5c-b8a4-4c5d-a888-5169cf9c1253",
+                  "name": "ValidationException",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-7df12f5c-b8a4-4c5d-a888-5169cf9c1253"
+                },
+                {
+                  "id": "62090dfc-3ed9-4f52-9f79-127d57178d59",
+                  "name": "ResourceNotFoundException",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-62090dfc-3ed9-4f52-9f79-127d57178d59"
+                },
+                {
+                  "id": "b33eec29-8f8b-40ba-b838-a13e11378217",
+                  "name": "AccessDeniedException",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "X-Amz-Content-Sha256",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Algorithm",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Credential",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Security-Token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "X-Amz-SignedHeaders",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/annotationStore/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "annotationStore",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "name"
+                        }
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T10:24:58.000Z",
+                  "updatedAt": "2026-07-28T10:24:58.000Z",
+                  "uid": "35240-b33eec29-8f8b-40ba-b838-a13e11378217"
+                }
+              ],
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-b163f388-a073-4879-ac27-3b5ea03e8be9"
+            }
+          ],
+          "id": "d03d38de-e345-451f-b9b9-34c01d131579",
+          "createdAt": "2026-07-28T10:24:58.000Z",
+          "updatedAt": "2026-07-28T10:24:58.000Z",
+          "uid": "35240-d03d38de-e345-451f-b9b9-34c01d131579"
+        },
+        {
+          "name": "Amazon HealthOmics Create Annotation Store",
+          "id": "cfc3d1cc-f5b0-4929-8037-284fcdf1cd1c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Amz-Content-Sha256",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Date",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Algorithm",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Credential",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Security-Token",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Signature",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-SignedHeaders",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/annotationStore",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "annotationStore"
+              ]
+            },
+            "description": "Creates an annotation store."
+          },
+          "response": [
+            {
+              "id": "ddd83726-69f9-47a4-851a-fb5126ba86c6",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"3a004c63-361c-f855-c2a0-86ab199a0c36\",\n  \"status\": \"DELETING\",\n  \"name\": \"<string>\",\n  \"creationTime\": \"<dateTime>\",\n  \"reference\": {\n    \"referenceArn\": \"arn:&M#\"\n  },\n  \"storeFormat\": \"VCF\",\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"GENERIC\",\n      \"formatToHeader\": {\n        \"ad5\": \"<string>\",\n        \"deserunt_f_\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"elit_6\": \"FLOAT\"\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-ddd83726-69f9-47a4-851a-fb5126ba86c6"
+            },
+            {
+              "id": "7e5dca91-2dcf-4ef3-b79e-62748a61540b",
+              "name": "InternalServerException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-7e5dca91-2dcf-4ef3-b79e-62748a61540b"
+            },
+            {
+              "id": "4c44441c-cfb7-4bf1-a748-7f3e5774b322",
+              "name": "ServiceQuotaExceededException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-4c44441c-cfb7-4bf1-a748-7f3e5774b322"
+            },
+            {
+              "id": "e3950cc7-ed03-4889-a81f-396860264b6a",
+              "name": "ThrottlingException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-e3950cc7-ed03-4889-a81f-396860264b6a"
+            },
+            {
+              "id": "a655a7c5-6efd-431d-a751-c23c25befa56",
+              "name": "ValidationException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-a655a7c5-6efd-431d-a751-c23c25befa56"
+            },
+            {
+              "id": "6381fe91-a150-455a-9dc7-ef50286e4108",
+              "name": "ConflictException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-6381fe91-a150-455a-9dc7-ef50286e4108"
+            },
+            {
+              "id": "aef21fc4-3dc5-4471-baf7-f875365396fb",
+              "name": "ResourceNotFoundException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-aef21fc4-3dc5-4471-baf7-f875365396fb"
+            },
+            {
+              "id": "8840f06e-6cee-4f93-819a-1593a0fe376c",
+              "name": "AccessDeniedException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"storeFormat\": \"VCF\",\n  \"reference\": {\n    \"referenceArn\": \"arn:%a}>r-Qz-\"\n  },\n  \"name\": \"rksn927x9klqhqn2sp8fk2ay3sx_anfmpeju8b62c2qxljv\",\n  \"description\": \"<string>\",\n  \"tags\": {\n    \"pariatur_4\": \"<string>\",\n    \"irure17\": \"<string>\"\n  },\n  \"sseConfig\": {\n    \"type\": \"KMS\",\n    \"keyArn\": \".arn::)HEzx%=:x2({:261562176937:qNj#nzC](8xOTYI7\"\n  },\n  \"storeOptions\": {\n    \"tsvStoreOptions\": {\n      \"annotationType\": \"CHR_START_END_REF_ALT_ONE_BASE\",\n      \"formatToHeader\": {\n        \"animab9\": \"<string>\",\n        \"quia\": \"<string>\"\n      },\n      \"schema\": [\n        {\n          \"Excepteur63\": \"BOOLEAN\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotationStore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotationStore"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:24:58.000Z",
+              "updatedAt": "2026-07-28T10:24:58.000Z",
+              "uid": "35240-8840f06e-6cee-4f93-819a-1593a0fe376c"
+            }
+          ],
+          "createdAt": "2026-07-28T10:24:58.000Z",
+          "updatedAt": "2026-07-28T10:24:58.000Z",
+          "uid": "35240-cfc3d1cc-f5b0-4929-8037-284fcdf1cd1c"
+        }
+      ],
+      "id": "ac4b6bd6-ff00-4612-947d-b83f7c9c7c20",
+      "createdAt": "2026-07-28T10:24:58.000Z",
+      "updatedAt": "2026-07-28T10:24:58.000Z",
+      "uid": "35240-ac4b6bd6-ff00-4612-947d-b83f7c9c7c20"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "http://omics.{{region}}.amazonaws.com"
+    }
+  ]
+}

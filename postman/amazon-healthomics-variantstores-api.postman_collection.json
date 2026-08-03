@@ -1,0 +1,704 @@
+{
+  "info": {
+    "_postman_id": "b7a67ab8-6c77-4a7d-b974-2ba61e8663f5",
+    "name": "Amazon Omics AnnotationStore VariantStores API",
+    "description": "This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/\">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.\n\nContact Support:\n Name: Mike Ralphson\n Email: mike.ralphson@gmail.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:26:16.000Z",
+    "updatedAt": "2026-07-28T10:26:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b7a67ab8-6c77-4a7d-b974-2ba61e8663f5"
+  },
+  "item": [
+    {
+      "name": "variantStores",
+      "item": [
+        {
+          "name": "Amazon HealthOmics List Variant Stores",
+          "id": "f18608c3-1acd-4124-a22c-881e7aca01c6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Amz-Content-Sha256",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Date",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Algorithm",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Credential",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Security-Token",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Signature",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-SignedHeaders",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"status\": \"CREATING\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/variantStores?maxResults=<integer>&nextToken=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "variantStores"
+              ],
+              "query": [
+                {
+                  "description": "The maximum number of stores to return in one page of results.",
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                  "key": "nextToken",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of variant stores."
+          },
+          "response": [
+            {
+              "id": "46daa9f5-dc53-426c-858d-c78be86020a4",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"status\": \"CREATING\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/variantStores?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "variantStores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"variantStores\": [\n    {\n      \"id\": \"42250553-a63d-3664-db0d-35d2444a0ba6\",\n      \"reference\": {\n        \"referenceArn\": \"arn:F|\\\\ZP)m\"\n      },\n      \"status\": \"FAILED\",\n      \"storeArn\": \"arn:MiW:c/h&6GYe:R33t:452726211831:JFpX{Z0\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"sseConfig\": {\n        \"type\": \"KMS\",\n        \"keyArn\": \"MWPb<u>arn:kLF{Y_:.:'-E8<&V:614345739256:Qpd8HfvDX\\\\^\"\n      },\n      \"creationTime\": \"<dateTime>\",\n      \"updateTime\": \"<dateTime>\",\n      \"statusMessage\": \"<string>\",\n      \"storeSizeBytes\": \"<integer>\"\n    },\n    {\n      \"id\": \"a1b43a58-dbdf-1c44-f323-b10bbeef854c\",\n      \"reference\": {\n        \"referenceArn\": \"arn:3oT%;N==s\"\n      },\n      \"status\": \"UPDATING\",\n      \"storeArn\": \"arn:7xY\\\\V@g4d9:F!%9::353585388513:]=fE#!\\\"6Y0\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"sseConfig\": {\n        \"type\": \"KMS\",\n        \"keyArn\": \"9A@YBarn:M+^u6\\\"f&u:e~+13<::720771459484:$B3|Ky0:k,y(Z9R~\"\n      },\n      \"creationTime\": \"<dateTime>\",\n      \"updateTime\": \"<dateTime>\",\n      \"statusMessage\": \"<string>\",\n      \"storeSizeBytes\": \"<integer>\"\n    }\n  ],\n  \"nextToken\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T10:26:17.000Z",
+              "updatedAt": "2026-07-28T10:26:17.000Z",
+              "uid": "35240-46daa9f5-dc53-426c-858d-c78be86020a4"
+            },
+            {
+              "id": "784e5b96-96bd-4765-b95d-20342cdf0a6a",
+              "name": "InternalServerException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"status\": \"CREATING\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/variantStores?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "variantStores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:26:17.000Z",
+              "updatedAt": "2026-07-28T10:26:17.000Z",
+              "uid": "35240-784e5b96-96bd-4765-b95d-20342cdf0a6a"
+            },
+            {
+              "id": "b36df843-d787-4ddd-8b05-e92cea17060f",
+              "name": "ThrottlingException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"status\": \"CREATING\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/variantStores?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "variantStores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:26:17.000Z",
+              "updatedAt": "2026-07-28T10:26:17.000Z",
+              "uid": "35240-b36df843-d787-4ddd-8b05-e92cea17060f"
+            },
+            {
+              "id": "c1ba967b-3261-4ec5-b26b-ce7ecd33a769",
+              "name": "ValidationException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"status\": \"CREATING\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/variantStores?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "variantStores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:26:17.000Z",
+              "updatedAt": "2026-07-28T10:26:17.000Z",
+              "uid": "35240-c1ba967b-3261-4ec5-b26b-ce7ecd33a769"
+            },
+            {
+              "id": "77e0e5df-5ae7-4f81-a8c3-81ef07af1c09",
+              "name": "ResourceNotFoundException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"status\": \"CREATING\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/variantStores?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "variantStores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:26:17.000Z",
+              "updatedAt": "2026-07-28T10:26:17.000Z",
+              "uid": "35240-77e0e5df-5ae7-4f81-a8c3-81ef07af1c09"
+            },
+            {
+              "id": "3cfd2168-1ff0-4019-824a-881a248f4b6e",
+              "name": "AccessDeniedException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"status\": \"CREATING\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/variantStores?maxResults=<integer>&nextToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "variantStores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:26:17.000Z",
+              "updatedAt": "2026-07-28T10:26:17.000Z",
+              "uid": "35240-3cfd2168-1ff0-4019-824a-881a248f4b6e"
+            }
+          ],
+          "createdAt": "2026-07-28T10:26:17.000Z",
+          "updatedAt": "2026-07-28T10:26:17.000Z",
+          "uid": "35240-f18608c3-1acd-4124-a22c-881e7aca01c6"
+        }
+      ],
+      "id": "e053749d-9aa3-4253-bdd7-0aecef532ca5",
+      "createdAt": "2026-07-28T10:26:16.000Z",
+      "updatedAt": "2026-07-28T10:26:16.000Z",
+      "uid": "35240-e053749d-9aa3-4253-bdd7-0aecef532ca5"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "http://omics.{{region}}.amazonaws.com"
+    }
+  ]
+}

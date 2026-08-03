@@ -1,0 +1,704 @@
+{
+  "info": {
+    "_postman_id": "4fcc5536-f2ff-449f-863c-6e4c91e4dbb1",
+    "name": "Amazon Omics AnnotationStore Referencestores API",
+    "description": "This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/\">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.\n\nContact Support:\n Name: Mike Ralphson\n Email: mike.ralphson@gmail.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:25:03.000Z",
+    "updatedAt": "2026-07-28T10:25:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4fcc5536-f2ff-449f-863c-6e4c91e4dbb1"
+  },
+  "item": [
+    {
+      "name": "referencestores",
+      "item": [
+        {
+          "name": "Amazon HealthOmics List Reference Stores",
+          "id": "d919d7bb-56f8-4cfb-abd9-65a9f4818af1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Amz-Content-Sha256",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Date",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Algorithm",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Credential",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Security-Token",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-Signature",
+                "value": "<string>"
+              },
+              {
+                "key": "X-Amz-SignedHeaders",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"name\": \"N}SP}\",\n    \"createdAfter\": \"<dateTime>\",\n    \"createdBefore\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/referencestores?maxResults=<integer>&nextToken=PNZSM",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "referencestores"
+              ],
+              "query": [
+                {
+                  "description": "The maximum number of stores to return in one page of results.",
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                  "key": "nextToken",
+                  "value": "PNZSM"
+                }
+              ]
+            },
+            "description": "Retrieves a list of reference stores."
+          },
+          "response": [
+            {
+              "id": "c5647224-9c01-4704-93f1-a22208860328",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"name\": \"N}SP}\",\n    \"createdAfter\": \"<dateTime>\",\n    \"createdBefore\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/referencestores?maxResults=<integer>&nextToken=PNZSM",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "referencestores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "PNZSM"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"referenceStores\": [\n    {\n      \"arn\": \"arn:M\",\n      \"id\": \"7744767577447675\",\n      \"creationTime\": \"<dateTime>\",\n      \"name\": \"LMPSp\",\n      \"description\": \"S}Z|M}MPSSp\",\n      \"sseConfig\": {\n        \"type\": \"KMS\",\n        \"keyArn\": \"xk;rH('Ibarn::VQ\\\\VpdRl|:UIFKwpd;i':371727688829:tWYjG?gi@\"\n      }\n    },\n    {\n      \"arn\": \"arn:ICLG.rp1+h\",\n      \"id\": \"91642207934\",\n      \"creationTime\": \"<dateTime>\",\n      \"name\": \"S}SpSS{\",\n      \"description\": \"{SZLP}{|Z}\",\n      \"sseConfig\": {\n        \"type\": \"KMS\",\n        \"keyArn\": \"ZdiJY+Zarn:)\\\\X'6]LVa:Wfq,f:cKvD^KnJ/:863769182437:hT`P)L{2L\"\n      }\n    }\n  ],\n  \"nextToken\": \"NLLMN|\"\n}",
+              "createdAt": "2026-07-28T10:25:04.000Z",
+              "updatedAt": "2026-07-28T10:25:04.000Z",
+              "uid": "35240-c5647224-9c01-4704-93f1-a22208860328"
+            },
+            {
+              "id": "e606eb75-16ee-43a6-bbf4-588256946d29",
+              "name": "InternalServerException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"name\": \"N}SP}\",\n    \"createdAfter\": \"<dateTime>\",\n    \"createdBefore\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/referencestores?maxResults=<integer>&nextToken=PNZSM",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "referencestores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "PNZSM"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:25:04.000Z",
+              "updatedAt": "2026-07-28T10:25:04.000Z",
+              "uid": "35240-e606eb75-16ee-43a6-bbf4-588256946d29"
+            },
+            {
+              "id": "0a32edff-dc7e-4137-8071-d3b3f0f2a4cc",
+              "name": "ThrottlingException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"name\": \"N}SP}\",\n    \"createdAfter\": \"<dateTime>\",\n    \"createdBefore\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/referencestores?maxResults=<integer>&nextToken=PNZSM",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "referencestores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "PNZSM"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:25:04.000Z",
+              "updatedAt": "2026-07-28T10:25:04.000Z",
+              "uid": "35240-0a32edff-dc7e-4137-8071-d3b3f0f2a4cc"
+            },
+            {
+              "id": "2e8780ec-61de-4c09-87b2-88f53cd5322c",
+              "name": "ValidationException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"name\": \"N}SP}\",\n    \"createdAfter\": \"<dateTime>\",\n    \"createdBefore\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/referencestores?maxResults=<integer>&nextToken=PNZSM",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "referencestores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "PNZSM"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:25:04.000Z",
+              "updatedAt": "2026-07-28T10:25:04.000Z",
+              "uid": "35240-2e8780ec-61de-4c09-87b2-88f53cd5322c"
+            },
+            {
+              "id": "655a1be1-ce32-4432-90d4-8a7f2665b3d2",
+              "name": "AccessDeniedException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"name\": \"N}SP}\",\n    \"createdAfter\": \"<dateTime>\",\n    \"createdBefore\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/referencestores?maxResults=<integer>&nextToken=PNZSM",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "referencestores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "PNZSM"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:25:04.000Z",
+              "updatedAt": "2026-07-28T10:25:04.000Z",
+              "uid": "35240-655a1be1-ce32-4432-90d4-8a7f2665b3d2"
+            },
+            {
+              "id": "fcb643c1-8415-426e-84eb-5736b54be46a",
+              "name": "RequestTimeoutException",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "X-Amz-Content-Sha256",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Algorithm",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Credential",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Security-Token",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "X-Amz-SignedHeaders",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"name\": \"N}SP}\",\n    \"createdAfter\": \"<dateTime>\",\n    \"createdBefore\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/referencestores?maxResults=<integer>&nextToken=PNZSM",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "referencestores"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of stores to return in one page of results.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specify the pagination token from a previous request to retrieve the next page of results.",
+                      "key": "nextToken",
+                      "value": "PNZSM"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T10:25:04.000Z",
+              "updatedAt": "2026-07-28T10:25:04.000Z",
+              "uid": "35240-fcb643c1-8415-426e-84eb-5736b54be46a"
+            }
+          ],
+          "createdAt": "2026-07-28T10:25:04.000Z",
+          "updatedAt": "2026-07-28T10:25:04.000Z",
+          "uid": "35240-d919d7bb-56f8-4cfb-abd9-65a9f4818af1"
+        }
+      ],
+      "id": "6575d518-f0e7-49b4-9694-316d7f026118",
+      "createdAt": "2026-07-28T10:25:04.000Z",
+      "updatedAt": "2026-07-28T10:25:04.000Z",
+      "uid": "35240-6575d518-f0e7-49b4-9694-316d7f026118"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "http://omics.{{region}}.amazonaws.com"
+    }
+  ]
+}

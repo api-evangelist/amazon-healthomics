@@ -1,0 +1,38 @@
+{
+  "provider": "amazon-healthomics",
+  "sources": [
+    "amazon-healthomics-annotationstore-api-openapi.yml",
+    "amazon-healthomics-annotationstores-api-openapi.yml",
+    "amazon-healthomics-import-api-openapi.yml",
+    "amazon-healthomics-referencestore-api-openapi.yml",
+    "amazon-healthomics-referencestores-api-openapi.yml",
+    "amazon-healthomics-run-api-openapi.yml",
+    "amazon-healthomics-rungroup-api-openapi.yml",
+    "amazon-healthomics-sequencestore-api-openapi.yml",
+    "amazon-healthomics-sequencestores-api-openapi.yml",
+    "amazon-healthomics-tags-api-openapi.yml",
+    "amazon-healthomics-variantstore-api-openapi.yml",
+    "amazon-healthomics-variantstores-api-openapi.yml",
+    "amazon-healthomics-workflow-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-healthomics-annotationstore-api-openapi.yml",
+    "amazon-healthomics-annotationstores-api-openapi.yml",
+    "amazon-healthomics-import-api-openapi.yml",
+    "amazon-healthomics-referencestore-api-openapi.yml",
+    "amazon-healthomics-referencestores-api-openapi.yml",
+    "amazon-healthomics-run-api-openapi.yml",
+    "amazon-healthomics-rungroup-api-openapi.yml",
+    "amazon-healthomics-sequencestore-api-openapi.yml",
+    "amazon-healthomics-sequencestores-api-openapi.yml",
+    "amazon-healthomics-tags-api-openapi.yml",
+    "amazon-healthomics-variantstore-api-openapi.yml",
+    "amazon-healthomics-variantstores-api-openapi.yml",
+    "amazon-healthomics-workflow-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
