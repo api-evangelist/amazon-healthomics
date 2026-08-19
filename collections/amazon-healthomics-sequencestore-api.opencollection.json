@@ -1,0 +1,1298 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Omics AnnotationStore Sequencestore API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sequencestore",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon HealthOmics Abort Multipart Read Set Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/upload/:uploadId/abort",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": " The sequence store ID for the store involved in the multipart upload. "
+              },
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path",
+                "description": " The ID for the multipart upload. "
+              }
+            ]
+          },
+          "docs": " Stops a multipart upload. "
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Batch Delete Read Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/readset/batch/delete",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The read sets' sequence store ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes one or more read sets."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Complete Multipart Read Set Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/upload/:uploadId/complete",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": " The sequence store ID for the store involved in the multipart upload. "
+              },
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path",
+                "description": " The ID for the multipart upload. "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": " Concludes a multipart upload once you have uploaded all the components. "
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Create Multipart Read Set Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/upload",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": " The sequence store ID for the store that is the destination of the multipart uploads. "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": " Begins a multipart read set upload. "
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Create Sequence Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a sequence store."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Get Sequence Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:id",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The store's ID."
+              }
+            ]
+          },
+          "docs": "Gets information about a sequence store."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Delete Sequence Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:id",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The sequence store's ID."
+              }
+            ]
+          },
+          "docs": "Deletes a sequence store."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Get Read Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/readset/:id#partNumber",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The read set's ID."
+              },
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The read set's sequence store ID."
+              },
+              {
+                "name": "file",
+                "value": "",
+                "type": "query",
+                "description": "The file to retrieve."
+              },
+              {
+                "name": "partNumber",
+                "value": "",
+                "type": "query",
+                "description": "The part number to retrieve."
+              }
+            ]
+          },
+          "docs": "Gets a file from a read set."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Get Read Set Activation Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/activationjob/:id",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The job's ID."
+              },
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The job's sequence store ID."
+              }
+            ]
+          },
+          "docs": "Gets information about a read set activation job."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Get Read Set Export Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/exportjob/:id",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The job's sequence store ID."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The job's ID."
+              }
+            ]
+          },
+          "docs": "Gets information about a read set export job."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Get Read Set Import Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/importjob/:id",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The job's ID."
+              },
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The job's sequence store ID."
+              }
+            ]
+          },
+          "docs": "Gets information about a read set import job."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Get Read Set Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/readset/:id/metadata",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The read set's ID."
+              },
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The read set's sequence store ID."
+              }
+            ]
+          },
+          "docs": "Gets details about a read set."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics List Multipart Read Set Uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/uploads",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": " The Sequence Store ID used for the multipart uploads. "
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": " The maximum number of multipart uploads returned in a page. "
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": " Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. "
+              }
+            ]
+          },
+          "docs": " Lists all multipart read set uploads and their statuses. "
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics List Read Set Activation Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/activationjobs",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The read set's sequence store ID."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of read set activation jobs to return in one page of results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Specify the pagination token from a previous request to retrieve the next page of results."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of read set activation jobs."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics List Read Set Export Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/exportjobs",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The jobs' sequence store ID."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of jobs to return in one page of results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Specify the pagination token from a previous request to retrieve the next page of results."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of read set export jobs."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics List Read Set Import Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/importjobs",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of jobs to return in one page of results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Specify the pagination token from a previous request to retrieve the next page of results."
+              },
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The jobs' sequence store ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of read set import jobs."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics List Read Set Upload Parts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/upload/:uploadId/parts",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": " The Sequence Store ID used for the multipart uploads. "
+              },
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path",
+                "description": " The ID for the initiated multipart upload. "
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": " The maximum number of read set upload parts returned in a page. "
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": " Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results. "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": " This operation will list all parts in a requested multipart upload for a sequence store. "
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics List Read Sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/readsets",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The jobs' sequence store ID."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of read sets to return in one page of results."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Specify the pagination token from a previous request to retrieve the next page of results."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a list of read sets."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Start Read Set Activation Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/activationjob",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The read set's sequence store ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Start Read Set Export Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/exportjob",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The read set's sequence store ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports a read set to Amazon S3."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Start Read Set Import Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/importjob",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": "The read set's sequence store ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a read set import job."
+        },
+        {
+          "info": {
+            "name": "Amazon HealthOmics Upload Read Set Part",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://omics.{region}.amazonaws.com/sequencestore/:sequenceStoreId/upload/:uploadId/part#partSource&partNumber",
+            "headers": [
+              {
+                "name": "X-Amz-Content-Sha256",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Date",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Algorithm",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Credential",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Security-Token",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-Signature",
+                "value": ""
+              },
+              {
+                "name": "X-Amz-SignedHeaders",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sequenceStoreId",
+                "value": "",
+                "type": "path",
+                "description": " The Sequence Store ID used for the multipart upload. "
+              },
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path",
+                "description": " The ID for the initiated multipart upload. "
+              },
+              {
+                "name": "partSource",
+                "value": "",
+                "type": "query",
+                "description": " The source file for an upload part. "
+              },
+              {
+                "name": "partNumber",
+                "value": "",
+                "type": "query",
+                "description": " The number of the part being uploaded. "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": " This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten. "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
