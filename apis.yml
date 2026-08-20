@@ -348,6 +348,8 @@ apis:
   humanURL: https://aws.amazon.com/healthomics/
   baseURL: https://omics.amazonaws.com
   tags:
+  - Workflows
+  tags_raw:
   - Workflow
   properties:
   - type: OpenAPI
