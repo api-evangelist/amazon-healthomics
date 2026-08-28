@@ -11,8 +11,11 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: healthOmicsApi
-  url: ../openapi/amazon-healthomics-openapi.yaml
+- name: annotationstoreApi
+  url: ../openapi/amazon-healthomics-annotationstore-api-openapi.yml
+  type: openapi
+- name: importApi
+  url: ../openapi/amazon-healthomics-import-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: import-annotations

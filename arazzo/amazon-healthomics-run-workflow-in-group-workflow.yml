@@ -11,8 +11,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: healthOmicsApi
-  url: ../openapi/amazon-healthomics-openapi.yaml
+- name: runApi
+  url: ../openapi/amazon-healthomics-run-api-openapi.yml
+  type: openapi
+- name: rungroupApi
+  url: ../openapi/amazon-healthomics-rungroup-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: run-workflow-in-group

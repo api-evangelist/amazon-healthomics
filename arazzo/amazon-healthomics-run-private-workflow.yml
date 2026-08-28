@@ -12,8 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: healthOmicsApi
-  url: ../openapi/amazon-healthomics-openapi.yaml
+- name: runApi
+  url: ../openapi/amazon-healthomics-run-api-openapi.yml
+  type: openapi
+- name: workflowApi
+  url: ../openapi/amazon-healthomics-workflow-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: run-private-workflow

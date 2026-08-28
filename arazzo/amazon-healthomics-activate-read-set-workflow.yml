@@ -12,8 +12,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: healthOmicsApi
-  url: ../openapi/amazon-healthomics-openapi.yaml
+- name: sequencestoreApi
+  url: ../openapi/amazon-healthomics-sequencestore-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: activate-read-set

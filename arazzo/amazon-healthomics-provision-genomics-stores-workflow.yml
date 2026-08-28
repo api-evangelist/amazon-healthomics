@@ -11,8 +11,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: healthOmicsApi
-  url: ../openapi/amazon-healthomics-openapi.yaml
+- name: referencestoreApi
+  url: ../openapi/amazon-healthomics-referencestore-api-openapi.yml
+  type: openapi
+- name: sequencestoreApi
+  url: ../openapi/amazon-healthomics-sequencestore-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-genomics-stores
