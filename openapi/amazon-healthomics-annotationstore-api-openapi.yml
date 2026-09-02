@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: "1.0.0"
+  version: 1.0.0
   x-release: v4
-  title: Amazon Omics AnnotationStore API
+  title: Amazon Omics Annotation Store API
   description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
@@ -434,12 +434,112 @@ paths:
       - AnnotationStore
 components:
   schemas:
-    Arn:
+    TsvStoreOptions:
+      type: object
+      properties:
+        annotationType:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationType'
+          - description: The store's annotation type.
+        formatToHeader:
+          allOf:
+          - $ref: '#/components/schemas/FormatToHeader'
+          - description: The store's header key to column name mapping.
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/TsvStoreOptionsSchemaList'
+          - description: The store's schema.
+      description: File settings for a TSV store.
+    SseConfigKeyArnString:
       type: string
-      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
       minLength: 20
       maxLength: 2048
-    ResourceNotFoundException: {}
+    ConflictException: {}
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    StoreDescription:
+      type: string
+      minLength: 0
+      maxLength: 500
+    FormatToHeader:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FormatToHeaderValueString'
+    String:
+      type: string
+    AnnotationType:
+      type: string
+      enum:
+      - GENERIC
+      - CHR_POS
+      - CHR_POS_REF_ALT
+      - CHR_START_END_ONE_BASE
+      - CHR_START_END_REF_ALT_ONE_BASE
+      - CHR_START_END_ZERO_BASE
+      - CHR_START_END_REF_ALT_ZERO_BASE
+    UpdateAnnotationStoreResponse:
+      type: object
+      required:
+      - id
+      - reference
+      - status
+      - name
+      - description
+      - creationTime
+      - updateTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The store's ID.
+        reference:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceItem'
+          - description: The store's genome reference.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/StoreDescription'
+          - description: The store's description.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the store was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/UpdateTime'
+          - description: When the store was updated.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: Parsing options for the store.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The annotation file format of the store.
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    StoreOptions:
+      type: object
+      properties:
+        tsvStoreOptions:
+          allOf:
+          - $ref: '#/components/schemas/TsvStoreOptions'
+          - description: File settings for a TSV store.
+      description: Settings for a store.
     DeleteAnnotationStoreResponse:
       type: object
       required:
@@ -452,28 +552,20 @@ components:
     CreationTime:
       type: string
       format: date-time
-    ConflictException: {}
-    StoreDescription:
-      type: string
-      minLength: 0
-      maxLength: 500
-    ReferenceArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    SchemaItem:
+    SseConfig:
       type: object
-      minProperties: 1
-      maxProperties: 1
-      additionalProperties:
-        $ref: '#/components/schemas/SchemaValueType'
-    StoreFormat:
-      type: string
-      enum:
-      - GFF
-      - TSV
-      - VCF
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
     SchemaValueType:
       type: string
       enum:
@@ -483,6 +575,31 @@ components:
       - FLOAT
       - DOUBLE
       - BOOLEAN
+    StoreFormat:
+      type: string
+      enum:
+      - GFF
+      - TSV
+      - VCF
+    UpdateTime:
+      type: string
+      format: date-time
+    SchemaItem:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        $ref: '#/components/schemas/SchemaValueType'
+    StoreStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
+      - FAILED
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
     ReferenceItem:
       type: object
       properties:
@@ -494,85 +611,6 @@ components:
     ResourceId:
       type: string
       pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
-    AnnotationType:
-      type: string
-      enum:
-      - GENERIC
-      - CHR_POS
-      - CHR_POS_REF_ALT
-      - CHR_START_END_ONE_BASE
-      - CHR_START_END_REF_ALT_ONE_BASE
-      - CHR_START_END_ZERO_BASE
-      - CHR_START_END_REF_ALT_ZERO_BASE
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    FormatToHeader:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/FormatToHeaderValueString'
-    StoreStatus:
-      type: string
-      enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
-      - FAILED
-    ThrottlingException: {}
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
-    CreateAnnotationStoreResponse:
-      type: object
-      required:
-      - id
-      - status
-      - name
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ResourceId'
-          - description: The store's ID.
-        reference:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceItem'
-          - description: The store's genome reference. Required for all stores except TSV format with generic annotations.
-        storeFormat:
-          allOf:
-          - $ref: '#/components/schemas/StoreFormat'
-          - description: The annotation file format of the store.
-        storeOptions:
-          allOf:
-          - $ref: '#/components/schemas/StoreOptions'
-          - description: The store's file parsing options.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/StoreStatus'
-          - description: The store's status.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: The store's name.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/CreationTime'
-          - description: When the store was created.
-    StoreOptions:
-      type: object
-      properties:
-        tsvStoreOptions:
-          allOf:
-          - $ref: '#/components/schemas/TsvStoreOptions'
-          - description: File settings for a TSV store.
-      description: Settings for a store.
     GetAnnotationStoreResponse:
       type: object
       required:
@@ -645,36 +683,42 @@ components:
           allOf:
           - $ref: '#/components/schemas/Long'
           - description: The store's size in bytes.
-    String:
+    ServiceQuotaExceededException: {}
+    TagValue:
       type: string
-    StatusMessage:
+      minLength: 0
+      maxLength: 256
+    Long:
+      type: integer
+    ValidationException: {}
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    InternalServerException: {}
+    Arn:
+      type: string
+      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      minLength: 20
+      maxLength: 2048
+    FormatToHeaderValueString:
       type: string
       minLength: 0
       maxLength: 1000
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    UpdateAnnotationStoreResponse:
+    TsvStoreOptionsSchemaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaItem'
+      minItems: 1
+      maxItems: 5000
+    AccessDeniedException: {}
+    CreateAnnotationStoreResponse:
       type: object
       required:
       - id
-      - reference
       - status
       - name
-      - description
       - creationTime
-      - updateTime
       properties:
         id:
           allOf:
@@ -683,7 +727,15 @@ components:
         reference:
           allOf:
           - $ref: '#/components/schemas/ReferenceItem'
-          - description: The store's genome reference.
+          - description: The store's genome reference. Required for all stores except TSV format with generic annotations.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The annotation file format of the store.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: The store's file parsing options.
         status:
           allOf:
           - $ref: '#/components/schemas/StoreStatus'
@@ -692,81 +744,17 @@ components:
           allOf:
           - $ref: '#/components/schemas/String'
           - description: The store's name.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/StoreDescription'
-          - description: The store's description.
         creationTime:
           allOf:
           - $ref: '#/components/schemas/CreationTime'
           - description: When the store was created.
-        updateTime:
-          allOf:
-          - $ref: '#/components/schemas/UpdateTime'
-          - description: When the store was updated.
-        storeOptions:
-          allOf:
-          - $ref: '#/components/schemas/StoreOptions'
-          - description: Parsing options for the store.
-        storeFormat:
-          allOf:
-          - $ref: '#/components/schemas/StoreFormat'
-          - description: The annotation file format of the store.
-    ValidationException: {}
-    TsvStoreOptions:
-      type: object
-      properties:
-        annotationType:
-          allOf:
-          - $ref: '#/components/schemas/AnnotationType'
-          - description: The store's annotation type.
-        formatToHeader:
-          allOf:
-          - $ref: '#/components/schemas/FormatToHeader'
-          - description: The store's header key to column name mapping.
-        schema:
-          allOf:
-          - $ref: '#/components/schemas/TsvStoreOptionsSchemaList'
-          - description: The store's schema.
-      description: File settings for a TSV store.
-    SseConfigKeyArnString:
+    EncryptionType:
       type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    TsvStoreOptionsSchemaList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SchemaItem'
-      minItems: 1
-      maxItems: 5000
-    AccessDeniedException: {}
-    FormatToHeaderValueString:
-      type: string
-      minLength: 0
-      maxLength: 1000
-    ServiceQuotaExceededException: {}
-    UpdateTime:
-      type: string
-      format: date-time
-    InternalServerException: {}
-    Long:
-      type: integer
+      enum:
+      - KMS
   parameters:
     X-Amz-Content-Sha256:
       name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -783,14 +771,26 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string

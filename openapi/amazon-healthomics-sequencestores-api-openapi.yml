@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: "1.0.0"
+  version: 1.0.0
   x-release: v4
   title: Amazon Omics AnnotationStore Sequencestores API
   description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
@@ -211,58 +211,12 @@ paths:
       tags:
       - Sequencestores
 components:
-  parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
   schemas:
-    SequenceStoreName:
+    SseConfigKeyArnString:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    S3Destination:
-      type: string
-      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
     NextToken:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
@@ -281,29 +235,37 @@ components:
           allOf:
           - $ref: '#/components/schemas/SequenceStoreDetailList'
           - description: A list of sequence stores.
-    SyntheticTimestamp_date_time:
+    SequenceStoreArn:
       type: string
-      format: date-time
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    S3Destination:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
     SequenceStoreId:
       type: string
       pattern: '[0-9]+'
       minLength: 10
       maxLength: 36
-    SequenceStoreDescription:
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    SyntheticTimestamp_date_time:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    SequenceStoreDetailList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SequenceStoreDetail'
-    RequestTimeoutException: {}
+      format: date-time
     ThrottlingException: {}
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
     SequenceStoreDetail:
       type: object
       required:
@@ -340,33 +302,71 @@ components:
           - $ref: '#/components/schemas/S3Destination'
           - description: ' An S3 location that is used to store files that have failed a direct upload. '
       description: Details about a sequence store.
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    ValidationException: {}
-    SseConfigKeyArnString:
+    SequenceStoreName:
       type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    SequenceStoreArn:
-      type: string
-      pattern: arn:.+
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 127
-    AccessDeniedException: {}
+    ValidationException: {}
     InternalServerException: {}
+    RequestTimeoutException: {}
+    SequenceStoreDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SequenceStoreDetail'
+    SequenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    AccessDeniedException: {}
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
   securitySchemes:
     hmac:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  version: "1.0.0"
+  version: 1.0.0
   x-release: v4
   title: Amazon Omics AnnotationStore Referencestore API
   description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
@@ -1051,62 +1051,33 @@ paths:
       - Referencestore
 components:
   schemas:
-    FileInformation:
-      type: object
-      properties:
-        totalParts:
-          allOf:
-          - $ref: '#/components/schemas/FileInformationTotalPartsInteger'
-          - description: The file's total parts.
-        partSize:
-          allOf:
-          - $ref: '#/components/schemas/FileInformationPartSizeLong'
-          - description: The file's part size.
-        contentLength:
-          allOf:
-          - $ref: '#/components/schemas/FileInformationContentLengthLong'
-          - description: The file's content length.
-      description: Details about a file.
-    ResourceNotFoundException: {}
+    ReferenceStoreArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    NextToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
+    ReferenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    ConflictException: {}
     ReferenceStatus:
       type: string
       enum:
       - ACTIVE
       - DELETING
       - DELETED
-    ImportReferenceSourceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ImportReferenceSourceItem'
-    FileInformationPartSizeLong:
-      type: integer
-      minimum: 1
-      maximum: 5368709120
-    NextToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 6144
-    DeleteReferenceResponse:
-      type: object
-      properties: {}
-    ConflictException: {}
-    ReferenceDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    ReferenceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceListItem'
-    SyntheticTimestamp_date_time:
-      type: string
-      format: date-time
-    RangeNotSatisfiableException: {}
-    S3Uri:
-      type: string
-      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})
     GetReferenceImportJobResponse:
       type: object
       required:
@@ -1149,11 +1120,55 @@ components:
           allOf:
           - $ref: '#/components/schemas/ImportReferenceSourceList'
           - description: The job's source files.
-    ReferenceArn:
+    JobStatusMessage:
       type: string
-      pattern: arn:.+
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 127
+    ReferenceImportJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    ImportReferenceJobItem:
+      type: object
+      required:
+      - id
+      - referenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The job's reference store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: An import reference job.
     ReferenceImportJobItemStatus:
       type: string
       enum:
@@ -1161,52 +1176,198 @@ components:
       - IN_PROGRESS
       - FINISHED
       - FAILED
-    RoleArn:
-      type: string
-      pattern: arn:.*
-      minLength: 20
-      maxLength: 2048
-    GetReferenceStoreResponse:
+    ListReferenceImportJobsResponse:
       type: object
-      required:
-      - id
-      - arn
-      - creationTime
       properties:
-        id:
+        nextToken:
           allOf:
-          - $ref: '#/components/schemas/ReferenceStoreId'
-          - description: The store's ID.
-        arn:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        importJobs:
           allOf:
-          - $ref: '#/components/schemas/ReferenceStoreArn'
-          - description: The store's ARN.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStoreName'
-          - description: The store's name.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStoreDescription'
-          - description: The store's description.
-        sseConfig:
-          allOf:
-          - $ref: '#/components/schemas/SseConfig'
-          - description: The store's server-side encryption (SSE) settings.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the store was created.
-    Md5:
-      type: string
-      pattern: '[\p{L}||\p{N}]+'
-      minLength: 1
-      maxLength: 255
+          - $ref: '#/components/schemas/ImportReferenceJobList'
+          - description: A lis of jobs.
     ImportJobId:
       type: string
       pattern: '[0-9]+'
       minLength: 10
       maxLength: 36
+    ReferenceDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    FileInformation:
+      type: object
+      properties:
+        totalParts:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationTotalPartsInteger'
+          - description: The file's total parts.
+        partSize:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationPartSizeLong'
+          - description: The file's part size.
+        contentLength:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationContentLengthLong'
+          - description: The file's content length.
+      description: Details about a file.
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    FileInformationContentLengthLong:
+      type: integer
+      minimum: 1
+      maximum: 5497558138880
+    StartReferenceImportJobResponse:
+      type: object
+      required:
+      - id
+      - referenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The job's reference store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+    Md5:
+      type: string
+      pattern: '[\p{L}||\p{N}]+'
+      minLength: 1
+      maxLength: 255
+    ReferenceFiles:
+      type: object
+      properties:
+        source:
+          allOf:
+          - $ref: '#/components/schemas/FileInformation'
+          - description: The source file's location in Amazon S3.
+        index:
+          allOf:
+          - $ref: '#/components/schemas/FileInformation'
+          - description: The files' index.
+      description: A set of genome reference files.
+    S3Uri:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})
+    DeleteReferenceResponse:
+      type: object
+      properties: {}
+    ReferenceListItem:
+      type: object
+      required:
+      - id
+      - arn
+      - referenceStoreId
+      - md5
+      - creationTime
+      - updateTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceId'
+          - description: The reference's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The reference's ARN.
+        referenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The reference's store ID.
+        md5:
+          allOf:
+          - $ref: '#/components/schemas/Md5'
+          - description: The reference's MD5 checksum.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStatus'
+          - description: The reference's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceName'
+          - description: The reference's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceDescription'
+          - description: The reference's description.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the reference was created.
+        updateTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the reference was updated.
+      description: A genome reference.
+    FileInformationTotalPartsInteger:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    ImportReferenceSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportReferenceSourceItem'
+    FileInformationPartSizeLong:
+      type: integer
+      minimum: 1
+      maximum: 5368709120
+    ListReferencesResponse:
+      type: object
+      required:
+      - references
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        references:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceList'
+          - description: A list of references.
+    DeleteReferenceStoreResponse:
+      type: object
+      properties: {}
+    ReferenceName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 3
+      maxLength: 255
     CreateReferenceStoreResponse:
       type: object
       required:
@@ -1238,8 +1399,41 @@ components:
           allOf:
           - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
           - description: When the store was created.
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    ResourceNotFoundException: {}
+    ReferenceId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    StartReferenceImportJobSourceItem:
+      type: object
+      required:
+      - sourceFile
+      - name
+      properties:
+        sourceFile:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The source file's location in Amazon S3.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceName'
+          - description: The source's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceDescription'
+          - description: The source's description.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The source's tags.
+      description: A source for a reference import job.
     ReferenceStreamingBlob:
       type: string
+    ThrottlingException: {}
     ImportReferenceSourceItem:
       type: object
       required:
@@ -1270,108 +1464,6 @@ components:
           - $ref: '#/components/schemas/TagMap'
           - description: The source's tags.
       description: An genome reference source.
-    FileInformationTotalPartsInteger:
-      type: integer
-      minimum: 1
-      maximum: 10000
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    RequestTimeoutException: {}
-    FileInformationContentLengthLong:
-      type: integer
-      minimum: 1
-      maximum: 5497558138880
-    ReferenceId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    StartReferenceImportJobSourceItem:
-      type: object
-      required:
-      - sourceFile
-      - name
-      properties:
-        sourceFile:
-          allOf:
-          - $ref: '#/components/schemas/S3Uri'
-          - description: The source file's location in Amazon S3.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceName'
-          - description: The source's name.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceDescription'
-          - description: The source's description.
-        tags:
-          allOf:
-          - $ref: '#/components/schemas/TagMap'
-          - description: The source's tags.
-      description: A source for a reference import job.
-    ThrottlingException: {}
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
-    ReferenceStoreName:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    ListReferenceImportJobsResponse:
-      type: object
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        importJobs:
-          allOf:
-          - $ref: '#/components/schemas/ImportReferenceJobList'
-          - description: A lis of jobs.
-    ReferenceStoreArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    JobStatusMessage:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    GetReferenceResponse:
-      type: object
-      properties:
-        payload:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStreamingBlob'
-          - description: The reference file payload.
-    ReferenceName:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 3
-      maxLength: 255
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
     GetReferenceMetadataResponse:
       type: object
       required:
@@ -1422,192 +1514,88 @@ components:
           allOf:
           - $ref: '#/components/schemas/ReferenceFiles'
           - description: The reference's files.
-    ValidationException: {}
+    RoleArn:
+      type: string
+      pattern: arn:.*
+      minLength: 20
+      maxLength: 2048
+    RangeNotSatisfiableException: {}
     ImportReferenceJobList:
       type: array
       items:
         $ref: '#/components/schemas/ImportReferenceJobItem'
-    ReferenceListItem:
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ServiceQuotaExceededException: {}
+    ReferenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ValidationException: {}
+    TagMap:
       type: object
-      required:
-      - id
-      - arn
-      - referenceStoreId
-      - md5
-      - creationTime
-      - updateTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceId'
-          - description: The reference's ID.
-        arn:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceArn'
-          - description: The reference's ARN.
-        referenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStoreId'
-          - description: The reference's store ID.
-        md5:
-          allOf:
-          - $ref: '#/components/schemas/Md5'
-          - description: The reference's MD5 checksum.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStatus'
-          - description: The reference's status.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceName'
-          - description: The reference's name.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceDescription'
-          - description: The reference's description.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the reference was created.
-        updateTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the reference was updated.
-      description: A genome reference.
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     ReferenceStoreId:
       type: string
       pattern: '[0-9]+'
       minLength: 10
       maxLength: 36
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    ReferenceImportJobStatus:
+    InternalServerException: {}
+    GetReferenceResponse:
+      type: object
+      properties:
+        payload:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStreamingBlob'
+          - description: The reference file payload.
+    RequestTimeoutException: {}
+    AccessDeniedException: {}
+    GetReferenceStoreResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreId'
+          - description: The store's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreArn'
+          - description: The store's ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreName'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreDescription'
+          - description: The store's description.
+        sseConfig:
+          allOf:
+          - $ref: '#/components/schemas/SseConfig'
+          - description: The store's server-side encryption (SSE) settings.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the store was created.
+    ReferenceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceListItem'
+    EncryptionType:
       type: string
       enum:
-      - SUBMITTED
-      - IN_PROGRESS
-      - CANCELLING
-      - CANCELLED
-      - FAILED
-      - COMPLETED
-      - COMPLETED_WITH_FAILURES
-    ListReferencesResponse:
-      type: object
-      required:
-      - references
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        references:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceList'
-          - description: A list of references.
-    ImportReferenceJobItem:
-      type: object
-      required:
-      - id
-      - referenceStoreId
-      - roleArn
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ImportJobId'
-          - description: The job's ID.
-        referenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStoreId'
-          - description: The job's reference store ID.
-        roleArn:
-          allOf:
-          - $ref: '#/components/schemas/RoleArn'
-          - description: The job's service role ARN.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceImportJobStatus'
-          - description: The job's status.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-        completionTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job completed.
-      description: An import reference job.
-    ReferenceFiles:
-      type: object
-      properties:
-        source:
-          allOf:
-          - $ref: '#/components/schemas/FileInformation'
-          - description: The source file's location in Amazon S3.
-        index:
-          allOf:
-          - $ref: '#/components/schemas/FileInformation'
-          - description: The files' index.
-      description: A set of genome reference files.
-    ReferenceStoreDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    DeleteReferenceStoreResponse:
-      type: object
-      properties: {}
-    ServiceQuotaExceededException: {}
-    AccessDeniedException: {}
-    InternalServerException: {}
-    StartReferenceImportJobResponse:
-      type: object
-      required:
-      - id
-      - referenceStoreId
-      - roleArn
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ImportJobId'
-          - description: The job's ID.
-        referenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStoreId'
-          - description: The job's reference store ID.
-        roleArn:
-          allOf:
-          - $ref: '#/components/schemas/RoleArn'
-          - description: The job's service role ARN.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceImportJobStatus'
-          - description: The job's status.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
+      - KMS
   parameters:
     X-Amz-Content-Sha256:
       name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -1624,14 +1612,26 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
