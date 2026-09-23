@@ -1,9 +1,9 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2022-11-28'
   x-release: v4
-  title: Amazon Omics AnnotationStore Variant Store API
-  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  title: Amazon Omics Annotation Store API
+  description: This is the AWS HealthOmics API Reference. For an introduction to the service, see What is AWS HealthOmics? in the AWS HealthOmics User Guide.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
     backgroundColor: '#FFFFFF'
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -112,9 +113,9 @@ servers:
 security:
 - hmac: []
 tags:
-- name: VariantStore
+- name: Annotation Store
 paths:
-  /variantStore:
+  /annotationStore:
     parameters:
     - $ref: '#/components/parameters/X-Amz-Content-Sha256'
     - $ref: '#/components/parameters/X-Amz-Date'
@@ -124,15 +125,15 @@ paths:
     - $ref: '#/components/parameters/X-Amz-Signature'
     - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: CreateVariantStore
-      description: Creates a variant store.
+      operationId: CreateAnnotationStore
+      description: Creates an annotation store.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateVariantStoreResponse'
+                $ref: '#/components/schemas/CreateAnnotationStoreResponse'
         '480':
           description: InternalServerException
           content:
@@ -183,7 +184,7 @@ paths:
             schema:
               type: object
               required:
-              - reference
+              - storeFormat
               properties:
                 reference:
                   description: A genome reference.
@@ -219,13 +220,28 @@ paths:
                       allOf:
                       - $ref: '#/components/schemas/SseConfigKeyArnString'
                       - description: An encryption key ARN.
-      summary: Amazon HealthOmics Create Variant Store
+                storeFormat:
+                  description: The annotation file format of the store.
+                  type: string
+                  enum:
+                  - GFF
+                  - TSV
+                  - VCF
+                storeOptions:
+                  description: Settings for a store.
+                  type: object
+                  properties:
+                    tsvStoreOptions:
+                      allOf:
+                      - $ref: '#/components/schemas/TsvStoreOptions'
+                      - description: File settings for a TSV store.
+      summary: Amazon HealthOmics Create Annotation Store
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
       tags:
-      - VariantStore
-  /variantStore/{name}:
+      - Annotation Store
+  /annotationStore/{name}:
     parameters:
     - $ref: '#/components/parameters/X-Amz-Content-Sha256'
     - $ref: '#/components/parameters/X-Amz-Date'
@@ -235,15 +251,15 @@ paths:
     - $ref: '#/components/parameters/X-Amz-Signature'
     - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     delete:
-      operationId: DeleteVariantStore
-      description: Deletes a variant store.
+      operationId: DeleteAnnotationStore
+      description: Deletes an annotation store.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteVariantStoreResponse'
+                $ref: '#/components/schemas/DeleteAnnotationStoreResponse'
         '480':
           description: InternalServerException
           content:
@@ -293,22 +309,22 @@ paths:
         description: Whether to force deletion.
         schema:
           type: boolean
-      summary: Amazon HealthOmics Delete Variant Store
+      summary: Amazon HealthOmics Delete Annotation Store
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
       tags:
-      - VariantStore
+      - Annotation Store
     get:
-      operationId: GetVariantStore
-      description: Gets information about a variant store.
+      operationId: GetAnnotationStore
+      description: Gets information about an annotation store.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetVariantStoreResponse'
+                $ref: '#/components/schemas/GetAnnotationStoreResponse'
         '480':
           description: InternalServerException
           content:
@@ -346,22 +362,22 @@ paths:
         description: The store's name.
         schema:
           type: string
-      summary: Amazon HealthOmics Get Variant Store
+      summary: Amazon HealthOmics Get Annotation Store
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
       tags:
-      - VariantStore
+      - Annotation Store
     post:
-      operationId: UpdateVariantStore
-      description: Updates a variant store.
+      operationId: UpdateAnnotationStore
+      description: Updates an annotation store.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateVariantStoreResponse'
+                $ref: '#/components/schemas/UpdateAnnotationStoreResponse'
         '480':
           description: InternalServerException
           content:
@@ -411,76 +427,20 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 500
-      summary: Amazon HealthOmics Update Variant Store
+      summary: Amazon HealthOmics Update Annotation Store
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
       tags:
-      - VariantStore
+      - Annotation Store
 components:
   schemas:
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    ConflictException: {}
-    StatusMessage:
-      type: string
-      minLength: 0
-      maxLength: 1000
-    StoreDescription:
-      type: string
-      minLength: 0
-      maxLength: 500
-    DeleteVariantStoreResponse:
-      type: object
-      required:
-      - status
-      properties:
-        status:
-          allOf:
-          - $ref: '#/components/schemas/StoreStatus'
-          - description: The store's status.
-    String:
-      type: string
-    CreateVariantStoreResponse:
-      type: object
-      required:
-      - id
-      - status
-      - name
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ResourceId'
-          - description: The store's ID.
-        reference:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceItem'
-          - description: The store's genome reference.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/StoreStatus'
-          - description: The store's status.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: The store's name.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/CreationTime'
-          - description: When the store was created.
     ReferenceArn:
       type: string
       pattern: arn:.+
       minLength: 1
       maxLength: 127
-    CreationTime:
-      type: string
-      format: date-time
-    UpdateVariantStoreResponse:
+    UpdateAnnotationStoreResponse:
       type: object
       required:
       - id
@@ -519,6 +479,36 @@ components:
           allOf:
           - $ref: '#/components/schemas/UpdateTime'
           - description: When the store was updated.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: Parsing options for the store.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The annotation file format of the store.
+    ServiceQuotaExceededException: {}
+    FormatToHeader:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FormatToHeaderValueString'
+    StoreFormat:
+      type: string
+      enum:
+      - GFF
+      - TSV
+      - VCF
+    ConflictException: {}
+    StoreDescription:
+      type: string
+      minLength: 0
+      maxLength: 500
+    TsvStoreOptionsSchemaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaItem'
+      minItems: 1
+      maxItems: 5000
     SseConfig:
       type: object
       required:
@@ -533,19 +523,79 @@ components:
           - $ref: '#/components/schemas/SseConfigKeyArnString'
           - description: An encryption key ARN.
       description: Server-side encryption (SSE) settings for a store.
-    UpdateTime:
+    ResourceId:
       type: string
-      format: date-time
-    StoreStatus:
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    InternalServerException: {}
+    SchemaItem:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        $ref: '#/components/schemas/SchemaValueType'
+    StoreOptions:
+      type: object
+      properties:
+        tsvStoreOptions:
+          allOf:
+          - $ref: '#/components/schemas/TsvStoreOptions'
+          - description: File settings for a TSV store.
+      description: Settings for a store.
+    AnnotationType:
       type: string
       enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
-      - FAILED
-    ResourceNotFoundException: {}
-    GetVariantStoreResponse:
+      - GENERIC
+      - CHR_POS
+      - CHR_POS_REF_ALT
+      - CHR_START_END_ONE_BASE
+      - CHR_START_END_REF_ALT_ONE_BASE
+      - CHR_START_END_ZERO_BASE
+      - CHR_START_END_REF_ALT_ZERO_BASE
+    ValidationException: {}
+    Long:
+      type: integer
+    CreationTime:
+      type: string
+      format: date-time
+    CreateAnnotationStoreResponse:
+      type: object
+      required:
+      - id
+      - status
+      - name
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ResourceId'
+          - description: The store's ID.
+        reference:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceItem'
+          - description: The store's genome reference. Required for all stores except TSV format with generic annotations.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The annotation file format of the store.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: The store's file parsing options.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The store's name.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/CreationTime'
+          - description: When the store was created.
+    String:
+      type: string
+    GetAnnotationStoreResponse:
       type: object
       required:
       - id
@@ -601,18 +651,86 @@ components:
           allOf:
           - $ref: '#/components/schemas/TagMap'
           - description: The store's tags.
+        storeOptions:
+          allOf:
+          - $ref: '#/components/schemas/StoreOptions'
+          - description: The store's parsing options.
+        storeFormat:
+          allOf:
+          - $ref: '#/components/schemas/StoreFormat'
+          - description: The store's annotation file format.
         statusMessage:
           allOf:
           - $ref: '#/components/schemas/StatusMessage'
-          - description: The store's status message.
+          - description: A status message.
         storeSizeBytes:
           allOf:
           - $ref: '#/components/schemas/Long'
           - description: The store's size in bytes.
-    ThrottlingException: {}
-    ResourceId:
+    TsvStoreOptions:
+      type: object
+      properties:
+        annotationType:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationType'
+          - description: The store's annotation type.
+        formatToHeader:
+          allOf:
+          - $ref: '#/components/schemas/FormatToHeader'
+          - description: The store's header key to column name mapping.
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/TsvStoreOptionsSchemaList'
+          - description: The store's schema.
+      description: File settings for a TSV store.
+    UpdateTime:
       type: string
-      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      format: date-time
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    StoreStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
+      - FAILED
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    FormatToHeaderValueString:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    Arn:
+      type: string
+      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      minLength: 20
+      maxLength: 2048
+    DeleteAnnotationStoreResponse:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
+    ThrottlingException: {}
+    SchemaValueType:
+      type: string
+      enum:
+      - LONG
+      - INT
+      - STRING
+      - FLOAT
+      - DOUBLE
+      - BOOLEAN
+    ResourceNotFoundException: {}
     ReferenceItem:
       type: object
       properties:
@@ -621,38 +739,23 @@ components:
           - $ref: '#/components/schemas/ReferenceArn'
           - description: The reference's ARN.
       description: A genome reference.
-    TagValue:
+    AccessDeniedException: {}
+    SseConfigKeyArnString:
       type: string
-      minLength: 0
-      maxLength: 256
-    ServiceQuotaExceededException: {}
-    Long:
-      type: integer
-    ValidationException: {}
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
     TagMap:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
-    InternalServerException: {}
-    Arn:
-      type: string
-      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
-      minLength: 20
-      maxLength: 2048
-    AccessDeniedException: {}
     EncryptionType:
       type: string
       enum:
       - KMS
   parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -663,8 +766,20 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -675,14 +790,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-Credential:
+      name: X-Amz-Credential
       in: header
       schema:
         type: string

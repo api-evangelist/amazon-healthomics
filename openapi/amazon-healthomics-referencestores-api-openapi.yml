@@ -1,9 +1,9 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2022-11-28'
   x-release: v4
-  title: Amazon Omics AnnotationStore Referencestores API
-  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  title: Amazon Omics Referencestores API
+  description: This is the AWS HealthOmics API Reference. For an introduction to the service, see What is AWS HealthOmics? in the AWS HealthOmics User Guide.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
     backgroundColor: '#FFFFFF'
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -211,27 +212,50 @@ paths:
       tags:
       - Referencestores
 components:
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
   schemas:
-    ReferenceStoreArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    NextToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 6144
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    ReferenceStoreDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
     ReferenceStoreDetail:
       type: object
       required:
@@ -264,6 +288,11 @@ components:
           - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
           - description: When the store was created.
       description: Details about a reference store.
+    ReferenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
     SseConfig:
       type: object
       required:
@@ -278,6 +307,13 @@ components:
           - $ref: '#/components/schemas/SseConfigKeyArnString'
           - description: An encryption key ARN.
       description: Server-side encryption (SSE) settings for a store.
+    InternalServerException: {}
+    ValidationException: {}
+    ReferenceStoreId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
     ListReferenceStoresResponse:
       type: object
       required:
@@ -291,75 +327,40 @@ components:
           allOf:
           - $ref: '#/components/schemas/ReferenceStoreDetailList'
           - description: A list of reference stores.
-    SyntheticTimestamp_date_time:
-      type: string
-      format: date-time
-    ThrottlingException: {}
-    ReferenceStoreName:
+    ReferenceStoreDescription:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
+      maxLength: 255
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    ReferenceStoreArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
       maxLength: 127
+    ThrottlingException: {}
     ReferenceStoreDetailList:
       type: array
       items:
         $ref: '#/components/schemas/ReferenceStoreDetail'
-    ValidationException: {}
-    InternalServerException: {}
-    ReferenceStoreId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    RequestTimeoutException: {}
     AccessDeniedException: {}
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    RequestTimeoutException: {}
+    NextToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
     EncryptionType:
       type: string
       enum:
       - KMS
-  parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
   securitySchemes:
     hmac:
       type: apiKey

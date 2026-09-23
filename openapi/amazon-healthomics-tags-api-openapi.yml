@@ -1,9 +1,9 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2022-11-28'
   x-release: v4
-  title: Amazon Omics AnnotationStore Tags API
-  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  title: Amazon Omics Tags API
+  description: This is the AWS HealthOmics API Reference. For an introduction to the service, see What is AWS HealthOmics? in the AWS HealthOmics User Guide.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
     backgroundColor: '#FFFFFF'
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -381,73 +382,7 @@ paths:
       tags:
       - Tags
 components:
-  schemas:
-    ConflictException: {}
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
-    TagKey:
-      type: string
-      minLength: 1
-      maxLength: 128
-    UntagResourceResponse:
-      type: object
-      properties: {}
-    TagResourceResponse:
-      type: object
-      properties: {}
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    ServiceQuotaExceededException: {}
-    ListTagsForResourceResponse:
-      type: object
-      required:
-      - tags
-      properties:
-        tags:
-          allOf:
-          - $ref: '#/components/schemas/TagMap'
-          - description: A list of tags.
-    ValidationException: {}
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    InternalServerException: {}
-    RequestTimeoutException: {}
-    AccessDeniedException: {}
   parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
       in: header
@@ -460,6 +395,72 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    ServiceQuotaExceededException: {}
+    ConflictException: {}
+    InternalServerException: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    ValidationException: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ListTagsForResourceResponse:
+      type: object
+      required:
+      - tags
+      properties:
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: A list of tags.
+    ThrottlingException: {}
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    RequestTimeoutException: {}
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
   securitySchemes:
     hmac:
       type: apiKey

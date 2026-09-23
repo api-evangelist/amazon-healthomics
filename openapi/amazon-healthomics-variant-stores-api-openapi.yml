@@ -1,9 +1,9 @@
 openapi: 3.2.0
 info:
-  version: 1.0.0
+  version: '2022-11-28'
   x-release: v4
-  title: Amazon Omics AnnotationStore Annotation Stores API
-  description: This is the <i>AWS HealthOmics API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/omics/latest/dev/">What is AWS HealthOmics?</a> in the <i>AWS HealthOmics User Guide</i>.
+  title: Amazon Omics Variant Stores API
+  description: This is the AWS HealthOmics API Reference. For an introduction to the service, see What is AWS HealthOmics? in the AWS HealthOmics User Guide.
   x-logo:
     url: https://twitter.com/awscloud/profile_image?size=original
     backgroundColor: '#FFFFFF'
@@ -24,6 +24,7 @@ info:
     url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/omics-2022-11-28.normal.json
     converter:
       url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
     x-apisguru-driver: external
   x-apiClientRegistration:
     url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
@@ -112,9 +113,9 @@ servers:
 security:
 - hmac: []
 tags:
-- name: AnnotationStores
+- name: Variant Stores
 paths:
-  /annotationStores:
+  /variantStores:
     parameters:
     - $ref: '#/components/parameters/X-Amz-Content-Sha256'
     - $ref: '#/components/parameters/X-Amz-Date'
@@ -124,15 +125,15 @@ paths:
     - $ref: '#/components/parameters/X-Amz-Signature'
     - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
-      operationId: ListAnnotationStores
-      description: Retrieves a list of annotation stores.
+      operationId: ListVariantStores
+      description: Retrieves a list of variant stores.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListAnnotationStoresResponse'
+                $ref: '#/components/schemas/ListVariantStoresResponse'
         '480':
           description: InternalServerException
           content:
@@ -188,44 +189,113 @@ paths:
               type: object
               properties:
                 ids:
-                  description: IDs of stores to list.
+                  description: A list of store IDs.
                   type: array
                   items:
                     $ref: '#/components/schemas/ResourceIdentifier'
                   minItems: 1
                   maxItems: 20
                 filter:
-                  description: A filter for annotation stores.
+                  description: A filter for variant stores.
                   type: object
                   properties:
                     status:
                       allOf:
                       - $ref: '#/components/schemas/StoreStatus'
                       - description: A status to filter on.
-      summary: Amazon HealthOmics List Annotation Stores
+      summary: Amazon HealthOmics List Variant Stores
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
       tags:
-      - AnnotationStores
+      - Variant Stores
 components:
   schemas:
-    SseConfigKeyArnString:
+    ReferenceArn:
       type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    StatusMessage:
-      type: string
-      minLength: 0
-      maxLength: 1000
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
     StoreDescription:
       type: string
       minLength: 0
       maxLength: 500
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    ResourceId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    InternalServerException: {}
+    ValidationException: {}
+    Long:
+      type: integer
+    CreationTime:
+      type: string
+      format: date-time
     String:
       type: string
-    AnnotationStoreItem:
+    ListVariantStoresResponse:
+      type: object
+      properties:
+        variantStores:
+          allOf:
+          - $ref: '#/components/schemas/VariantStoreItems'
+          - description: A list of variant stores.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: A pagination token that's included if more results are available.
+    UpdateTime:
+      type: string
+      format: date-time
+    StoreStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
+      - FAILED
+    ResourceIdentifier:
+      type: string
+      minLength: 1
+      maxLength: 50
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    VariantStoreItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/VariantStoreItem'
+    Arn:
+      type: string
+      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      minLength: 20
+      maxLength: 2048
+    ThrottlingException: {}
+    ResourceNotFoundException: {}
+    ReferenceItem:
+      type: object
+      properties:
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The reference's ARN.
+      description: A genome reference.
+    VariantStoreItem:
       type: object
       required:
       - id
@@ -233,7 +303,6 @@ components:
       - status
       - storeArn
       - name
-      - storeFormat
       - description
       - sseConfig
       - creationTime
@@ -261,10 +330,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/String'
           - description: The store's name.
-        storeFormat:
-          allOf:
-          - $ref: '#/components/schemas/StoreFormat'
-          - description: The store's file format.
         description:
           allOf:
           - $ref: '#/components/schemas/StoreDescription'
@@ -276,7 +341,7 @@ components:
         creationTime:
           allOf:
           - $ref: '#/components/schemas/CreationTime'
-          - description: The store's creation time.
+          - description: When the store was created.
         updateTime:
           allOf:
           - $ref: '#/components/schemas/UpdateTime'
@@ -289,101 +354,20 @@ components:
           allOf:
           - $ref: '#/components/schemas/Long'
           - description: The store's size in bytes.
-      description: An annotation store.
-    ReferenceArn:
+      description: A variant store.
+    AccessDeniedException: {}
+    SseConfigKeyArnString:
       type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    ListAnnotationStoresResponse:
-      type: object
-      properties:
-        annotationStores:
-          allOf:
-          - $ref: '#/components/schemas/AnnotationStoreItems'
-          - description: A list of stores.
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: A pagination token that's included if more results are available.
-    AnnotationStoreItems:
-      type: array
-      items:
-        $ref: '#/components/schemas/AnnotationStoreItem'
-    CreationTime:
-      type: string
-      format: date-time
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    UpdateTime:
-      type: string
-      format: date-time
-    StoreFormat:
-      type: string
-      enum:
-      - GFF
-      - TSV
-      - VCF
-    StoreStatus:
-      type: string
-      enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
-      - FAILED
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
-    ResourceIdentifier:
-      type: string
-      minLength: 1
-      maxLength: 50
-    ResourceId:
-      type: string
-      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
-    ReferenceItem:
-      type: object
-      properties:
-        referenceArn:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceArn'
-          - description: The reference's ARN.
-      description: A genome reference.
-    Long:
-      type: integer
-    ValidationException: {}
-    InternalServerException: {}
-    Arn:
-      type: string
-      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
       minLength: 20
       maxLength: 2048
-    AccessDeniedException: {}
     EncryptionType:
       type: string
       enum:
       - KMS
   parameters:
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -394,8 +378,20 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -406,14 +402,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-Credential:
+      name: X-Amz-Credential
       in: header
       schema:
         type: string
