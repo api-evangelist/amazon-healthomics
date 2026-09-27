@@ -386,7 +386,7 @@ apis:
     url: json-ld/amazon-healthomics-context.jsonld
 common:
 - type: Website
-  url: https://amazon.com
+  url: https://aws.amazon.com/healthomics/
 - type: AgenticAccess
   url: agentic-access/amazon-healthomics-agentic-access.yml
 - type: TrustCenter
@@ -520,5 +520,5 @@ integrations:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product

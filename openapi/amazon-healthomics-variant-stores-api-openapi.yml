@@ -211,52 +211,6 @@ paths:
       - Variant Stores
 components:
   schemas:
-    ReferenceArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    StoreDescription:
-      type: string
-      minLength: 0
-      maxLength: 500
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    ResourceId:
-      type: string
-      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
-    InternalServerException: {}
-    ValidationException: {}
-    Long:
-      type: integer
-    CreationTime:
-      type: string
-      format: date-time
-    String:
-      type: string
-    ListVariantStoresResponse:
-      type: object
-      properties:
-        variantStores:
-          allOf:
-          - $ref: '#/components/schemas/VariantStoreItems'
-          - description: A list of variant stores.
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: A pagination token that's included if more results are available.
     UpdateTime:
       type: string
       format: date-time
@@ -268,25 +222,30 @@ components:
       - DELETING
       - ACTIVE
       - FAILED
+    AccessDeniedException: {}
+    String:
+      type: string
+    CreationTime:
+      type: string
+      format: date-time
+    ValidationException: {}
+    StoreDescription:
+      type: string
+      minLength: 0
+      maxLength: 500
+    ThrottlingException: {}
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
     ResourceIdentifier:
       type: string
       minLength: 1
       maxLength: 50
-    StatusMessage:
-      type: string
-      minLength: 0
-      maxLength: 1000
-    VariantStoreItems:
-      type: array
-      items:
-        $ref: '#/components/schemas/VariantStoreItem'
-    Arn:
-      type: string
-      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
-      minLength: 20
-      maxLength: 2048
-    ThrottlingException: {}
-    ResourceNotFoundException: {}
+    Long:
+      type: integer
+    InternalServerException: {}
     ReferenceItem:
       type: object
       properties:
@@ -355,43 +314,60 @@ components:
           - $ref: '#/components/schemas/Long'
           - description: The store's size in bytes.
       description: A variant store.
-    AccessDeniedException: {}
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    VariantStoreItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/VariantStoreItem'
     EncryptionType:
       type: string
       enum:
       - KMS
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    Arn:
+      type: string
+      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      minLength: 20
+      maxLength: 2048
+    ResourceNotFoundException: {}
+    ResourceId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    ListVariantStoresResponse:
+      type: object
+      properties:
+        variantStores:
+          allOf:
+          - $ref: '#/components/schemas/VariantStoreItems'
+          - description: A list of variant stores.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: A pagination token that's included if more results are available.
   parameters:
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -404,6 +380,30 @@ components:
       required: false
     X-Amz-Credential:
       name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string

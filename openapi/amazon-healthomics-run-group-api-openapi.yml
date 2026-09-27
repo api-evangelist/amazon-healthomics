@@ -584,28 +584,45 @@ paths:
       - Run Group
 components:
   schemas:
-    RunGroupListToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 128
-    ServiceQuotaExceededException: {}
-    ConflictException: {}
-    RunGroupListItemMaxCpusInteger:
-      type: integer
-      minimum: 1
-      maximum: 100000
-    InternalServerException: {}
-    RunGroupList:
-      type: array
-      items:
-        $ref: '#/components/schemas/RunGroupListItem'
-    ValidationException: {}
     RunGroupListItemMaxGpusInteger:
       type: integer
       minimum: 1
       maximum: 100000
+    AccessDeniedException: {}
+    RunGroupListItemMaxDurationInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    RunGroupName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
+    ValidationException: {}
+    ThrottlingException: {}
     RunGroupListItemMaxRunsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    RequestTimeoutException: {}
+    ConflictException: {}
+    ListRunGroupsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupList'
+          - description: A list of groups.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListToken'
+          - description: A pagination token that's included if more results are available.
+    InternalServerException: {}
+    RunGroupListItemMaxCpusInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    GetRunGroupResponseMaxDurationInteger:
       type: integer
       minimum: 1
       maximum: 100000
@@ -614,10 +631,83 @@ components:
       pattern: '[0-9]+'
       minLength: 1
       maxLength: 18
+    GetRunGroupResponseMaxGpusInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    RunGroupArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 128
     GetRunGroupResponseMaxCpusInteger:
       type: integer
       minimum: 1
       maximum: 100000
+    ServiceQuotaExceededException: {}
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    GetRunGroupResponseMaxRunsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    RunGroupTimestamp:
+      type: string
+      format: date-time
+    RunGroupListItem:
+      type: object
+      properties:
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupArn'
+          - description: The group's ARN.
+        id:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupId'
+          - description: The group's ID.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupName'
+          - description: The group's name.
+        maxCpus:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxCpusInteger'
+          - description: The group's maximum CPU count setting.
+        maxRuns:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxRunsInteger'
+          - description: The group's maximum concurrent run setting.
+        maxDuration:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxDurationInteger'
+          - description: The group's maximum duration setting in minutes.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupTimestamp'
+          - description: When the group was created.
+        maxGpus:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupListItemMaxGpusInteger'
+          - description: ' The maximum GPUs that can be used by a run group. '
+      description: A run group.
+    ResourceNotFoundException: {}
+    CreateRunGroupResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupArn'
+          - description: The group's ARN.
+        id:
+          allOf:
+          - $ref: '#/components/schemas/RunGroupId'
+          - description: The group's ID.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: Tags for the run group.
     GetRunGroupResponse:
       type: object
       properties:
@@ -657,112 +747,40 @@ components:
           allOf:
           - $ref: '#/components/schemas/GetRunGroupResponseMaxGpusInteger'
           - description: ' The maximum GPUs that can be used by a run group. '
-    GetRunGroupResponseMaxDurationInteger:
-      type: integer
-      minimum: 1
-      maximum: 100000
-    GetRunGroupResponseMaxGpusInteger:
-      type: integer
-      minimum: 1
-      maximum: 100000
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    RunGroupArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 128
-    RunGroupListItem:
-      type: object
-      properties:
-        arn:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupArn'
-          - description: The group's ARN.
-        id:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupId'
-          - description: The group's ID.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupName'
-          - description: The group's name.
-        maxCpus:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupListItemMaxCpusInteger'
-          - description: The group's maximum CPU count setting.
-        maxRuns:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupListItemMaxRunsInteger'
-          - description: The group's maximum concurrent run setting.
-        maxDuration:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupListItemMaxDurationInteger'
-          - description: The group's maximum duration setting in minutes.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupTimestamp'
-          - description: When the group was created.
-        maxGpus:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupListItemMaxGpusInteger'
-          - description: ' The maximum GPUs that can be used by a run group. '
-      description: A run group.
-    ThrottlingException: {}
-    ResourceNotFoundException: {}
-    RunGroupName:
+    RunGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RunGroupListItem'
+    RunGroupListToken:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 128
-    RunGroupListItemMaxDurationInteger:
-      type: integer
-      minimum: 1
-      maximum: 100000
-    AccessDeniedException: {}
-    ListRunGroupsResponse:
-      type: object
-      properties:
-        items:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupList'
-          - description: A list of groups.
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupListToken'
-          - description: A pagination token that's included if more results are available.
-    GetRunGroupResponseMaxRunsInteger:
-      type: integer
-      minimum: 1
-      maximum: 100000
-    RunGroupTimestamp:
+    TagValue:
       type: string
-      format: date-time
-    RequestTimeoutException: {}
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    CreateRunGroupResponse:
-      type: object
-      properties:
-        arn:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupArn'
-          - description: The group's ARN.
-        id:
-          allOf:
-          - $ref: '#/components/schemas/RunGroupId'
-          - description: The group's ID.
-        tags:
-          allOf:
-          - $ref: '#/components/schemas/TagMap'
-          - description: Tags for the run group.
+      minLength: 0
+      maxLength: 256
   parameters:
     X-Amz-Signature:
       name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
       in: header
       schema:
         type: string
@@ -779,26 +797,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Content-Sha256:
       name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
       in: header
       schema:
         type: string

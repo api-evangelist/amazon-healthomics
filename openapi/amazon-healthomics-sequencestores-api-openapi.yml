@@ -213,10 +213,61 @@ paths:
       - Sequencestores
 components:
   schemas:
+    NextToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
     SequenceStoreDetailList:
       type: array
       items:
         $ref: '#/components/schemas/SequenceStoreDetail'
+    SequenceStoreArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    AccessDeniedException: {}
+    SequenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    SequenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    ValidationException: {}
+    ThrottlingException: {}
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    RequestTimeoutException: {}
+    InternalServerException: {}
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
     SequenceStoreDetail:
       type: object
       required:
@@ -253,32 +304,14 @@ components:
           - $ref: '#/components/schemas/S3Destination'
           - description: ' An S3 location that is used to store files that have failed a direct upload. '
       description: Details about a sequence store.
-    InternalServerException: {}
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    ValidationException: {}
     SequenceStoreId:
       type: string
       pattern: '[0-9]+'
       minLength: 10
       maxLength: 36
-    SequenceStoreName:
+    S3Destination:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
     ListSequenceStoresResponse:
       type: object
       required:
@@ -292,66 +325,9 @@ components:
           allOf:
           - $ref: '#/components/schemas/SequenceStoreDetailList'
           - description: A list of sequence stores.
-    SyntheticTimestamp_date_time:
-      type: string
-      format: date-time
-    SequenceStoreDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    ThrottlingException: {}
-    S3Destination:
-      type: string
-      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
-    SequenceStoreArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    AccessDeniedException: {}
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    RequestTimeoutException: {}
-    NextToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 6144
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
   parameters:
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -364,6 +340,30 @@ components:
       required: false
     X-Amz-Credential:
       name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
