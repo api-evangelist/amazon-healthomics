@@ -213,29 +213,34 @@ paths:
       - Referencestores
 components:
   schemas:
-    NextToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 6144
-    ReferenceStoreArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    ReferenceStoreId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    AccessDeniedException: {}
+    ListReferenceStoresResponse:
+      type: object
+      required:
+      - referenceStores
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        referenceStores:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreDetailList'
+          - description: A list of reference stores.
     ValidationException: {}
-    ThrottlingException: {}
     SseConfigKeyArnString:
       type: string
       pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
       minLength: 20
       maxLength: 2048
+    ReferenceStoreDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceStoreDetail'
+    ReferenceStoreId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
     ReferenceStoreDetail:
       type: object
       required:
@@ -268,38 +273,10 @@ components:
           - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
           - description: When the store was created.
       description: Details about a reference store.
-    SyntheticTimestamp_date_time:
+    EncryptionType:
       type: string
-      format: date-time
-    RequestTimeoutException: {}
-    ListReferenceStoresResponse:
-      type: object
-      required:
-      - referenceStores
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        referenceStores:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStoreDetailList'
-          - description: A list of reference stores.
-    InternalServerException: {}
-    ReferenceStoreDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    ReferenceStoreName:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    ReferenceStoreDetailList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceStoreDetail'
+      enum:
+      - KMS
     SseConfig:
       type: object
       required:
@@ -314,19 +291,48 @@ components:
           - $ref: '#/components/schemas/SseConfigKeyArnString'
           - description: An encryption key ARN.
       description: Server-side encryption (SSE) settings for a store.
-    EncryptionType:
+    AccessDeniedException: {}
+    InternalServerException: {}
+    NextToken:
       type: string
-      enum:
-      - KMS
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
+    ReferenceStoreArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    ThrottlingException: {}
+    ReferenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    RequestTimeoutException: {}
+    ReferenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
   parameters:
-    X-Amz-Signature:
-      name: X-Amz-Signature
+    X-Amz-Date:
+      name: X-Amz-Date
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Date:
-      name: X-Amz-Date
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
       in: header
       schema:
         type: string
@@ -339,12 +345,6 @@ components:
       required: false
     X-Amz-SignedHeaders:
       name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
       in: header
       schema:
         type: string

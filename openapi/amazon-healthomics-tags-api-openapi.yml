@@ -383,6 +383,11 @@ paths:
       - Tags
 components:
   schemas:
+    ConflictException: {}
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     UntagResourceResponse:
       type: object
       properties: {}
@@ -390,21 +395,7 @@ components:
       type: string
       minLength: 1
       maxLength: 128
-    AccessDeniedException: {}
     ValidationException: {}
-    ThrottlingException: {}
-    RequestTimeoutException: {}
-    ConflictException: {}
-    InternalServerException: {}
-    TagResourceResponse:
-      type: object
-      properties: {}
-    ServiceQuotaExceededException: {}
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    ResourceNotFoundException: {}
     TagValue:
       type: string
       minLength: 0
@@ -418,15 +409,24 @@ components:
           allOf:
           - $ref: '#/components/schemas/TagMap'
           - description: A list of tags.
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    ThrottlingException: {}
+    RequestTimeoutException: {}
+    ServiceQuotaExceededException: {}
   parameters:
-    X-Amz-Signature:
-      name: X-Amz-Signature
+    X-Amz-Date:
+      name: X-Amz-Date
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Date:
-      name: X-Amz-Date
+    X-Amz-Signature:
+      name: X-Amz-Signature
       in: header
       schema:
         type: string
@@ -443,14 +443,14 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string

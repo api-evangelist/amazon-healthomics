@@ -212,44 +212,79 @@ paths:
       tags:
       - Sequencestores
 components:
+  parameters:
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
   schemas:
-    NextToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 6144
     SequenceStoreDetailList:
       type: array
       items:
         $ref: '#/components/schemas/SequenceStoreDetail'
+    SequenceStoreId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    ValidationException: {}
     SequenceStoreArn:
       type: string
       pattern: arn:.+
       minLength: 1
       maxLength: 127
-    AccessDeniedException: {}
-    SequenceStoreName:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    SequenceStoreDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    ValidationException: {}
-    ThrottlingException: {}
     SseConfigKeyArnString:
       type: string
       pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
       minLength: 20
       maxLength: 2048
-    SyntheticTimestamp_date_time:
+    SequenceStoreDescription:
       type: string
-      format: date-time
-    RequestTimeoutException: {}
-    InternalServerException: {}
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
     SseConfig:
       type: object
       required:
@@ -264,10 +299,13 @@ components:
           - $ref: '#/components/schemas/SseConfigKeyArnString'
           - description: An encryption key ARN.
       description: Server-side encryption (SSE) settings for a store.
-    EncryptionType:
+    AccessDeniedException: {}
+    InternalServerException: {}
+    NextToken:
       type: string
-      enum:
-      - KMS
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
     SequenceStoreDetail:
       type: object
       required:
@@ -304,14 +342,6 @@ components:
           - $ref: '#/components/schemas/S3Destination'
           - description: ' An S3 location that is used to store files that have failed a direct upload. '
       description: Details about a sequence store.
-    SequenceStoreId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    S3Destination:
-      type: string
-      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
     ListSequenceStoresResponse:
       type: object
       required:
@@ -325,49 +355,19 @@ components:
           allOf:
           - $ref: '#/components/schemas/SequenceStoreDetailList'
           - description: A list of sequence stores.
-  parameters:
-    X-Amz-Signature:
-      name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
-      in: header
-      schema:
-        type: string
-      required: false
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    SequenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ThrottlingException: {}
+    S3Destination:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
+    RequestTimeoutException: {}
   securitySchemes:
     hmac:
       type: apiKey

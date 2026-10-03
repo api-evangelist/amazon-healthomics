@@ -420,45 +420,18 @@ paths:
       - Variant Store
 components:
   schemas:
-    UpdateTime:
-      type: string
-      format: date-time
-    StoreStatus:
-      type: string
-      enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
-      - FAILED
-    DeleteVariantStoreResponse:
-      type: object
-      required:
-      - status
-      properties:
-        status:
-          allOf:
-          - $ref: '#/components/schemas/StoreStatus'
-          - description: The store's status.
-    AccessDeniedException: {}
     String:
       type: string
     CreationTime:
       type: string
       format: date-time
-    ValidationException: {}
-    StoreDescription:
+    ResourceId:
       type: string
-      minLength: 0
-      maxLength: 500
-    ThrottlingException: {}
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    Long:
-      type: integer
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     UpdateVariantStoreResponse:
       type: object
       required:
@@ -498,39 +471,36 @@ components:
           allOf:
           - $ref: '#/components/schemas/UpdateTime'
           - description: When the store was updated.
-    ConflictException: {}
-    InternalServerException: {}
-    ReferenceItem:
-      type: object
-      properties:
-        referenceArn:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceArn'
-          - description: The reference's ARN.
-      description: A genome reference.
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
     ReferenceArn:
       type: string
       pattern: arn:.+
       minLength: 1
       maxLength: 127
+    StoreStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
+      - FAILED
+    ValidationException: {}
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    UpdateTime:
+      type: string
+      format: date-time
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
     CreateVariantStoreResponse:
       type: object
       required:
@@ -559,21 +529,53 @@ components:
           allOf:
           - $ref: '#/components/schemas/CreationTime'
           - description: When the store was created.
-    StatusMessage:
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+    ReferenceItem:
+      type: object
+      properties:
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The reference's ARN.
+      description: A genome reference.
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    AccessDeniedException: {}
+    InternalServerException: {}
+    StoreDescription:
       type: string
       minLength: 0
-      maxLength: 1000
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    ServiceQuotaExceededException: {}
+      maxLength: 500
     Arn:
       type: string
       pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
       minLength: 20
       maxLength: 2048
     ResourceNotFoundException: {}
+    DeleteVariantStoreResponse:
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StoreStatus'
+          - description: The store's status.
     GetVariantStoreResponse:
       type: object
       required:
@@ -638,22 +640,26 @@ components:
           allOf:
           - $ref: '#/components/schemas/Long'
           - description: The store's size in bytes.
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    ResourceId:
-      type: string
-      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    ThrottlingException: {}
+    ServiceQuotaExceededException: {}
+    Long:
+      type: integer
+    ConflictException: {}
   parameters:
-    X-Amz-Signature:
-      name: X-Amz-Signature
+    X-Amz-Date:
+      name: X-Amz-Date
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Date:
-      name: X-Amz-Date
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
       in: header
       schema:
         type: string
@@ -670,20 +676,14 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
       required: false
     X-Amz-Algorithm:
       name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
