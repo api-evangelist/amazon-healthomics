@@ -211,71 +211,6 @@ paths:
       - Annotation Stores
 components:
   schemas:
-    String:
-      type: string
-    CreationTime:
-      type: string
-      format: date-time
-    ResourceId:
-      type: string
-      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
-    ListAnnotationStoresResponse:
-      type: object
-      properties:
-        annotationStores:
-          allOf:
-          - $ref: '#/components/schemas/AnnotationStoreItems'
-          - description: A list of stores.
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: A pagination token that's included if more results are available.
-    ResourceIdentifier:
-      type: string
-      minLength: 1
-      maxLength: 50
-    ReferenceArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    AnnotationStoreItems:
-      type: array
-      items:
-        $ref: '#/components/schemas/AnnotationStoreItem'
-    StoreStatus:
-      type: string
-      enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
-      - FAILED
-    ValidationException: {}
-    StatusMessage:
-      type: string
-      minLength: 0
-      maxLength: 1000
-    UpdateTime:
-      type: string
-      format: date-time
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
-    ReferenceItem:
-      type: object
-      properties:
-        referenceArn:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceArn'
-          - description: The reference's ARN.
-      description: A genome reference.
     SseConfig:
       type: object
       required:
@@ -290,12 +225,80 @@ components:
           - $ref: '#/components/schemas/SseConfigKeyArnString'
           - description: An encryption key ARN.
       description: Server-side encryption (SSE) settings for a store.
-    AccessDeniedException: {}
-    InternalServerException: {}
+    AnnotationStoreItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnnotationStoreItem'
+    ReferenceItem:
+      type: object
+      properties:
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The reference's ARN.
+      description: A genome reference.
     StoreDescription:
       type: string
       minLength: 0
       maxLength: 500
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    Arn:
+      type: string
+      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
+      minLength: 20
+      maxLength: 2048
+    ListAnnotationStoresResponse:
+      type: object
+      properties:
+        annotationStores:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationStoreItems'
+          - description: A list of stores.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: A pagination token that's included if more results are available.
+    Long:
+      type: integer
+    CreationTime:
+      type: string
+      format: date-time
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+    ValidationException: {}
+    AccessDeniedException: {}
+    StoreStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
+      - FAILED
+    InternalServerException: {}
+    StoreFormat:
+      type: string
+      enum:
+      - GFF
+      - TSV
+      - VCF
+    UpdateTime:
+      type: string
+      format: date-time
+    ResourceNotFoundException: {}
+    ResourceId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
     AnnotationStoreItem:
       type: object
       required:
@@ -361,30 +364,45 @@ components:
           - $ref: '#/components/schemas/Long'
           - description: The store's size in bytes.
       description: An annotation store.
-    StoreFormat:
+    String:
       type: string
-      enum:
-      - GFF
-      - TSV
-      - VCF
-    Arn:
+    ResourceIdentifier:
       type: string
-      pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
-      minLength: 20
-      maxLength: 2048
-    ResourceNotFoundException: {}
+      minLength: 1
+      maxLength: 50
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
     ThrottlingException: {}
-    Long:
-      type: integer
   parameters:
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Date:
       name: X-Amz-Date
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
       in: header
       schema:
         type: string
@@ -397,24 +415,6 @@ components:
       required: false
     X-Amz-Credential:
       name: X-Amz-Credential
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
