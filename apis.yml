@@ -385,6 +385,12 @@ apis:
   - type: JSONLD
     url: json-ld/amazon-healthomics-context.jsonld
 common:
+- type: Plans
+  url: plans/amazon-healthomics-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/amazon-healthomics-rate-limits.yml
+- type: FinOps
+  url: finops/amazon-healthomics-finops.yml
 - type: Website
   url: https://aws.amazon.com/healthomics/
 - type: AgenticAccess
