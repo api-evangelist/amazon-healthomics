@@ -213,6 +213,65 @@ paths:
       - Referencestores
 components:
   schemas:
+    ThrottlingException: {}
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    ListReferenceStoresResponse:
+      type: object
+      required:
+      - referenceStores
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        referenceStores:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceStoreDetailList'
+          - description: A list of reference stores.
+    ReferenceStoreArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    NextToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
+    ReferenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    ReferenceStoreDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceStoreDetail'
     ReferenceStoreDetail:
       type: object
       required:
@@ -245,86 +304,21 @@ components:
           - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
           - description: When the store was created.
       description: Details about a reference store.
-    SyntheticTimestamp_date_time:
-      type: string
-      format: date-time
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    ListReferenceStoresResponse:
-      type: object
-      required:
-      - referenceStores
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        referenceStores:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceStoreDetailList'
-          - description: A list of reference stores.
-    ThrottlingException: {}
-    RequestTimeoutException: {}
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
+    InternalServerException: {}
+    ValidationException: {}
     ReferenceStoreName:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 127
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
-    ValidationException: {}
     AccessDeniedException: {}
-    NextToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 6144
-    InternalServerException: {}
-    ReferenceStoreDetailList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceStoreDetail'
+    RequestTimeoutException: {}
     ReferenceStoreId:
       type: string
       pattern: '[0-9]+'
       minLength: 10
       maxLength: 36
-    ReferenceStoreDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    ReferenceStoreArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
   parameters:
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-SignedHeaders:
       name: X-Amz-SignedHeaders
       in: header
@@ -337,8 +331,20 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Date:
       name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -351,12 +357,6 @@ components:
       required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
       in: header
       schema:
         type: string

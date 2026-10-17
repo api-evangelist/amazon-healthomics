@@ -847,16 +847,12 @@ paths:
       - Run
 components:
   schemas:
-    RunOutputUri:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 128
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    GetRunTaskResponseCpusInteger:
+    ThrottlingException: {}
+    GetRunResponsePriorityInteger:
+      type: integer
+      minimum: 0
+      maximum: 100000
+    GetRunTaskResponseMemoryInteger:
       type: integer
       minimum: 1
     RunListItem:
@@ -903,35 +899,116 @@ components:
           - $ref: '#/components/schemas/RunTimestamp'
           - description: When the run stopped.
       description: A workflow run.
-    RunRoleArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 128
-    RunName:
+    TaskListItemCpusInteger:
+      type: integer
+      minimum: 1
+    TaskListItemMemoryInteger:
+      type: integer
+      minimum: 1
+    TaskListToken:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 128
+    WorkflowDefinition:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 256
+    TaskLogStream:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+    RunExport:
+      type: string
+      enum:
+      - DEFINITION
+      minLength: 1
+      maxLength: 64
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    GetRunTaskResponseGpusInteger:
+      type: integer
+      minimum: 0
+    TaskTimestamp:
+      type: string
+      format: date-time
     WorkflowId:
       type: string
       pattern: '[0-9]+'
       minLength: 1
       maxLength: 18
-    RunResourceDigest:
+    TaskListItemGpusInteger:
+      type: integer
+      minimum: 0
+    WorkflowType:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 0
+      enum:
+      - PRIVATE
+      - READY2RUN
+      minLength: 1
       maxLength: 64
-    RunStatusMessage:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-    RunTimestamp:
-      type: string
-      format: date-time
-    TaskListItemCpusInteger:
+    RunListItemStorageCapacityInteger:
+      type: integer
+      minimum: 0
+      maximum: 100000
+    RunList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RunListItem'
+    GetRunTaskResponseCpusInteger:
       type: integer
       minimum: 1
+    RunListItemPriorityInteger:
+      type: integer
+      minimum: 0
+      maximum: 100000
+    TaskListItem:
+      type: object
+      properties:
+        taskId:
+          allOf:
+          - $ref: '#/components/schemas/TaskId'
+          - description: The task's ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TaskStatus'
+          - description: The task's status.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/TaskName'
+          - description: The task's name.
+        cpus:
+          allOf:
+          - $ref: '#/components/schemas/TaskListItemCpusInteger'
+          - description: The task's CPU count.
+        memory:
+          allOf:
+          - $ref: '#/components/schemas/TaskListItemMemoryInteger'
+          - description: The task's memory use in gigabyes.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/TaskTimestamp'
+          - description: When the task was created.
+        startTime:
+          allOf:
+          - $ref: '#/components/schemas/TaskTimestamp'
+          - description: When the task started.
+        stopTime:
+          allOf:
+          - $ref: '#/components/schemas/TaskTimestamp'
+          - description: When the task stopped.
+        gpus:
+          allOf:
+          - $ref: '#/components/schemas/TaskListItemGpusInteger'
+          - description: ' The number of Graphics Processing Units (GPU) specified for the task. '
+      description: A workflow run task.
+    RunOutputUri:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
     GetRunResponse:
       type: object
       properties:
@@ -1031,29 +1108,53 @@ components:
           allOf:
           - $ref: '#/components/schemas/Accelerators'
           - description: ' The computational accelerator used to run the workflow. '
-    RunListToken:
+    TaskId:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      pattern: '[0-9]+'
+      minLength: 1
+      maxLength: 18
+    ConflictException: {}
+    ListRunsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+          - $ref: '#/components/schemas/RunList'
+          - description: A list of runs.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/RunListToken'
+          - description: A pagination token that's included if more results are available.
+    GetRunResponseStorageCapacityInteger:
+      type: integer
+      minimum: 0
+      maximum: 100000
+    RunParameters:
+      type: object
+      properties: {}
+    RunGroupId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 1
+      maxLength: 18
+    RunStatus:
+      type: string
+      enum:
+      - PENDING
+      - STARTING
+      - RUNNING
+      - STOPPING
+      - COMPLETED
+      - DELETED
+      - CANCELLED
+      - FAILED
+      minLength: 1
+      maxLength: 64
+    RunRoleArn:
+      type: string
+      pattern: arn:.+
       minLength: 1
       maxLength: 128
-    WorkflowType:
-      type: string
-      enum:
-      - PRIVATE
-      - READY2RUN
-      minLength: 1
-      maxLength: 64
-    RunResourceDigests:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/RunResourceDigest'
-    Accelerators:
-      type: string
-      enum:
-      - GPU
-      minLength: 1
-      maxLength: 64
-    RequestTimeoutException: {}
     TagValue:
       type: string
       minLength: 0
@@ -1070,20 +1171,6 @@ components:
       - FAILED
       minLength: 1
       maxLength: 64
-    GetRunResponsePriorityInteger:
-      type: integer
-      minimum: 0
-      maximum: 100000
-    ServiceQuotaExceededException: {}
-    RunGroupId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 1
-      maxLength: 18
-    GetRunResponseStorageCapacityInteger:
-      type: integer
-      minimum: 0
-      maximum: 100000
     ListRunTasksResponse:
       type: object
       properties:
@@ -1095,29 +1182,41 @@ components:
           allOf:
           - $ref: '#/components/schemas/TaskListToken'
           - description: A pagination token that's included if more results are available.
-    TaskStatusMessage:
+    RunId:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-    GetRunTaskResponseMemoryInteger:
-      type: integer
-      minimum: 1
-    TaskListItemMemoryInteger:
-      type: integer
-      minimum: 1
-    TaskLogStream:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-    TaskList:
-      type: array
-      items:
-        $ref: '#/components/schemas/TaskListItem'
-    TaskListItemGpusInteger:
-      type: integer
-      minimum: 0
-    RunParameters:
+      pattern: '[0-9]+'
+      minLength: 1
+      maxLength: 18
+    ResourceNotFoundException: {}
+    RunResourceDigests:
       type: object
-      properties: {}
+      additionalProperties:
+        $ref: '#/components/schemas/RunResourceDigest'
+    RunListToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
+    RunStatusMessage:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+    RunStartedBy:
+      type: string
+      minLength: 1
+      maxLength: 128
+    InternalServerException: {}
+    RunName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
     ValidationException: {}
+    Accelerators:
+      type: string
+      enum:
+      - GPU
+      minLength: 1
+      maxLength: 64
     StartRunResponse:
       type: object
       properties:
@@ -1137,102 +1236,17 @@ components:
           allOf:
           - $ref: '#/components/schemas/TagMap'
           - description: The run's tags.
-    TaskName:
-      type: string
-      minLength: 1
-      maxLength: 128
-    RunList:
-      type: array
-      items:
-        $ref: '#/components/schemas/RunListItem'
     AccessDeniedException: {}
-    InternalServerException: {}
-    TaskId:
+    TaskStatusMessage:
       type: string
-      pattern: '[0-9]+'
-      minLength: 1
-      maxLength: 18
-    RunStatus:
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+    WorkflowDigest:
       type: string
-      enum:
-      - PENDING
-      - STARTING
-      - RUNNING
-      - STOPPING
-      - COMPLETED
-      - DELETED
-      - CANCELLED
-      - FAILED
       minLength: 1
       maxLength: 64
     RunArn:
       type: string
       pattern: arn:.+
-      minLength: 1
-      maxLength: 128
-    ConflictException: {}
-    RunListItemPriorityInteger:
-      type: integer
-      minimum: 0
-      maximum: 100000
-    TaskTimestamp:
-      type: string
-      format: date-time
-    ResourceNotFoundException: {}
-    TaskListItem:
-      type: object
-      properties:
-        taskId:
-          allOf:
-          - $ref: '#/components/schemas/TaskId'
-          - description: The task's ID.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/TaskStatus'
-          - description: The task's status.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/TaskName'
-          - description: The task's name.
-        cpus:
-          allOf:
-          - $ref: '#/components/schemas/TaskListItemCpusInteger'
-          - description: The task's CPU count.
-        memory:
-          allOf:
-          - $ref: '#/components/schemas/TaskListItemMemoryInteger'
-          - description: The task's memory use in gigabyes.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/TaskTimestamp'
-          - description: When the task was created.
-        startTime:
-          allOf:
-          - $ref: '#/components/schemas/TaskTimestamp'
-          - description: When the task started.
-        stopTime:
-          allOf:
-          - $ref: '#/components/schemas/TaskTimestamp'
-          - description: When the task stopped.
-        gpus:
-          allOf:
-          - $ref: '#/components/schemas/TaskListItemGpusInteger'
-          - description: ' The number of Graphics Processing Units (GPU) specified for the task. '
-      description: A workflow run task.
-    ListRunsResponse:
-      type: object
-      properties:
-        items:
-          allOf:
-          - $ref: '#/components/schemas/RunList'
-          - description: A list of runs.
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/RunListToken'
-          - description: A pagination token that's included if more results are available.
-    TaskListToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 128
     RunLogLevel:
@@ -1244,34 +1258,6 @@ components:
       - ALL
       minLength: 1
       maxLength: 64
-    RunStartedBy:
-      type: string
-      minLength: 1
-      maxLength: 128
-    GetRunTaskResponseGpusInteger:
-      type: integer
-      minimum: 0
-    RunExport:
-      type: string
-      enum:
-      - DEFINITION
-      minLength: 1
-      maxLength: 64
-    RunListItemStorageCapacityInteger:
-      type: integer
-      minimum: 0
-      maximum: 100000
-    RunId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 1
-      maxLength: 18
-    ThrottlingException: {}
-    WorkflowDefinition:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 256
     GetRunTaskResponse:
       type: object
       properties:
@@ -1319,17 +1305,25 @@ components:
           allOf:
           - $ref: '#/components/schemas/GetRunTaskResponseGpusInteger'
           - description: ' The number of Graphics Processing Units (GPU) specified in the task. '
-    WorkflowDigest:
+    RunTimestamp:
+      type: string
+      format: date-time
+    TaskList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskListItem'
+    TaskName:
       type: string
       minLength: 1
+      maxLength: 128
+    ServiceQuotaExceededException: {}
+    RequestTimeoutException: {}
+    RunResourceDigest:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 0
       maxLength: 64
   parameters:
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-SignedHeaders:
       name: X-Amz-SignedHeaders
       in: header
@@ -1342,8 +1336,20 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Date:
       name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -1356,12 +1362,6 @@ components:
       required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
       in: header
       schema:
         type: string

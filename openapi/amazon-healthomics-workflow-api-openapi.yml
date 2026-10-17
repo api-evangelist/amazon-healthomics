@@ -631,33 +631,65 @@ paths:
       - Workflow
 components:
   schemas:
+    ThrottlingException: {}
     GetWorkflowResponseStorageCapacityInteger:
       type: integer
       minimum: 0
       maximum: 100000
-    TagMap:
+    WorkflowStatusMessage:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+    WorkflowMetadata:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    WorkflowList:
-      type: array
-      items:
-        $ref: '#/components/schemas/WorkflowListItem'
+        $ref: '#/components/schemas/WorkflowMetadataValue'
+    WorkflowDefinition:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 256
+    WorkflowParameter:
+      type: object
+      properties:
+        description:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowParameterDescription'
+          - description: The parameter's description.
+        optional:
+          allOf:
+          - $ref: '#/components/schemas/Boolean'
+          - description: Whether the parameter is optional.
+      description: A workflow parameter.
+    WorkflowMain:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
     WorkflowExport:
       type: string
       enum:
       - DEFINITION
       minLength: 1
       maxLength: 64
+    WorkflowName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 128
     WorkflowId:
       type: string
       pattern: '[0-9]+'
       minLength: 1
       maxLength: 18
-    WorkflowMetadataValue:
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    WorkflowArn:
       type: string
-      minLength: 0
-      maxLength: 256
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 128
     WorkflowType:
       type: string
       enum:
@@ -665,33 +697,53 @@ components:
       - READY2RUN
       minLength: 1
       maxLength: 64
-    WorkflowMain:
+    WorkflowDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 256
+    ConflictException: {}
+    WorkflowListToken:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 128
-    Accelerators:
-      type: string
-      enum:
-      - GPU
-      minLength: 1
-      maxLength: 64
-    RequestTimeoutException: {}
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    WorkflowArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 128
-    ServiceQuotaExceededException: {}
-    WorkflowParameterDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 0
-      maxLength: 256
+    WorkflowListItem:
+      type: object
+      properties:
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowArn'
+          - description: The workflow's ARN.
+        id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowId'
+          - description: The workflow's ID.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowName'
+          - description: The workflow's name.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowStatus'
+          - description: The workflow's status.
+        type:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowType'
+          - description: The workflow's type.
+        digest:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowDigest'
+          - description: The workflow's digest.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowTimestamp'
+          - description: When the workflow was created.
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowMetadata'
+          - description: ' Any metadata available for workflow. The information listed may vary depending on the workflow, and there may also be no metadata to return. '
+      description: A workflow.
     GetWorkflowResponse:
       type: object
       properties:
@@ -763,65 +815,13 @@ components:
           allOf:
           - $ref: '#/components/schemas/Accelerators'
           - description: ' The computational accelerator specified to run the workflow. '
-    WorkflowStatusMessage:
+    TagValue:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-    WorkflowListItem:
-      type: object
-      properties:
-        arn:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowArn'
-          - description: The workflow's ARN.
-        id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowId'
-          - description: The workflow's ID.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowName'
-          - description: The workflow's name.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowStatus'
-          - description: The workflow's status.
-        type:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowType'
-          - description: The workflow's type.
-        digest:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowDigest'
-          - description: The workflow's digest.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowTimestamp'
-          - description: When the workflow was created.
-        metadata:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowMetadata'
-          - description: ' Any metadata available for workflow. The information listed may vary depending on the workflow, and there may also be no metadata to return. '
-      description: A workflow.
-    WorkflowMetadata:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/WorkflowMetadataValue'
-    WorkflowStatus:
+      minLength: 0
+      maxLength: 256
+    WorkflowTimestamp:
       type: string
-      enum:
-      - CREATING
-      - ACTIVE
-      - UPDATING
-      - DELETED
-      - FAILED
-      - INACTIVE
-      minLength: 1
-      maxLength: 64
-    WorkflowListToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 128
+      format: date-time
     CreateWorkflowResponse:
       type: object
       properties:
@@ -841,31 +841,27 @@ components:
           allOf:
           - $ref: '#/components/schemas/TagMap'
           - description: The workflow's tags.
-    WorkflowTimestamp:
-      type: string
-      format: date-time
-    ValidationException: {}
-    AccessDeniedException: {}
-    InternalServerException: {}
-    WorkflowParameter:
-      type: object
-      properties:
-        description:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowParameterDescription'
-          - description: The parameter's description.
-        optional:
-          allOf:
-          - $ref: '#/components/schemas/Boolean'
-          - description: Whether the parameter is optional.
-      description: A workflow parameter.
-    ConflictException: {}
-    WorkflowDescription:
+    WorkflowParameterDescription:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
+      minLength: 0
       maxLength: 256
     ResourceNotFoundException: {}
+    WorkflowList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowListItem'
+    WorkflowStatus:
+      type: string
+      enum:
+      - CREATING
+      - ACTIVE
+      - UPDATING
+      - DELETED
+      - FAILED
+      - INACTIVE
+      minLength: 1
+      maxLength: 64
     ListWorkflowsResponse:
       type: object
       properties:
@@ -877,17 +873,29 @@ components:
           allOf:
           - $ref: '#/components/schemas/WorkflowListToken'
           - description: A pagination token that's included if more results are available.
-    WorkflowName:
+    InternalServerException: {}
+    ValidationException: {}
+    Accelerators:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      enum:
+      - GPU
       minLength: 1
-      maxLength: 128
+      maxLength: 64
+    WorkflowMetadataValue:
+      type: string
+      minLength: 0
+      maxLength: 256
     WorkflowParameterTemplate:
       type: object
       minProperties: 1
       maxProperties: 1000
       additionalProperties:
         $ref: '#/components/schemas/WorkflowParameter'
+    WorkflowDigest:
+      type: string
+      minLength: 1
+      maxLength: 64
+    AccessDeniedException: {}
     WorkflowEngine:
       type: string
       enum:
@@ -896,25 +904,11 @@ components:
       - CWL
       minLength: 1
       maxLength: 64
-    ThrottlingException: {}
-    WorkflowDefinition:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 256
-    WorkflowDigest:
-      type: string
-      minLength: 1
-      maxLength: 64
+    ServiceQuotaExceededException: {}
+    RequestTimeoutException: {}
     Boolean:
       type: boolean
   parameters:
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-SignedHeaders:
       name: X-Amz-SignedHeaders
       in: header
@@ -927,8 +921,20 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Date:
       name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -941,12 +947,6 @@ components:
       required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
       in: header
       schema:
         type: string

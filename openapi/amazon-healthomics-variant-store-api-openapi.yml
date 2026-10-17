@@ -420,24 +420,7 @@ paths:
       - Variant Store
 components:
   schemas:
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
+    ThrottlingException: {}
     ReferenceItem:
       type: object
       properties:
@@ -446,10 +429,6 @@ components:
           - $ref: '#/components/schemas/ReferenceArn'
           - description: The reference's ARN.
       description: A genome reference.
-    StoreDescription:
-      type: string
-      minLength: 0
-      maxLength: 500
     UpdateVariantStoreResponse:
       type: object
       required:
@@ -489,6 +468,20 @@ components:
           allOf:
           - $ref: '#/components/schemas/UpdateTime'
           - description: When the store was updated.
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreationTime:
+      type: string
+      format: date-time
+    ResourceId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
     SseConfigKeyArnString:
       type: string
       pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
@@ -499,10 +492,44 @@ components:
       pattern: 'arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*)'
       minLength: 20
       maxLength: 2048
+    ConflictException: {}
+    UpdateTime:
+      type: string
+      format: date-time
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
     TagValue:
       type: string
       minLength: 0
       maxLength: 256
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    ResourceNotFoundException: {}
+    StoreStatus:
+      type: string
+      enum:
+      - CREATING
+      - UPDATING
+      - DELETING
+      - ACTIVE
+      - FAILED
+    String:
+      type: string
     DeleteVariantStoreResponse:
       type: object
       required:
@@ -512,6 +539,13 @@ components:
           allOf:
           - $ref: '#/components/schemas/StoreStatus'
           - description: The store's status.
+    StoreDescription:
+      type: string
+      minLength: 0
+      maxLength: 500
+    InternalServerException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
     GetVariantStoreResponse:
       type: object
       required:
@@ -576,9 +610,13 @@ components:
           allOf:
           - $ref: '#/components/schemas/Long'
           - description: The store's size in bytes.
-    ServiceQuotaExceededException: {}
+    StatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 1000
     Long:
       type: integer
+    ServiceQuotaExceededException: {}
     CreateVariantStoreResponse:
       type: object
       required:
@@ -607,51 +645,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/CreationTime'
           - description: When the store was created.
-    CreationTime:
-      type: string
-      format: date-time
-    EncryptionType:
-      type: string
-      enum:
-      - KMS
-    ValidationException: {}
-    AccessDeniedException: {}
-    StoreStatus:
-      type: string
-      enum:
-      - CREATING
-      - UPDATING
-      - DELETING
-      - ACTIVE
-      - FAILED
-    InternalServerException: {}
-    ConflictException: {}
-    ResourceNotFoundException: {}
-    UpdateTime:
-      type: string
-      format: date-time
-    ResourceId:
-      type: string
-      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
-    StatusMessage:
-      type: string
-      minLength: 0
-      maxLength: 1000
-    String:
-      type: string
-    ReferenceArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    ThrottlingException: {}
   parameters:
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-SignedHeaders:
       name: X-Amz-SignedHeaders
       in: header
@@ -664,8 +658,20 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Date:
       name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -678,12 +684,6 @@ components:
       required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
       in: header
       schema:
         type: string

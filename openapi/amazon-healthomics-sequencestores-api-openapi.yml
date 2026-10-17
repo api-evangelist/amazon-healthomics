@@ -213,39 +213,32 @@ paths:
       - Sequencestores
 components:
   schemas:
-    SyntheticTimestamp_date_time:
+    S3Destination:
       type: string
-      format: date-time
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
+    ThrottlingException: {}
     SequenceStoreId:
       type: string
       pattern: '[0-9]+'
       minLength: 10
       maxLength: 36
-    SequenceStoreArn:
+    ListSequenceStoresResponse:
+      type: object
+      required:
+      - sequenceStores
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        sequenceStores:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreDetailList'
+          - description: A list of sequence stores.
+    EncryptionType:
       type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    RequestTimeoutException: {}
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
+      enum:
+      - KMS
     SequenceStoreDetail:
       type: object
       required:
@@ -282,56 +275,57 @@ components:
           - $ref: '#/components/schemas/S3Destination'
           - description: ' An S3 location that is used to store files that have failed a direct upload. '
       description: Details about a sequence store.
-    SequenceStoreDescription:
+    SseConfigKeyArnString:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    SequenceStoreArn:
+      type: string
+      pattern: arn:.+
       minLength: 1
-      maxLength: 255
-    EncryptionType:
+      maxLength: 127
+    SyntheticTimestamp_date_time:
       type: string
-      enum:
-      - KMS
+      format: date-time
     SequenceStoreName:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 127
-    ValidationException: {}
-    AccessDeniedException: {}
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    SequenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    SequenceStoreDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SequenceStoreDetail'
     NextToken:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 6144
     InternalServerException: {}
-    S3Destination:
-      type: string
-      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
-    ListSequenceStoresResponse:
-      type: object
-      required:
-      - sequenceStores
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        sequenceStores:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreDetailList'
-          - description: A list of sequence stores.
-    ThrottlingException: {}
-    SequenceStoreDetailList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SequenceStoreDetail'
+    ValidationException: {}
+    AccessDeniedException: {}
+    RequestTimeoutException: {}
   parameters:
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-SignedHeaders:
       name: X-Amz-SignedHeaders
       in: header
@@ -344,8 +338,20 @@ components:
       schema:
         type: string
       required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
     X-Amz-Date:
       name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -358,12 +364,6 @@ components:
       required: false
     X-Amz-Signature:
       name: X-Amz-Signature
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
       in: header
       schema:
         type: string

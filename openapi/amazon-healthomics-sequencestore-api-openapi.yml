@@ -2372,7 +2372,22 @@ paths:
       - Sequencestore
 components:
   schemas:
-    ExportReadSet:
+    ListReadSetUploadPartsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: ' Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results. '
+        parts:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetUploadPartList'
+          - description: ' An array of upload parts. '
+    ExportReadSetDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportReadSetDetail'
+    CompleteMultipartReadSetUploadResponse:
       type: object
       required:
       - readSetId
@@ -2380,76 +2395,14 @@ components:
         readSetId:
           allOf:
           - $ref: '#/components/schemas/ReadSetId'
-          - description: The set's ID.
-      description: A read set.
-    ListMultipartReadSetUploadsResponse:
-      type: object
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: ' Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. '
-        uploads:
-          allOf:
-          - $ref: '#/components/schemas/MultipartReadSetUploadList'
-          - description: ' An array of multipart uploads. '
-    BatchDeleteReadSetResponse:
-      type: object
-      properties:
-        errors:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetBatchErrorList'
-          - description: Errors returned by individual delete operations.
-    ReadSetId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    ActivationJobId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    SequenceStoreArn:
-      type: string
-      pattern: arn:.+
-      minLength: 1
-      maxLength: 127
-    ReadSetBatchError:
-      type: object
-      required:
-      - id
-      - code
-      - message
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetId'
-          - description: The error's ID.
-        code:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: The error's code.
-        message:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: The error's message.
-      description: An error from a batch read set operation.
-    ReadSetImportJobStatus:
+          - description: ' The read set ID created for an uploaded read set. '
+    ReadSetExportJobItemStatus:
       type: string
       enum:
-      - SUBMITTED
+      - NOT_STARTED
       - IN_PROGRESS
-      - CANCELLING
-      - CANCELLED
+      - FINISHED
       - FAILED
-      - COMPLETED
-      - COMPLETED_WITH_FAILURES
-    ReadSetDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
     GetReadSetActivationJobResponse:
       type: object
       required:
@@ -2486,20 +2439,638 @@ components:
           allOf:
           - $ref: '#/components/schemas/ActivateReadSetSourceList'
           - description: The job's source files.
-    FileInformationPartSizeLong:
+    ListReadSetsResponse:
+      type: object
+      required:
+      - readSets
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        readSets:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetList'
+          - description: A list of read sets.
+    ReadSetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadSetListItem'
+    ReadSetImportJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    RoleArn:
+      type: string
+      pattern: arn:.*
+      minLength: 20
+      maxLength: 2048
+    CreateSequenceStoreResponse:
+      type: object
+      required:
+      - id
+      - arn
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The store's ID.
+        arn:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreArn'
+          - description: The store's ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreName'
+          - description: The store's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreDescription'
+          - description: The store's description.
+        sseConfig:
+          allOf:
+          - $ref: '#/components/schemas/SseConfig'
+          - description: The store's SSE settings.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the store was created.
+        fallbackLocation:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: ' An S3 location that is used to store files that have failed a direct upload. '
+    GetReadSetExportJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - destination
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ExportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        destination:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: The job's destination in Amazon S3.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobStatus'
+          - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The job's status message.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+        readSets:
+          allOf:
+          - $ref: '#/components/schemas/ExportReadSetDetailList'
+          - description: The job's read sets.
+    ListReadSetActivationJobsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        activationJobs:
+          allOf:
+          - $ref: '#/components/schemas/ActivateReadSetJobList'
+          - description: A list of jobs.
+    SequenceStoreDescription:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    StartReadSetActivationJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ActivationJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetActivationJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+    NextToken:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 6144
+    ExportJobId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    ReadSetExportJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    DeleteSequenceStoreResponse:
+      type: object
+      properties: {}
+    ListReadSetImportJobsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        importJobs:
+          allOf:
+          - $ref: '#/components/schemas/ImportReadSetJobList'
+          - description: A list of jobs.
+    CompleteReadSetUploadPartListItemPartNumberInteger:
       type: integer
       minimum: 1
-      maximum: 5368709120
-    SequenceStoreName:
+      maximum: 10000
+    ImportReadSetJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportReadSetJobItem'
+    ReadSetImportJobItemStatus:
+      type: string
+      enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+    RequestTimeoutException: {}
+    S3Destination:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
+    ThrottlingException: {}
+    ActivateReadSetSourceItem:
+      type: object
+      required:
+      - readSetId
+      - status
+      properties:
+        readSetId:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The source's read set ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetActivationJobItemStatus'
+          - description: The source's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The source's status message.
+      description: A source for a read set activation job.
+    SourceFiles:
+      type: object
+      required:
+      - source1
+      properties:
+        source1:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The location of the first file in Amazon S3.
+        source2:
+          allOf:
+          - $ref: '#/components/schemas/S3Uri'
+          - description: The location of the second file in Amazon S3.
+      description: Source files for a sequence.
+    S3Uri:
+      type: string
+      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})
+    ImportReadSetJobItem:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: An import read set job.
+    CreationType:
+      type: string
+      enum:
+      - IMPORT
+      - UPLOAD
+    RangeNotSatisfiableException: {}
+    JobStatusMessage:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 127
+    MultipartReadSetUploadListItem:
+      type: object
+      required:
+      - sequenceStoreId
+      - uploadId
+      - sourceFileType
+      - subjectId
+      - sampleId
+      - generatedFrom
+      - referenceArn
+      - creationTime
+      properties:
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: ' The sequence store ID used for the multipart upload. '
+        uploadId:
+          allOf:
+          - $ref: '#/components/schemas/UploadId'
+          - description: ' The ID for the initiated multipart upload. '
+        sourceFileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: ' The type of file the read set originated from. '
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: ' The read set source''s subject ID. '
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: ' The read set source''s sample ID. '
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: ' The source of an uploaded part. '
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: ' The source''s reference ARN. '
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: ' The name of a read set. '
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: ' The description of a read set. '
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: ' Any tags you wish to add to a read set. '
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The time stamp for when a direct upload was created. '
+      description: ' Part of the response to ListMultipartReadSetUploads, excluding completed and aborted multipart uploads. '
+    ExportReadSet:
+      type: object
+      required:
+      - readSetId
+      properties:
+        readSetId:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The set's ID.
+      description: A read set.
+    ImportReadSetSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportReadSetSourceItem'
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    ReadSetUploadPartListItemPartSizeLong:
+      type: integer
+      minimum: 1
+      maximum: 5368709120
+    StartReadSetImportJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - roleArn
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ImportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/RoleArn'
+          - description: The job's service role ARN.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetImportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+    SampleId:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ExportReadSetJobDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportReadSetJobDetail'
+    CreateMultipartReadSetUploadResponse:
+      type: object
+      required:
+      - sequenceStoreId
+      - uploadId
+      - sourceFileType
+      - subjectId
+      - sampleId
+      - referenceArn
+      - creationTime
+      properties:
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: ' The sequence store ID for the store that the read set will be created in. '
+        uploadId:
+          allOf:
+          - $ref: '#/components/schemas/UploadId'
+          - description: ' he ID for the initiated multipart upload. '
+        sourceFileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: ' The file type of the read set source. '
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: ' The source''s subject ID. '
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: ' The source''s sample ID. '
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: ' The source of the read set. '
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: ' The read set source''s reference ARN. '
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: ' The name of the read set. '
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: ' The description of the read set. '
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: ' The tags to add to the read set. '
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The creation time of the multipart upload. '
+    ActivationJobId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    GeneratedFrom:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    ExportReadSetJobDetail:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - destination
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ExportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        destination:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: The job's destination in Amazon S3.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: Details about a read set export job.
     ImportJobId:
       type: string
       pattern: '[0-9]+'
       minLength: 10
       maxLength: 36
+    ExportReadSetDetail:
+      type: object
+      required:
+      - id
+      - status
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The set's ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobItemStatus'
+          - description: The set's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The set's status message.
+      description: Details about a read set.
+    ReadSetActivationJobStatus:
+      type: string
+      enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+      - COMPLETED
+      - COMPLETED_WITH_FAILURES
+    ReadSetName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    InternalServerException: {}
+    ReadSetUploadPartListItem:
+      type: object
+      required:
+      - partNumber
+      - partSize
+      - partSource
+      - checksum
+      properties:
+        partNumber:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetUploadPartListItemPartNumberInteger'
+          - description: ' The number identifying the part in an upload. '
+        partSize:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetUploadPartListItemPartSizeLong'
+          - description: ' The size of the the part in an upload. '
+        partSource:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetPartSource'
+          - description: ' The origin of the part being direct uploaded. '
+        checksum:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: ' A unique identifier used to confirm that parts are being added to the correct upload. '
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The time stamp for when a direct upload was created. '
+        lastUpdatedTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: ' The time stamp for the most recent update to an uploaded part. '
+      description: ' The metadata of a single part of a file that was added to a multipart upload. A list of these parts is returned in the response to the ListReadSetUploadParts API. '
+    AccessDeniedException: {}
+    StartReadSetExportJobResponse:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - destination
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ExportJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The read set's sequence store ID.
+        destination:
+          allOf:
+          - $ref: '#/components/schemas/S3Destination'
+          - description: The job's output location.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetExportJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+    ServiceQuotaExceededException: {}
+    StartReadSetActivationJobSourceItem:
+      type: object
+      required:
+      - readSetId
+      properties:
+        readSetId:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The source's read set ID.
+      description: A source for a read set activation job.
+    ListReadSetExportJobsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: A pagination token that's included if more results are available.
+        exportJobs:
+          allOf:
+          - $ref: '#/components/schemas/ExportReadSetJobDetailList'
+          - description: A list of jobs.
+    FileInformationContentLengthLong:
+      type: integer
+      minimum: 1
+      maximum: 5497558138880
     ReadSetFiles:
       type: object
       properties:
@@ -2516,6 +3087,10 @@ components:
           - $ref: '#/components/schemas/FileInformation'
           - description: The files' index.
       description: Files in a read set.
+    FileInformationTotalPartsInteger:
+      type: integer
+      minimum: 1
+      maximum: 10000
     ImportReadSetSourceItem:
       type: object
       required:
@@ -2570,7 +3145,186 @@ components:
           - $ref: '#/components/schemas/TagMap'
           - description: The source's tags.
       description: A source for an import read set job.
-    StartReadSetImportJobResponse:
+    ConflictException: {}
+    SequenceStoreName:
+      type: string
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 127
+    CompleteReadSetUploadPartListItem:
+      type: object
+      required:
+      - partNumber
+      - partSource
+      - checksum
+      properties:
+        partNumber:
+          allOf:
+          - $ref: '#/components/schemas/CompleteReadSetUploadPartListItemPartNumberInteger'
+          - description: ' A number identifying the part in a read set upload. '
+        partSource:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetPartSource'
+          - description: ' The source file of the part being uploaded. '
+        checksum:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: ' A unique identifier used to confirm that parts are being added to the correct upload. '
+      description: ' Part of the response to the CompleteReadSetUpload API, including metadata. '
+    SseConfig:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EncryptionType'
+          - description: The encryption type.
+        keyArn:
+          allOf:
+          - $ref: '#/components/schemas/SseConfigKeyArnString'
+          - description: An encryption key ARN.
+      description: Server-side encryption (SSE) settings for a store.
+    FileInformation:
+      type: object
+      properties:
+        totalParts:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationTotalPartsInteger'
+          - description: The file's total parts.
+        partSize:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationPartSizeLong'
+          - description: The file's part size.
+        contentLength:
+          allOf:
+          - $ref: '#/components/schemas/FileInformationContentLengthLong'
+          - description: The file's content length.
+      description: Details about a file.
+    ReadSetUploadPartList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadSetUploadPartListItem'
+    ReferenceArn:
+      type: string
+      pattern: arn:.+
+      minLength: 1
+      maxLength: 127
+    UploadReadSetPartResponse:
+      type: object
+      required:
+      - checksum
+      properties:
+        checksum:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: ' An identifier used to confirm that parts are being added to the intended upload. '
+    ReadSetBatchError:
+      type: object
+      required:
+      - id
+      - code
+      - message
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetId'
+          - description: The error's ID.
+        code:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The error's code.
+        message:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The error's message.
+      description: An error from a batch read set operation.
+    SequenceInformation:
+      type: object
+      properties:
+        totalReadCount:
+          allOf:
+          - $ref: '#/components/schemas/Long'
+          - description: The sequence's total read count.
+        totalBaseCount:
+          allOf:
+          - $ref: '#/components/schemas/Long'
+          - description: The sequence's total base count.
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: Where the sequence originated.
+        alignment:
+          allOf:
+          - $ref: '#/components/schemas/String'
+          - description: The sequence's alignment setting.
+      description: Details about a sequence.
+    String:
+      type: string
+    ReadSetPartSource:
+      type: string
+      enum:
+      - SOURCE1
+      - SOURCE2
+    ListMultipartReadSetUploadsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/NextToken'
+          - description: ' Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. '
+        uploads:
+          allOf:
+          - $ref: '#/components/schemas/MultipartReadSetUploadList'
+          - description: ' An array of multipart uploads. '
+    ValidationException: {}
+    StartReadSetImportJobSourceItem:
+      type: object
+      required:
+      - sourceFiles
+      - sourceFileType
+      - subjectId
+      - sampleId
+      - referenceArn
+      properties:
+        sourceFiles:
+          allOf:
+          - $ref: '#/components/schemas/SourceFiles'
+          - description: The source files' location in Amazon S3.
+        sourceFileType:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          - description: The source's file type.
+        subjectId:
+          allOf:
+          - $ref: '#/components/schemas/SubjectId'
+          - description: The source's subject ID.
+        sampleId:
+          allOf:
+          - $ref: '#/components/schemas/SampleId'
+          - description: The source's sample ID.
+        generatedFrom:
+          allOf:
+          - $ref: '#/components/schemas/GeneratedFrom'
+          - description: Where the source originated.
+        referenceArn:
+          allOf:
+          - $ref: '#/components/schemas/ReferenceArn'
+          - description: The source's reference ARN.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetName'
+          - description: The source's name.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetDescription'
+          - description: The source's description.
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagMap'
+          - description: The source's tags.
+      description: A source for a read set import job.
+    GetReadSetImportJobResponse:
       type: object
       required:
       - id
@@ -2578,6 +3332,7 @@ components:
       - roleArn
       - status
       - creationTime
+      - sources
       properties:
         id:
           allOf:
@@ -2586,7 +3341,7 @@ components:
         sequenceStoreId:
           allOf:
           - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The read set's sequence store ID.
+          - description: The job's sequence store ID.
         roleArn:
           allOf:
           - $ref: '#/components/schemas/RoleArn'
@@ -2595,12 +3350,75 @@ components:
           allOf:
           - $ref: '#/components/schemas/ReadSetImportJobStatus'
           - description: The job's status.
+        statusMessage:
+          allOf:
+          - $ref: '#/components/schemas/JobStatusMessage'
+          - description: The job's status message.
         creationTime:
           allOf:
           - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
           - description: When the job was created.
-    ConflictException: {}
-    CreateSequenceStoreResponse:
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+        sources:
+          allOf:
+          - $ref: '#/components/schemas/ImportReadSetSourceList'
+          - description: The job's source files.
+    ReadSetStatus:
+      type: string
+      enum:
+      - ARCHIVED
+      - ACTIVATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - PROCESSING_UPLOAD
+      - UPLOAD_FAILED
+    AbortMultipartReadSetUploadResponse:
+      type: object
+      properties: {}
+    ActivateReadSetJobItem:
+      type: object
+      required:
+      - id
+      - sequenceStoreId
+      - status
+      - creationTime
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/ActivationJobId'
+          - description: The job's ID.
+        sequenceStoreId:
+          allOf:
+          - $ref: '#/components/schemas/SequenceStoreId'
+          - description: The job's sequence store ID.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetActivationJobStatus'
+          - description: The job's status.
+        creationTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job was created.
+        completionTime:
+          allOf:
+          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+          - description: When the job completed.
+      description: A read set activation job.
+    ReadSetBatchErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadSetBatchError'
+    ActivateReadSetJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActivateReadSetJobItem'
+    ReadSetStreamingBlob:
+      type: string
+    GetSequenceStoreResponse:
       type: object
       required:
       - id
@@ -2626,7 +3444,7 @@ components:
         sseConfig:
           allOf:
           - $ref: '#/components/schemas/SseConfig'
-          - description: The store's SSE settings.
+          - description: The store's server-side encryption (SSE) settings.
         creationTime:
           allOf:
           - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
@@ -2635,21 +3453,32 @@ components:
           allOf:
           - $ref: '#/components/schemas/S3Destination'
           - description: ' An S3 location that is used to store files that have failed a direct upload. '
-    JobStatusMessage:
+    FileInformationPartSizeLong:
+      type: integer
+      minimum: 1
+      maximum: 5368709120
+    SequenceStoreId:
       type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    ReadSetStatus:
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    FileType:
       type: string
       enum:
-      - ARCHIVED
-      - ACTIVATING
-      - ACTIVE
-      - DELETING
-      - DELETED
-      - PROCESSING_UPLOAD
-      - UPLOAD_FAILED
+      - FASTQ
+      - BAM
+      - CRAM
+    BatchDeleteReadSetResponse:
+      type: object
+      properties:
+        errors:
+          allOf:
+          - $ref: '#/components/schemas/ReadSetBatchErrorList'
+          - description: Errors returned by individual delete operations.
+    EncryptionType:
+      type: string
+      enum:
+      - KMS
     ReadSetListItem:
       type: object
       required:
@@ -2715,371 +3544,20 @@ components:
           - $ref: '#/components/schemas/CreationType'
           - description: ' The creation type of the read set. '
       description: A read set.
-    ReadSetArn:
+    SseConfigKeyArnString:
+      type: string
+      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
+      minLength: 20
+      maxLength: 2048
+    SequenceStoreArn:
       type: string
       pattern: arn:.+
       minLength: 1
       maxLength: 127
-    ExportReadSetJobDetail:
-      type: object
-      required:
-      - id
-      - sequenceStoreId
-      - destination
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ExportJobId'
-          - description: The job's ID.
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The job's sequence store ID.
-        destination:
-          allOf:
-          - $ref: '#/components/schemas/S3Destination'
-          - description: The job's destination in Amazon S3.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetExportJobStatus'
-          - description: The job's status.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-        completionTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job completed.
-      description: Details about a read set export job.
-    FileInformation:
-      type: object
-      properties:
-        totalParts:
-          allOf:
-          - $ref: '#/components/schemas/FileInformationTotalPartsInteger'
-          - description: The file's total parts.
-        partSize:
-          allOf:
-          - $ref: '#/components/schemas/FileInformationPartSizeLong'
-          - description: The file's part size.
-        contentLength:
-          allOf:
-          - $ref: '#/components/schemas/FileInformationContentLengthLong'
-          - description: The file's content length.
-      description: Details about a file.
-    SampleId:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    ExportJobId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
     SyntheticTimestamp_date_time:
       type: string
       format: date-time
-    StartReadSetActivationJobResponse:
-      type: object
-      required:
-      - id
-      - sequenceStoreId
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ActivationJobId'
-          - description: The job's ID.
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The read set's sequence store ID.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetActivationJobStatus'
-          - description: The job's status.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-    ReadSetName:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    UploadId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    ReadSetUploadPartListItem:
-      type: object
-      required:
-      - partNumber
-      - partSize
-      - partSource
-      - checksum
-      properties:
-        partNumber:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetUploadPartListItemPartNumberInteger'
-          - description: ' The number identifying the part in an upload. '
-        partSize:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetUploadPartListItemPartSizeLong'
-          - description: ' The size of the the part in an upload. '
-        partSource:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetPartSource'
-          - description: ' The origin of the part being direct uploaded. '
-        checksum:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: ' A unique identifier used to confirm that parts are being added to the correct upload. '
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: ' The time stamp for when a direct upload was created. '
-        lastUpdatedTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: ' The time stamp for the most recent update to an uploaded part. '
-      description: ' The metadata of a single part of a file that was added to a multipart upload. A list of these parts is returned in the response to the ListReadSetUploadParts API. '
-    ListReadSetsResponse:
-      type: object
-      required:
-      - readSets
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        readSets:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetList'
-          - description: A list of read sets.
-    CreationType:
-      type: string
-      enum:
-      - IMPORT
-      - UPLOAD
-    ReadSetPartSource:
-      type: string
-      enum:
-      - SOURCE1
-      - SOURCE2
-    CreateMultipartReadSetUploadResponse:
-      type: object
-      required:
-      - sequenceStoreId
-      - uploadId
-      - sourceFileType
-      - subjectId
-      - sampleId
-      - referenceArn
-      - creationTime
-      properties:
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: ' The sequence store ID for the store that the read set will be created in. '
-        uploadId:
-          allOf:
-          - $ref: '#/components/schemas/UploadId'
-          - description: ' he ID for the initiated multipart upload. '
-        sourceFileType:
-          allOf:
-          - $ref: '#/components/schemas/FileType'
-          - description: ' The file type of the read set source. '
-        subjectId:
-          allOf:
-          - $ref: '#/components/schemas/SubjectId'
-          - description: ' The source''s subject ID. '
-        sampleId:
-          allOf:
-          - $ref: '#/components/schemas/SampleId'
-          - description: ' The source''s sample ID. '
-        generatedFrom:
-          allOf:
-          - $ref: '#/components/schemas/GeneratedFrom'
-          - description: ' The source of the read set. '
-        referenceArn:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceArn'
-          - description: ' The read set source''s reference ARN. '
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetName'
-          - description: ' The name of the read set. '
-        description:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetDescription'
-          - description: ' The description of the read set. '
-        tags:
-          allOf:
-          - $ref: '#/components/schemas/TagMap'
-          - description: ' The tags to add to the read set. '
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: ' The creation time of the multipart upload. '
-    AbortMultipartReadSetUploadResponse:
-      type: object
-      properties: {}
-    FileType:
-      type: string
-      enum:
-      - FASTQ
-      - BAM
-      - CRAM
-    ListReadSetImportJobsResponse:
-      type: object
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        importJobs:
-          allOf:
-          - $ref: '#/components/schemas/ImportReadSetJobList'
-          - description: A list of jobs.
-    MultipartReadSetUploadList:
-      type: array
-      items:
-        $ref: '#/components/schemas/MultipartReadSetUploadListItem'
-    NextToken:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 6144
-    InternalServerException: {}
-    StartReadSetActivationJobSourceItem:
-      type: object
-      required:
-      - readSetId
-      properties:
-        readSetId:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetId'
-          - description: The source's read set ID.
-      description: A source for a read set activation job.
-    ReadSetStreamingBlob:
-      type: string
-    ResourceNotFoundException: {}
     ReadSetUploadPartListItemPartNumberInteger:
-      type: integer
-      minimum: 1
-      maximum: 10000
-    String:
-      type: string
-    GetReadSetImportJobResponse:
-      type: object
-      required:
-      - id
-      - sequenceStoreId
-      - roleArn
-      - status
-      - creationTime
-      - sources
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ImportJobId'
-          - description: The job's ID.
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The job's sequence store ID.
-        roleArn:
-          allOf:
-          - $ref: '#/components/schemas/RoleArn'
-          - description: The job's service role ARN.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetImportJobStatus'
-          - description: The job's status.
-        statusMessage:
-          allOf:
-          - $ref: '#/components/schemas/JobStatusMessage'
-          - description: The job's status message.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-        completionTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job completed.
-        sources:
-          allOf:
-          - $ref: '#/components/schemas/ImportReadSetSourceList'
-          - description: The job's source files.
-    ImportReadSetJobItem:
-      type: object
-      required:
-      - id
-      - sequenceStoreId
-      - roleArn
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ImportJobId'
-          - description: The job's ID.
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The job's sequence store ID.
-        roleArn:
-          allOf:
-          - $ref: '#/components/schemas/RoleArn'
-          - description: The job's service role ARN.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetImportJobStatus'
-          - description: The job's status.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-        completionTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job completed.
-      description: An import read set job.
-    ReadSetActivationJobItemStatus:
-      type: string
-      enum:
-      - NOT_STARTED
-      - IN_PROGRESS
-      - FINISHED
-      - FAILED
-    ExportReadSetDetail:
-      type: object
-      required:
-      - id
-      - status
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetId'
-          - description: The set's ID.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetExportJobItemStatus'
-          - description: The set's status.
-        statusMessage:
-          allOf:
-          - $ref: '#/components/schemas/JobStatusMessage'
-          - description: The set's status message.
-      description: Details about a read set.
-    CompleteReadSetUploadPartListItemPartNumberInteger:
       type: integer
       minimum: 1
       maximum: 10000
@@ -3088,191 +3566,6 @@ components:
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 127
-    ActivateReadSetJobItem:
-      type: object
-      required:
-      - id
-      - sequenceStoreId
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ActivationJobId'
-          - description: The job's ID.
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The job's sequence store ID.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetActivationJobStatus'
-          - description: The job's status.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-        completionTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job completed.
-      description: A read set activation job.
-    ReadSetUploadPartListItemPartSizeLong:
-      type: integer
-      minimum: 1
-      maximum: 5368709120
-    ExportReadSetJobDetailList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ExportReadSetJobDetail'
-    ActivateReadSetSourceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ActivateReadSetSourceItem'
-    ListReadSetUploadPartsResponse:
-      type: object
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: ' Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results. '
-        parts:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetUploadPartList'
-          - description: ' An array of upload parts. '
-    ReadSetBatchErrorList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReadSetBatchError'
-    ListReadSetActivationJobsResponse:
-      type: object
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        activationJobs:
-          allOf:
-          - $ref: '#/components/schemas/ActivateReadSetJobList'
-          - description: A list of jobs.
-    SseConfigKeyArnString:
-      type: string
-      pattern: '.*arn:([^: ]*):([^: ]*):([^: ]*):([0-9]{12}):([^: ]*).*'
-      minLength: 20
-      maxLength: 2048
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    ExportReadSetDetailList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ExportReadSetDetail'
-    MultipartReadSetUploadListItem:
-      type: object
-      required:
-      - sequenceStoreId
-      - uploadId
-      - sourceFileType
-      - subjectId
-      - sampleId
-      - generatedFrom
-      - referenceArn
-      - creationTime
-      properties:
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: ' The sequence store ID used for the multipart upload. '
-        uploadId:
-          allOf:
-          - $ref: '#/components/schemas/UploadId'
-          - description: ' The ID for the initiated multipart upload. '
-        sourceFileType:
-          allOf:
-          - $ref: '#/components/schemas/FileType'
-          - description: ' The type of file the read set originated from. '
-        subjectId:
-          allOf:
-          - $ref: '#/components/schemas/SubjectId'
-          - description: ' The read set source''s subject ID. '
-        sampleId:
-          allOf:
-          - $ref: '#/components/schemas/SampleId'
-          - description: ' The read set source''s sample ID. '
-        generatedFrom:
-          allOf:
-          - $ref: '#/components/schemas/GeneratedFrom'
-          - description: ' The source of an uploaded part. '
-        referenceArn:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceArn'
-          - description: ' The source''s reference ARN. '
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetName'
-          - description: ' The name of a read set. '
-        description:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetDescription'
-          - description: ' The description of a read set. '
-        tags:
-          allOf:
-          - $ref: '#/components/schemas/TagMap'
-          - description: ' Any tags you wish to add to a read set. '
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: ' The time stamp for when a direct upload was created. '
-      description: ' Part of the response to ListMultipartReadSetUploads, excluding completed and aborted multipart uploads. '
-    Long:
-      type: integer
-    SequenceStoreDescription:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 255
-    GetReadSetExportJobResponse:
-      type: object
-      required:
-      - id
-      - sequenceStoreId
-      - destination
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ExportJobId'
-          - description: The job's ID.
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The job's sequence store ID.
-        destination:
-          allOf:
-          - $ref: '#/components/schemas/S3Destination'
-          - description: The job's destination in Amazon S3.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetExportJobStatus'
-          - description: The job's status.
-        statusMessage:
-          allOf:
-          - $ref: '#/components/schemas/JobStatusMessage'
-          - description: The job's status message.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-        completionTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job completed.
-        readSets:
-          allOf:
-          - $ref: '#/components/schemas/ExportReadSetDetailList'
-          - description: The job's read sets.
     GetReadSetResponse:
       type: object
       properties:
@@ -3280,47 +3573,12 @@ components:
           allOf:
           - $ref: '#/components/schemas/ReadSetStreamingBlob'
           - description: The read set file payload.
-    EncryptionType:
+    UploadId:
       type: string
-      enum:
-      - KMS
-    ActivateReadSetSourceItem:
-      type: object
-      required:
-      - readSetId
-      - status
-      properties:
-        readSetId:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetId'
-          - description: The source's read set ID.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetActivationJobItemStatus'
-          - description: The source's status.
-        statusMessage:
-          allOf:
-          - $ref: '#/components/schemas/JobStatusMessage'
-          - description: The source's status message.
-      description: A source for a read set activation job.
-    ListReadSetExportJobsResponse:
-      type: object
-      properties:
-        nextToken:
-          allOf:
-          - $ref: '#/components/schemas/NextToken'
-          - description: A pagination token that's included if more results are available.
-        exportJobs:
-          allOf:
-          - $ref: '#/components/schemas/ExportReadSetJobDetailList'
-          - description: A list of jobs.
-    ImportReadSetJobList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ImportReadSetJobItem'
-    DeleteSequenceStoreResponse:
-      type: object
-      properties: {}
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    ResourceNotFoundException: {}
     GetReadSetMetadataResponse:
       type: object
       required:
@@ -3391,329 +3649,65 @@ components:
           allOf:
           - $ref: '#/components/schemas/CreationType'
           - description: ' The creation type of the read set. '
-    ReferenceArn:
+    ReadSetArn:
       type: string
       pattern: arn:.+
       minLength: 1
       maxLength: 127
-    ThrottlingException: {}
-    CompleteReadSetUploadPartListItem:
-      type: object
-      required:
-      - partNumber
-      - partSource
-      - checksum
-      properties:
-        partNumber:
-          allOf:
-          - $ref: '#/components/schemas/CompleteReadSetUploadPartListItemPartNumberInteger'
-          - description: ' A number identifying the part in a read set upload. '
-        partSource:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetPartSource'
-          - description: ' The source file of the part being uploaded. '
-        checksum:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: ' A unique identifier used to confirm that parts are being added to the correct upload. '
-      description: ' Part of the response to the CompleteReadSetUpload API, including metadata. '
-    TagMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
-    SseConfig:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EncryptionType'
-          - description: The encryption type.
-        keyArn:
-          allOf:
-          - $ref: '#/components/schemas/SseConfigKeyArnString'
-          - description: An encryption key ARN.
-      description: Server-side encryption (SSE) settings for a store.
-    ReadSetExportJobStatus:
+    ReadSetDescription:
       type: string
-      enum:
-      - SUBMITTED
-      - IN_PROGRESS
-      - CANCELLING
-      - CANCELLED
-      - FAILED
-      - COMPLETED
-      - COMPLETED_WITH_FAILURES
-    SourceFiles:
-      type: object
-      required:
-      - source1
-      properties:
-        source1:
-          allOf:
-          - $ref: '#/components/schemas/S3Uri'
-          - description: The location of the first file in Amazon S3.
-        source2:
-          allOf:
-          - $ref: '#/components/schemas/S3Uri'
-          - description: The location of the second file in Amazon S3.
-      description: Source files for a sequence.
-    SequenceStoreId:
-      type: string
-      pattern: '[0-9]+'
-      minLength: 10
-      maxLength: 36
-    ReadSetExportJobItemStatus:
+      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
+      minLength: 1
+      maxLength: 255
+    MultipartReadSetUploadList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MultipartReadSetUploadListItem'
+    ReadSetActivationJobItemStatus:
       type: string
       enum:
       - NOT_STARTED
       - IN_PROGRESS
       - FINISHED
       - FAILED
+    NotSupportedOperationException: {}
+    Long:
+      type: integer
+    ReadSetId:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 10
+      maxLength: 36
+    ActivateReadSetSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActivateReadSetSourceItem'
     ReadSetStatusMessage:
       type: string
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 255
-    FileInformationTotalPartsInteger:
-      type: integer
-      minimum: 1
-      maximum: 10000
-    UploadReadSetPartResponse:
-      type: object
-      required:
-      - checksum
-      properties:
-        checksum:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: ' An identifier used to confirm that parts are being added to the intended upload. '
-    ActivateReadSetJobList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ActivateReadSetJobItem'
-    ReadSetActivationJobStatus:
-      type: string
-      enum:
-      - SUBMITTED
-      - IN_PROGRESS
-      - CANCELLING
-      - CANCELLED
-      - FAILED
-      - COMPLETED
-      - COMPLETED_WITH_FAILURES
-    RequestTimeoutException: {}
-    ImportReadSetSourceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ImportReadSetSourceItem'
-    ServiceQuotaExceededException: {}
-    StartReadSetImportJobSourceItem:
-      type: object
-      required:
-      - sourceFiles
-      - sourceFileType
-      - subjectId
-      - sampleId
-      - referenceArn
-      properties:
-        sourceFiles:
-          allOf:
-          - $ref: '#/components/schemas/SourceFiles'
-          - description: The source files' location in Amazon S3.
-        sourceFileType:
-          allOf:
-          - $ref: '#/components/schemas/FileType'
-          - description: The source's file type.
-        subjectId:
-          allOf:
-          - $ref: '#/components/schemas/SubjectId'
-          - description: The source's subject ID.
-        sampleId:
-          allOf:
-          - $ref: '#/components/schemas/SampleId'
-          - description: The source's sample ID.
-        generatedFrom:
-          allOf:
-          - $ref: '#/components/schemas/GeneratedFrom'
-          - description: Where the source originated.
-        referenceArn:
-          allOf:
-          - $ref: '#/components/schemas/ReferenceArn'
-          - description: The source's reference ARN.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetName'
-          - description: The source's name.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetDescription'
-          - description: The source's description.
-        tags:
-          allOf:
-          - $ref: '#/components/schemas/TagMap'
-          - description: The source's tags.
-      description: A source for a read set import job.
-    ReadSetList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReadSetListItem'
-    GetSequenceStoreResponse:
-      type: object
-      required:
-      - id
-      - arn
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The store's ID.
-        arn:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreArn'
-          - description: The store's ARN.
-        name:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreName'
-          - description: The store's name.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreDescription'
-          - description: The store's description.
-        sseConfig:
-          allOf:
-          - $ref: '#/components/schemas/SseConfig'
-          - description: The store's server-side encryption (SSE) settings.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the store was created.
-        fallbackLocation:
-          allOf:
-          - $ref: '#/components/schemas/S3Destination'
-          - description: ' An S3 location that is used to store files that have failed a direct upload. '
-    GeneratedFrom:
-      type: string
-      pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
-      minLength: 1
-      maxLength: 127
-    FileInformationContentLengthLong:
-      type: integer
-      minimum: 1
-      maximum: 5497558138880
-    ValidationException: {}
-    RoleArn:
-      type: string
-      pattern: arn:.*
-      minLength: 20
-      maxLength: 2048
-    AccessDeniedException: {}
-    CompleteMultipartReadSetUploadResponse:
-      type: object
-      required:
-      - readSetId
-      properties:
-        readSetId:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetId'
-          - description: ' The read set ID created for an uploaded read set. '
-    ReadSetUploadPartList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReadSetUploadPartListItem'
-    RangeNotSatisfiableException: {}
-    ReadSetImportJobItemStatus:
-      type: string
-      enum:
-      - NOT_STARTED
-      - IN_PROGRESS
-      - FINISHED
-      - FAILED
-    S3Destination:
-      type: string
-      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,1024})/)?
-    StartReadSetExportJobResponse:
-      type: object
-      required:
-      - id
-      - sequenceStoreId
-      - destination
-      - status
-      - creationTime
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/ExportJobId'
-          - description: The job's ID.
-        sequenceStoreId:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStoreId'
-          - description: The read set's sequence store ID.
-        destination:
-          allOf:
-          - $ref: '#/components/schemas/S3Destination'
-          - description: The job's output location.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ReadSetExportJobStatus'
-          - description: The job's status.
-        creationTime:
-          allOf:
-          - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          - description: When the job was created.
-    SequenceInformation:
-      type: object
-      properties:
-        totalReadCount:
-          allOf:
-          - $ref: '#/components/schemas/Long'
-          - description: The sequence's total read count.
-        totalBaseCount:
-          allOf:
-          - $ref: '#/components/schemas/Long'
-          - description: The sequence's total base count.
-        generatedFrom:
-          allOf:
-          - $ref: '#/components/schemas/GeneratedFrom'
-          - description: Where the sequence originated.
-        alignment:
-          allOf:
-          - $ref: '#/components/schemas/String'
-          - description: The sequence's alignment setting.
-      description: Details about a sequence.
-    NotSupportedOperationException: {}
-    S3Uri:
-      type: string
-      pattern: s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})
   parameters:
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
-      in: header
-      schema:
-        type: string
-      required: false
     X-Amz-Content-Sha256:
       name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Date:
-      name: X-Amz-Date
-      in: header
-      schema:
-        type: string
-      required: false
-    X-Amz-Algorithm:
-      name: X-Amz-Algorithm
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
       in: header
       schema:
         type: string
       required: false
     X-Amz-Security-Token:
       name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
       in: header
       schema:
         type: string
@@ -3726,6 +3720,12 @@ components:
       required: false
     X-Amz-Credential:
       name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
       in: header
       schema:
         type: string
