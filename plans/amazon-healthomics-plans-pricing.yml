@@ -1,0 +1,195 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://aws.amazon.com/healthomics/pricing/
+sources:
+- https://aws.amazon.com/healthomics/pricing/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+published: true
+note: Main rate tables render via dynamic pricing tokens and show no numbers in the captured text; numeric
+  values come from the Pricing Examples section. Three or five year commitments and >500 TB/month data
+  transfer require contacting AWS.
+plan_count: 11
+currency: USD
+plans:
+- name: Private workflows – compute (omics.c.4xlarge, example)
+  price_text: $ 0.9180/hr
+  price: 0.918
+  currency: USD
+  period: per-use
+  unit: instance-hour
+- name: Private workflows – compute (omics.r.8xlarge, example)
+  price_text: $ 2.7216/hr
+  price: 2.7216
+  currency: USD
+  period: per-use
+  unit: instance-hour
+- name: Private workflows – compute (omics.m.xlarge, example)
+  price_text: $ 0.2592/hr
+  price: 0.2592
+  currency: USD
+  period: per-use
+  unit: instance-hour
+- name: Static run storage (example)
+  price_text: $0.0001918/ GB-hour
+  price: 0.0001918
+  currency: USD
+  period: per-use
+  unit: GB-hour
+- name: Dynamic run storage (example)
+  price_text: $0.0004110/ GB-hr
+  price: 0.000411
+  currency: USD
+  period: per-use
+  unit: GB-hour
+- name: Ready2Run workflow GATK-BP Germline fq2vcf 30x genome (example)
+  price_text: $ 10.00/run
+  price: 10
+  currency: USD
+  period: per-use
+  unit: run
+- name: Sequence store active storage class (example)
+  price_text: $0.005769 gigabase/month
+  price: 0.005769
+  currency: USD
+  period: month
+  unit: gigabase
+- name: Sequence store archive storage class (example)
+  price_text: $0.001154 gigabase/month
+  price: 0.001154
+  currency: USD
+  period: month
+  unit: gigabase
+- name: S3 GET APIs (example)
+  price_text: $0.0004 / 1000 API calls
+  price: 0.0004
+  currency: USD
+  period: per-use
+  unit: 1000 API calls
+- name: Variant store (example)
+  price_text: $0.035 GB/month
+  price: 0.035
+  currency: USD
+  period: month
+  unit: GB
+- name: Free Tier
+  price_text: free
+  currency: USD
+  period: month
+  included_quota: '275 omics.m.xlarge instance hours or equivalent compute instances and 49,000 GB-hours
+    of run storage; Sequence Store: 1500 gigabase-months active and 1500 gigabase-months archive; Variant
+    Store: 200 gigabyte-months (first 2 months)'
+rate_limit_statements:
+- Tasks are billed in increments of 1 second; However, there is a minimum billing threshold of 60 seconds
+  per task.
+- Data stored in AWS HealthOmics data stores is charged for a minimum storage duration of 30 days
+- Static run storage can be provisioned in sizes of 1,200 GiB, 2,400 GiB, and additional increments of
+  2,400 GiB, with a minimum size of 1,200 GiB.
+- You can allocate additional ephemeral storage to your workflow tasks, up to 3,072 GiB.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - compute
+  - data
+  - request
+  plans:
+  - name: Private workflows – compute (omics.c.4xlarge, example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Private workflows – compute (omics.r.8xlarge, example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Private workflows – compute (omics.m.xlarge, example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Static run storage (example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Dynamic run storage (example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Ready2Run workflow GATK-BP Germline fq2vcf 30x genome (example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: Sequence store active storage class (example)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Sequence store archive storage class (example)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: S3 GET APIs (example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: Variant store (example)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - month
+  - name: Free Tier
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - month
