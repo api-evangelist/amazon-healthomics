@@ -5,6 +5,9 @@ artifacts:
   agentic-access/amazon-healthomics-agentic-access.yml:
     method: generated
     evidence: declared in the artifact
+  ai-preferences/amazon-healthomics-ai-preferences.yml:
+    method: harvested
+    evidence: declared in the artifact
   arazzo/amazon-healthomics-activate-read-set-workflow.yml:
     method: derived
     evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
@@ -38,6 +41,12 @@ artifacts:
   authentication/amazon-healthomics-authentication.yml:
     method: derived
     evidence: declared in the artifact
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   collections/amazon-healthomics-annotationstore-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -116,6 +125,21 @@ artifacts:
   collections/amazon-healthomics-workflow-api.postman_collection.json:
     method: derived
     evidence: openapi/amazon-healthomics-workflow-api
+  compliance/amazon-healthomics-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
+  conformance/amazon-healthomics-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
+  data-model/amazon-healthomics-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  eligibility/amazon-healthomics-eligibility.yml:
+    method: harvested
+    evidence: declared in the artifact
+  errors/amazon-healthomics-problem-types.yml:
+    method: derived
+    evidence: declared in the artifact
   examples/healthomics-abort-multipart-read-set-upload-request-example.json:
     method: unknown
     evidence: no authorship recorded
@@ -1499,6 +1523,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/amazon-healthomics-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -1506,6 +1533,306 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   json-ld/amazon-healthomics-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-accept-share-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-cancel-run-batch-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-annotation-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-annotation-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-annotation-store-version-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-configuration-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-reference-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-reference-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-run-cache-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-run-cache-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-run-group-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-run-group-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-sequence-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-sequence-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-share-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-share-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-variant-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-variant-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-workflow-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-workflow-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-create-workflow-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-delete-annotation-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-delete-annotation-store-versions-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-delete-annotation-store-versions-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-delete-s3-access-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-delete-s3-access-policy-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-delete-share-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-delete-variant-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-annotation-import-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-annotation-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-annotation-store-version-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-batch-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-configuration-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-configuration-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-reference-import-job-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-reference-metadata-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-run-cache-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-run-group-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-run-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-run-task-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-s3-access-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-s3-access-policy-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-sequence-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-variant-import-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-variant-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-workflow-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-workflow-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-get-workflow-version-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-annotation-import-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-annotation-store-versions-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-annotation-store-versions-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-annotation-stores-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-annotation-stores-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-batch-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-batch-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-configurations-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-configurations-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-reference-stores-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-reference-stores-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-references-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-run-caches-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-run-caches-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-run-groups-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-run-groups-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-runs-in-batch-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-runs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-sequence-stores-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-shares-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-shares-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-tags-for-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-tags-for-resource-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-variant-import-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-variant-stores-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-variant-stores-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-list-workflows-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-put-s3-access-policy-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-put-s3-access-policy-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-start-annotation-import-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-start-reference-import-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-start-run-batch-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-start-run-batch-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-start-run-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-start-run-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-start-variant-import-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-tag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-tag-resource-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-untag-resource-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-untag-resource-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-annotation-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-annotation-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-annotation-store-version-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-run-cache-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-run-group-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-sequence-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-sequence-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-variant-store-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-variant-store-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-workflow-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-healthomics-update-workflow-version-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/healthomics-abort-multipart-read-set-upload-request-schema.json:
@@ -4265,7 +4592,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -4334,37 +4661,45 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  openapi/_original/amazon-healthomics-openapi.yaml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  llms/amazon-healthomics-llms-provenance.yml:
+    method: unknown
+    evidence: no authorship recorded
+  llms/amazon-healthomics-llms.txt:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/amazon-healthomics-mcp.yml:
+    method: searched
+    evidence: declared in the artifact
   openapi/amazon-healthomics-annotation-store-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-annotation-stores-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-configuration-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-healthomics-import-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-operations-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-healthomics-referencestore-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-referencestores-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-run-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-healthomics-run-group-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-runbatch-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -4378,26 +4713,32 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-healthomics-sequencestores-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-share-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-healthomics-tags-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-variant-store-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-variant-stores-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   openapi/amazon-healthomics-version-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
   openapi/amazon-healthomics-workflow-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  packages/amazon-healthomics-packages.yml:
+    method: searched
+    evidence: declared in the artifact
+  patterns/amazon-healthomics-patterns.yml:
     method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    evidence: declared in the artifact
   plans/amazon-healthomics-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -4446,10 +4787,16 @@ artifacts:
   postman/amazon-healthomics.postman_collection.json:
     method: derived
     evidence: openapi/amazon-healthomics
+  privacy/amazon-healthomics-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/amazon-healthomics-rate-limits.yml:
-    method: generated
+    method: searched
     evidence: declared in the artifact
   rules/amazon-healthomics-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/amazon-healthomics-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/amazon-healthomics-spectral-rules.yml:
@@ -4468,8 +4815,27 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   smithy/omics-2022-11-28.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/omics/service/2022-11-28/omics-2022-11-28.json
+      (sha256 271d00ed36db, fetched 2026-11-11T21:10:18+00:00)
+  terms/amazon-healthomics-terms-of-service.yml:
+    method: harvested
+    evidence: declared in the artifact
+  vendors/amazon-healthomics-vendors.yml:
     method: unknown
     evidence: no authorship recorded
   vocabulary/amazon-healthomics-vocabulary.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/amazon-healthomics-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
+  well-known/amazon-healthomics-midway-auth-openid-configuration.json:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-healthomics-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-healthomics-well-known.yml:
     method: unknown
     evidence: no authorship recorded
