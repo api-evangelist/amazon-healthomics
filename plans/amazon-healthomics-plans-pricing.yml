@@ -97,7 +97,7 @@ rate_limit_statements:
   2,400 GiB, with a minimum size of 1,200 GiB.
 - You can allocate additional ephemeral storage to your workflow tasks, up to 3,072 GiB.
 x-canonical:
-  generated: '2026-11-13'
+  generated: '2026-11-20'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
